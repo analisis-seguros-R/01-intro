@@ -4,9 +4,9 @@
 Primeramente, haremos un análisis exploratorio de los datos
 
 Librerias
-```{r librerias}
+```{r librerias, message=FALSE, warning=FALSE}
 if (.Platform$OS.type == "windows") {
-  Sys.setlocale("LC_CTYPE", "Spanish_Colombia.1252")
+  invisible(Sys.setlocale("LC_CTYPE", "Spanish_Colombia.1252"))
 }
 
 library(tidyverse) 
@@ -21,9 +21,47 @@ library(car)
 library(rstatix)
 library(coin)
 library(nortest)
+library(knitr)
+library(kableExtra)
+library(broom)
 ```
 
-```{r}
+
+```{r funciones-tablas, include=FALSE}
+# Tabla general con estilo
+tabla <- function(x, caption = NULL, digits = 4) {
+  x %>%
+    kable(caption = caption, digits = digits, align = "c") %>%
+    kable_styling(bootstrap_options = c("striped", "hover", "condensed"),
+                  full_width = FALSE, position = "center") %>%
+    row_spec(0, bold = TRUE)
+}
+
+# Para pruebas tipo htest: lillie.test, shapiro.test, kruskal.test, cor.test, chisq.test
+tabla_test <- function(test, caption = NULL) {
+  res <- broom::tidy(test)
+  res$p.value <- ifelse(res$p.value < 0.001, "< 0.001",
+                        format(round(res$p.value, 4), nsmall = 4))
+  res <- res %>% mutate(across(where(is.numeric), ~ round(.x, 4)))
+  tabla(res, caption)
+}
+
+# Para leveneTest
+tabla_levene <- function(lev, caption = NULL) {
+  res <- as.data.frame(lev) %>%
+    tibble::rownames_to_column("Fuente")
+  res$Fuente <- c("Grupo", "Residuos")
+  colnames(res) <- c("Fuente", "gl", "Estadístico F", "p-valor")
+  res$`p-valor` <- ifelse(is.na(res$`p-valor`), "",
+                          ifelse(res$`p-valor` < 0.001, "< 0.001",
+                                 format(round(res$`p-valor`, 4), nsmall = 4)))
+  tabla(res, caption, digits = 3)
+}
+```
+
+
+
+```{r, message=FALSE, warning=FALSE}
 theme_set(theme_bw())
 ```
 
@@ -43,16 +81,78 @@ df <- df %>%
 
 Ver las primeras 5 filas 
 ```{r filas}
-head(df, n=5)
+head(df, n = 5) %>%
+  kable(caption = "Primeras 5 filas del dataset", align = "c") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"),
+                full_width = FALSE, position = "center") %>%
+  row_spec(0, bold = TRUE) %>%
+  scroll_box(width = "100%")
 ```
 
 Ver la estructura de los datos
 ```{r str}
-str(df)
+tibble(
+  Variable = names(df),
+  Tipo = sapply(df, function(x) class(x)[1]),
+  `Primeros valores` = sapply(df, function(x) paste(head(as.character(x), 5), collapse = ", "))
+) %>%
+  kable(caption = paste0("Estructura del dataset: ", format(nrow(df), big.mark = ","),
+                         " observaciones y ", ncol(df), " variables"),
+        align = "lcl") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"),
+                full_width = FALSE, position = "center") %>%
+  row_spec(0, bold = TRUE)
 ```
 
 
-El dataset contiene 1,200,000 observaciones y 21 variables en total: 10 categóricas (Gender, Marital Status, Education Level, Occupation, Location, Policy Type, Customer Feedback, Smoking Status, Exercise Frequency, Property Type), 9 numéricas continuas (Age, Annual Income, Number of Dependents, Health Score, Previous Claims, Vehicle Age, Credit Score, Insurance Duration, Premium Amount), 1 entera (id) y 1 de tipo fecha/hora (Policy Start Date).
+## Clasificación de las variables
+
+Con base en la estructura anterior, las variables del dataset se clasifican según su naturaleza. Las variables `id` (identificador) y `Policy Start Date` (fecha/hora) no se incluyen en el análisis estadístico.
+
+```{r clasificacion}
+categoricas <- tibble(
+  Variable = c("Gender", "Marital Status", "Education Level", "Occupation",
+               "Location", "Policy Type", "Customer Feedback", "Smoking Status",
+               "Exercise Frequency", "Property Type"),
+  Subtipo = c("Nominal", "Nominal", "Ordinal", "Nominal", "Nominal", "Nominal",
+              "Ordinal", "Nominal", "Ordinal", "Nominal"),
+  Categorías = c("Female, Male",
+                 "Divorced, Married, Single",
+                 "High School, Bachelor's, Master's, PhD",
+                 "Employed, Self-Employed, Unemployed",
+                 "Rural, Suburban, Urban",
+                 "Basic, Comprehensive, Premium",
+                 "Poor, Average, Good",
+                 "No, Yes",
+                 "Rarely, Monthly, Weekly, Daily",
+                 "Apartment, Condo, House")
+)
+
+categoricas %>%
+  kable(caption = "Variables categóricas (10)", align = "lcl") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"),
+                full_width = FALSE, position = "center") %>%
+  row_spec(0, bold = TRUE)
+```
+
+```{r clasificacion-num}
+numericas <- tibble(
+  Variable = c("Age", "Annual Income", "Health Score", "Credit Score",
+               "Premium Amount", "Number of Dependents", "Previous Claims",
+               "Vehicle Age", "Insurance Duration"),
+  Subtipo = c(rep("Continua", 5), rep("Discreta (conteo)", 4)),
+  Rol = c(rep("Predictora", 4), "Respuesta", rep("Predictora", 4))
+)
+
+numericas %>%
+  kable(caption = "Variables numéricas (9)", align = "lcc") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"),
+                full_width = FALSE, position = "center") %>%
+  row_spec(0, bold = TRUE)
+```
+
+En total, el dataset contiene 1,200,000 observaciones y 21 variables: 10 categóricas, 9 numéricas (de las cuales Premium Amount es la variable respuesta), 1 identificador (id) y 1 variable de fecha/hora (Policy Start Date). Por lo tanto, se dispone de 18 variables predictoras: 10 categóricas y 8 numéricas.
+
 
 ## Revisión de datos faltantes en las variables numéricas
 
@@ -60,37 +160,71 @@ Veamos si hay datos faltantes en estas variables.
 
 ```{r faltantes}
 df %>%
-  summarise(across(everything(),~ sum(is.na(.)), .names = "NA_{.col}"))
+  summarise(across(everything(), ~ sum(is.na(.)))) %>%
+  pivot_longer(everything(), names_to = "Variable", values_to = "Datos faltantes") %>%
+  mutate(`Porcentaje (%)` = round(`Datos faltantes` / nrow(df) * 100, 2)) %>%
+  kable(caption = "Datos faltantes por variable (antes de la imputación)",
+        format.args = list(big.mark = ","), align = "lcc") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"),
+                full_width = FALSE, position = "center") %>%
+  row_spec(0, bold = TRUE)
 ```
 
 
 El análisis de valores faltantes muestra que las variables id, Gender, Marital Status, Education Level y Occupation están completas (0 NA), mientras que las variables numéricas presentan cantidades considerables de datos faltantes: Age con 18,705, Annual Income con 44,949, Number of Dependents con 109,672 (la más afectada) y Health Score con 74,076, lo que indica que será necesario aplicar algún tratamiento de imputación antes de continuar con el análisis.
 
-## Ingeniería de características en variables numéricas
+## Imputación de datos faltantes
 
 Ahora, imputemos los datos faltantes
 ```{r imputacion}
-moda <- function(x) {
-  ux <- unique(na.omit(x))
-  ux[which.max(tabulate(match(x, ux)))]
+vars_imp <- c("Age", "Annual Income", "Health Score", "Credit Score",
+              "Number of Dependents", "Previous Claims", "Vehicle Age",
+              "Insurance Duration")
+
+# 1. Prueba de normalidad sobre los datos observados y elección del método
+decision <- map_dfr(vars_imp, function(v) {
+  x_obs <- df[[v]][!is.na(df[[v]])]
+  lil <- nortest::lillie.test(x_obs)
+  normal <- lil$p.value >= 0.05
+  tibble(
+    Variable = v,
+    faltantes = sum(is.na(df[[v]])),
+    D = unname(lil$statistic),
+    p = lil$p.value,
+    Normalidad = ifelse(normal, "Sí", "No"),
+    Método = ifelse(normal, "Media", "Mediana"),
+    valor = ifelse(normal, mean(x_obs), median(x_obs))
+  )
+})
+
+# 2. Imputación con el método elegido
+for (v in vars_imp) {
+  valor <- decision$valor[decision$Variable == v]
+  df[[v]][is.na(df[[v]])] <- valor
 }
 
-df <- df %>%
-  mutate(
-    Age = ifelse(is.na(Age), median(Age, na.rm = TRUE), Age),
-    `Annual Income` = ifelse(is.na(`Annual Income`), median(`Annual Income`, na.rm = TRUE), `Annual Income`),
-    `Health Score` = ifelse(is.na(`Health Score`), median(`Health Score`, na.rm = TRUE), `Health Score`),
-    `Number of Dependents` = ifelse(is.na(`Number of Dependents`), moda(`Number of Dependents`), `Number of Dependents`),
-    `Previous Claims` = ifelse(is.na(`Previous Claims`), moda(`Previous Claims`), `Previous Claims`),
-    `Vehicle Age` = ifelse(is.na(`Vehicle Age`), moda(`Vehicle Age`), `Vehicle Age`),
-    `Insurance Duration` = ifelse(is.na(`Insurance Duration`), moda(`Insurance Duration`), `Insurance Duration`),
-    `Credit Score` = ifelse(is.na(`Credit Score`), median(`Credit Score`, na.rm = TRUE), `Credit Score`)
-  )
+# 3. Tabla
+decision %>%
+  mutate(p = ifelse(p < 0.001, "< 0.001", format(round(p, 4), nsmall = 4)),
+         D = round(D, 4),
+         valor = round(valor, 2)) %>%
+  select(Variable,
+         `Datos imputados` = faltantes,
+         `D (Lilliefors)` = D,
+         `p-valor` = p,
+         `¿Distribución normal?` = Normalidad,
+         `Método de imputación` = Método,
+         `Valor imputado` = valor) %>%
+  kable(caption = "Criterio de imputación de las variables numéricas",
+        format.args = list(big.mark = ","), align = "lcccccc") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"),
+                full_width = FALSE, position = "center") %>%
+  row_spec(0, bold = TRUE)
 
 ```
 
 
-Para las variables numéricas continuas (Age, Annual Income, Health Score) se utilizó la mediana como método de imputación, dado que es una medida más robusta frente a valores atípicos y distribuciones sesgadas en comparación con la media. Para Number of Dependents, al tratarse de una variable de conteo (valores enteros), se empleó la moda, ya que imputar con la media generaría valores decimales sin sentido lógico para esta variable.
+Para decidir el método de imputación de cada variable numérica se evaluó el supuesto de normalidad mediante la prueba de Lilliefors, aplicada a los valores observados (sin considerar los datos faltantes). Las variables con distribución normal se imputaron con la media, y las que no cumplen la normalidad, con la mediana, por ser más robusta ante sesgos y valores atípicos. Con una confianza del 95%, ninguna de las variables evaluadas presentó distribución normal (p-valor < 0.001 en todos los casos), por lo que todas se imputaron con la mediana.
 
 Verificamos otra vez si hay faltantes
 
@@ -114,7 +248,7 @@ df %>%
 
 Al verificar los valores faltantes en las variables categóricas, se identificó que Marital Status (18,529), Occupation (358,075) y Customer Feedback (77,824) presentan datos faltantes, mientras que el resto de las variables categóricas (Gender, Education Level, Location, Policy Type, Smoking Status, Exercise Frequency y Property Type) están completas. Destaca el caso de Occupation, cuyo porcentaje de faltantes es considerablemente alto (cerca del 30% del total de registros), por lo que su tratamiento requerirá un enfoque distinto al resto, como la creación de una categoría independiente en lugar de una imputación por moda.
 
-## Ingeniería de características en variables categóricas
+## Imputación de datos faltantes en variables categóricas
 
 ```{r}
 moda_cat <- function(x) {
@@ -142,9 +276,9 @@ df %>%
 
 Verificamos la cantidad de NA en las variables categóricas después de la imputación y efectivamente es 0 en todas, es decir, la imputación fue exitosa. 
 
-## Conversión de las variables categóricas a factor
+## Conversión de variables de tipo carácter a factor
 
-El paso siguiente es convertir las variables categóricas a factor para realizar los gráficos más facilmente.
+El paso siguiente es convertir las variables de tipo carácter (`character`) a factor (`factor`), que es el tipo de dato que R utiliza para representar variables categóricas. Este formato permite definir de forma explícita los niveles de cada variable y, cuando corresponde, su orden, lo que facilita las tablas de frecuencia, los gráficos y las pruebas estadísticas.
 
 ```{r}
 df <- df %>%
@@ -168,75 +302,114 @@ df <- df %>%
   )
 ```
 
-Se convirtieron todas las variables categóricas de tipo texto a factor, ya que este formato es más adecuado para el análisis en R, tanto para tablas de frecuencia como para gráficos. En el caso de Education Level, Customer Feedback y Exercise Frequency, se declararon además como factores ordenados, respetando una jerarquía lógica en sus categorías, lo que permitirá que tanto los análisis como las visualizaciones reflejen ese orden natural en lugar de mostrarlas simplemente en orden alfabético.
+Se convirtieron a factor todas las variables de tipo carácter: Gender, Marital Status, Occupation, Location, Policy Type, Smoking Status, Property Type, Education Level, Customer Feedback y Exercise Frequency. En el caso de Education Level, Customer Feedback y Exercise Frequency, se declararon además como factores ordenados, respetando una jerarquía lógica en sus categorías, lo que permite que tanto los análisis como las visualizaciones reflejen ese orden natural en lugar de mostrarlas en orden alfabético.
 
-Para que las visualizaciones sean legibles y el documento se pueda compilar de forma eficiente, los gráficos que usan el dataset completo se generan a partir de una muestra aleatoria reproducible de 50,000 observaciones. Las tablas, estimaciones y pruebas de hipótesis continúan calculándose sobre los 1,200,000 registros.
+Para que las visualizaciones sean legibles y el documento se pueda compilar de forma eficiente, los diagramas de dispersión se generan a partir de una muestra aleatoria reproducible de 300,000 observaciones (25 % de los datos). Los histogramas, diagramas de barras y boxplots, así como las tablas, estimaciones y pruebas de hipótesis, se calculan con los 1,200,000 registros.
 
 ```{r muestra-graficos}
 set.seed(2026)
-df_graficos <- df %>% slice_sample(n = min(50000, nrow(df)))
+df_graficos <- df %>% slice_sample(n = 300000)
 
-ggplot_original <- ggplot2::ggplot
-ggplot <- function(data = NULL, mapping = ggplot2::aes(), ..., environment = parent.frame()) {
-  if (identical(data, df)) {
-    data <- df_graficos
-  }
-  ggplot_original(data = data, mapping = mapping, ..., environment = environment)
+# Los diagramas de dispersión usan la muestra; el resto de gráficos usa los 1,200,000 registros
+geom_point <- function(mapping = NULL, ...) {
+  ggplot2::geom_point(mapping = mapping, data = df_graficos, ...)
 }
 ```
 
-## Resumen variables numéricas
+## Análisis de la variable respuesta (Premium Amount)
 
-Ahora, veamos un resumen de las variables numéricas
+Antes de analizar las variables independientes, se caracteriza por completo la variable respuesta del estudio, Premium Amount, ya que es la variable con la que se compararán todas las demás.
 
-```{r}
+### Resumen estadístico
 
+```{r resumen-respuesta}
 df %>%
-  select(where(is.numeric), -id) %>%  
-  pivot_longer(
-    cols = everything(),
-    names_to = "variable",
-    values_to = "valor"
-  ) %>%
-  group_by(variable) %>%
   summarise(
-    n = length(valor),
-    media = mean(valor, na.rm = TRUE),
-    sd = sd(valor, na.rm = TRUE),
-    mediana = median(valor, na.rm = TRUE),
-    RIC = IQR(valor, na.rm = TRUE),
-    Q1 = quantile(valor, 0.25, na.rm = TRUE),
-    Q3 = quantile(valor, 0.75, na.rm = TRUE),
-    minimo = min(valor, na.rm = TRUE),
-    maximo = max(valor, na.rm = TRUE),
-    asimetria = skewness(valor, na.rm = TRUE),
-    curtosis = kurtosis(valor, na.rm = TRUE)
-  )
+    n = n(),
+    media = mean(`Premium Amount`),
+    sd = sd(`Premium Amount`),
+    mediana = median(`Premium Amount`),
+    RIC = IQR(`Premium Amount`),
+    Q1 = quantile(`Premium Amount`, 0.25),
+    Q3 = quantile(`Premium Amount`, 0.75),
+    mínimo = min(`Premium Amount`),
+    máximo = max(`Premium Amount`),
+    asimetría = skewness(`Premium Amount`),
+    curtosis = kurtosis(`Premium Amount`)
+  ) %>%
+  pivot_longer(everything(), names_to = "Estadístico", values_to = "Valor") %>%
+  kable(caption = "Resumen estadístico de Premium Amount", digits = 2,
+        format.args = list(big.mark = ","), align = "lc") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"),
+                full_width = FALSE, position = "center") %>%
+  row_spec(0, bold = TRUE)
 ```
 
-El resumen estadístico muestra que la mayoría de las variables numéricas tiene una distribución bastante simétrica, ya que sus valores de media y mediana son muy parecidos; esto se observa en Age (media y mediana alrededor de 41 años, rango de 18 a 64), Credit Score (media y mediana cercanas a 593-595, dentro del rango típico de 300 a 849), Health Score (media y mediana alrededor de 25, con valores entre 2 y 59), Insurance Duration (media y mediana de 5 años, entre 1 y 9 años), Number of Dependents (media y mediana de 2, entre 0 y 4 dependientes) y Vehicle Age (media cercana a 9.6 y mediana de 10, entre 0 y 19 años). Previous Claims muestra una mediana de 0 y una media baja de 0.70, lo que indica que la mayoría de los clientes no ha realizado reclamos previos, aunque el máximo llega a 9. Por su parte, Annual Income y Premium Amount presentan una media notablemente más alta que su mediana (32,414 frente a 23,911 en el primer caso, y 1,102 frente a 872 en el segundo), lo que refleja un sesgo hacia la derecha, es decir, la existencia de algunos valores muy altos que elevan el promedio general; esto es especialmente relevante para Premium Amount, al tratarse de la variable de interés principal del análisis.
+El resumen muestra que Premium Amount presenta una media notablemente más alta que su mediana (1,102 frente a 872), lo que refleja un sesgo hacia la derecha, es decir, la existencia de algunos valores muy altos que elevan el promedio general. Esto es especialmente relevante al tratarse de la variable de interés principal del análisis, y es una primera señal de que no se cumplirá el supuesto de normalidad.
 
-## Análisis variable respuesta (Premium Amount)
+### Distribución
 
-Como la variable respuesta es Premium Amount, a continuación se realizarán gráficos para caracterizarla de mejor manera
-
-```{r}
+```{r histograma-respuesta}
 ggplot(df, aes(x = `Premium Amount`)) +
-  geom_histogram(aes(y = after_stat(density)), bins = 50, fill = "#AEC6CF", color = "white") +
-  geom_density(color = "#5B7C99", linewidth = 1) +
-  labs(title = "Distribución de Premium Amount", x = "Premium Amount", y = "Densidad")
+  geom_histogram(bins = 30, fill = "#AEC6CF", color = "white") +
+  geom_text(stat = "bin", bins = 30,
+            aes(y = after_stat(count),
+                label = ifelse(after_stat(count) == 0, "",
+                               scales::comma(after_stat(count)))),
+            vjust = -0.4, size = 2.8, check_overlap = TRUE) +
+  scale_y_continuous(labels = scales::comma,
+                     expand = expansion(mult = c(0, 0.1))) +
+  labs(title = "Distribución de Premium Amount", x = "Premium Amount", y = "Frecuencia")
 ```
 
-Se observa que la variable Premium Amount presenta un sesgo hacia la derecha, ya que la mayoría de los valores se concentran entre 0 y 2,000, mientras que unos pocos casos alcanzan montos bastante altos, llegando hasta casi 5,000. Además, la distribución no parece unimodal, pues se identifican dos picos: uno principal ubicado entre 500 y 700 (donde se concentra la mayor parte de los datos) y otro más pequeño alrededor de 2,000, lo que podría estar relacionado con la existencia de distintos grupos de clientes o tipos de póliza con montos de prima diferenciados. A partir de los 2,500, la frecuencia disminuye progresivamente hasta ser prácticamente nula cerca de los 5,000, lo que indica que las primas muy elevadas son poco frecuentes dentro del conjunto de datos.
+
+El histograma muestra que Premium Amount presenta un sesgo hacia la derecha. Hasta aproximadamente 449 la frecuencia de cada intervalo se mantiene entre 78,000 y 89,000 registros, y a partir de ahí se duplica: el intervalo de 449 a 621 es el más frecuente, con 152,188 registros (12.68 %), seguido de los intervalos de 621 a 793 (137,472 registros, 11.46 %) y de 793 a 964 (123,049 registros, 10.25 %). Estos tres intervalos concentran en conjunto cerca del 34 % de los clientes, y aproximadamente el 55 % de los registros tiene una prima por debajo de 964. A partir de ese punto la frecuencia disminuye de forma progresiva, aunque se aprecia un pequeño repunte alrededor de 2,000: el intervalo de 1,994 a 2,166 reúne 38,819 registros (3.23 %), frente a 24,335 (2.03 %) en el intervalo anterior, lo que sugiere la presencia de un grupo secundario de clientes con primas más altas. En la cola derecha, solo cerca del 8 % de los clientes paga más de 2,500 y menos del 1 % paga más de 4,000, hasta llegar a un máximo cercano a 5,000.
 
 
-```{r}
+### Valores atípicos
+
+```{r boxplot-respuesta}
 ggplot(df, aes(y = `Premium Amount`)) +
   geom_boxplot(fill = "#AEC6CF") +
   labs(title = "Boxplot de Premium Amount", y = "Premium Amount")
 ```
 
-El boxplot de Premium Amount muestra lo mismo que ya se había notado en el histograma: hay un sesgo hacia la derecha bastante claro. El 50% de los clientes paga una prima por debajo de 900, mientras que el otro 50% paga por encima de ese valor. La caja, que representa el 50% central de los datos, va más o menos de 500 a 1,500. El bigote superior es bastante largo, llegando hasta cerca de 3,000, y de ahí para arriba se ven varios puntos atípicos que se extienden hasta casi 5,000. Esto confirma que, si bien la mayoría de los clientes paga primas moderadas, hay un grupo más pequeño que paga montos bastante más altos, alejándose del comportamiento normal de la variable.
+El boxplot de Premium Amount confirma el sesgo hacia la derecha observado en el histograma. La caja, que representa el 50% central de los datos, va aproximadamente de 500 a 1,500, y la mediana se ubica cerca de 900. El bigote superior llega hasta cerca de 3,000, y por encima aparecen varios puntos atípicos que se extienden hasta casi 5,000. Esto confirma que, si bien la mayoría de los clientes paga primas moderadas, hay un grupo más pequeño que paga montos bastante más altos.
+
+### Conclusión sobre la variable respuesta
+
+En conclusión, Premium Amount es una variable asimétrica hacia la derecha, con una media (1,102) mayor que su mediana (872), una concentración principal de los clientes entre 449 y 964 (cerca del 34 % de los registros), un pequeño grupo secundario alrededor de 2,000 y una cola de primas altas con valores atípicos que llegan a casi 5,000. Estas características, en particular el sesgo y la presencia de dos zonas de concentración, indican que no cabe esperar un comportamiento normal, lo que justifica el uso de pruebas no paramétricas en el análisis posterior.
+
+## Resumen de las demás variables numéricas
+
+Ahora se resumen las variables numéricas restantes, que serán las predictoras numéricas del estudio.
+
+```{r resumen-numericas}
+df %>%
+  select(where(is.numeric), -id, -`Premium Amount`) %>%
+  pivot_longer(cols = everything(), names_to = "variable", values_to = "valor") %>%
+  group_by(variable) %>%
+  summarise(
+    n = length(valor),
+    media = mean(valor),
+    sd = sd(valor),
+    mediana = median(valor),
+    RIC = IQR(valor),
+    Q1 = quantile(valor, 0.25),
+    Q3 = quantile(valor, 0.75),
+    mínimo = min(valor),
+    máximo = max(valor),
+    asimetría = skewness(valor),
+    curtosis = kurtosis(valor)
+  ) %>%
+  kable(caption = "Resumen estadístico de las variables numéricas predictoras",
+        digits = 2, format.args = list(big.mark = ",")) %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"),
+                full_width = FALSE, position = "center", font_size = 12) %>%
+  row_spec(0, bold = TRUE)
+```
+
+La tabla presenta las principales medidas descriptivas de las variables numéricas predictoras. La edad tiene una media de 41,14 y una mediana de 41 años, mientras que la puntuación crediticia registra una media de 593,16 y una mediana de 595. El ingreso anual presenta una media de 32.414,31, superior a su mediana de 23.911, con una asimetría positiva de 1,52. De manera similar, las reclamaciones anteriores muestran una asimetría positiva de 1,09. En contraste, variables como la duración del seguro, el número de dependientes y la edad del vehículo presentan valores de asimetría cercanos a cero. Por otra parte, el ingreso anual y las reclamaciones anteriores registran las mayores curtosis, con 5,02 y 5,37, respectivamente. En cuanto a la dispersión, el ingreso anual presenta la mayor desviación estándar (31.615,60), mientras que las demás variables muestran distintos niveles de variabilidad según sus escalas y rangos de valores.
 
 
 
@@ -1525,9 +1698,9 @@ df %>%
   kruskal_effsize(Premium_Amount ~ Marital_Status)
 ```
 
-El tamaño del efecto obtenido fue de 0, lo que confirma que no hay ningún efecto entre los estados civiles sobre el Premium Amount. Esto va en línea con el resultado de Kruskal-Wallis: ni hay diferencia significativa, ni tampoco relevancia práctica entre los grupos Divorced, Married y Single.
+El tamaño del efecto obtenido fue prácticamente nulo ($\eta^2_H = 0.0000141$). Aunque la magnitud se clasifica como "small" (pequeña) según la escala utilizada, esta es la etiqueta más baja disponible y no implica que el efecto sea relevante: el valor es tan cercano a cero que, a pesar de la significancia estadística encontrada, la diferencia entre los estados civiles no tiene relevancia práctica sobre el Premium Amount. Esto es consistente con el patrón observado en Occupation y Customer Feedback: con un tamaño de muestra tan grande (1,200,000 observaciones), incluso diferencias mínimas pueden resultar estadísticamente significativas sin que esto implique una asociación relevante en la práctica.
 
-En conclusión, con una confianza del 95%, tanto la prueba de Kruskal-Wallis (χ²(2) = 1.1676, p-valor = 0.5578) como el tamaño del efecto (valor de 0) indican que no existen diferencias significativas ni relevancia práctica en el Premium Amount entre los tres estados civiles, por lo que no se rechaza H₀.
+En conclusión, con una confianza del 95%, la prueba de Kruskal-Wallis ($\chi^2(2) = 18.974$, p-valor $< 0.001$) indica diferencias estadísticamente significativas en el Premium Amount entre los estados civiles. Sin embargo, el tamaño del efecto ($\eta^2_H = 0.0000141$) es prácticamente nulo, lo que confirma que esta diferencia no tiene relevancia práctica y es consistente con el hecho de que, dado el gran tamaño de la muestra, incluso diferencias mínimas pueden alcanzar significancia estadística sin representar una asociación real entre las variables.
 
 
 Pregunta 10: ¿Existen diferencias significativas en el Premium Amount promedio entre los cuatro niveles educativos (High School, Bachelor's, Master's, PhD)?

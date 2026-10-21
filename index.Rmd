@@ -1,5 +1,5 @@
---- 
-title: "Análisis Estadístico del Dataset de Seguros"
+---
+title: "Factores Asociados al Monto de la Prima de Seguro: Análisis Exploratorio y Pruebas de Hipótesis sobre 1,200,000 Pólizas"
 author: "Fernando Cabrera Marriaga y Keisy Polo Peralta"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
@@ -7,7 +7,7 @@ output: bookdown::gitbook
 documentclass: book
 biblio-style: apalike
 link-citations: yes
-description: "Análisis exploratorio de datos y pruebas de hipótesis paramétricas y no paramétricas aplicadas a un conjunto de datos de pólizas de seguros."
+description: "Análisis exploratorio de datos y pruebas de hipótesis paramétricas y no paramétricas para evaluar la asociación estadística y la relevancia práctica de las características de los clientes con el monto de la prima de seguro, como paso previo a la construcción de un modelo de regresión múltiple."
 ---
 
 # Introducción 
@@ -52,47 +52,46 @@ de basar las conclusiones únicamente en la inspección visual de los gráficos.
 precisamente en este punto donde se plantean las pruebas de hipótesis paramétricas 
 y no paramétricas que constituyen el núcleo del presente capítulo.
 
-## Objetivo
+El estudio se concibe como un proceso por etapas. En esta primera etapa se 
+exploran los datos y se evalúa, variable por variable, qué características se 
+asocian con la prima y con qué magnitud. En etapas posteriores, estos resultados 
+servirán de base para construir y evaluar un modelo de regresión lineal múltiple 
+que incorpore los predictores de forma conjunta.
 
-El presente análisis busca responder la siguiente pregunta:
+## Objetivo general
 
-> **¿Cuáles de las 18 variables predictoras del dataset (10 categóricas y 8 
-> numéricas) presentan una asociación estadísticamente significativa y, además, 
-> prácticamente relevante con el monto de la prima de seguro (Premium Amount)?**
+Predecir el monto de la prima de seguro (Premium Amount) a partir de las características demográficas, socioeconómicas, de salud y de comportamiento de los clientes. Como primera etapa de este objetivo, el presente capítulo evalúa qué variables presentan una asociación estadísticamente significativa y prácticamente relevante con la prima, para determinar cuáles son candidatas a incluirse en un modelo de regresión múltiple en las etapas siguientes.
 
-Esta pregunta parte de una distinción central a lo largo de todo el capítulo: la 
-significancia estadística y la relevancia práctica no son lo mismo. Dado el gran 
-tamaño de la muestra (1,200,000 observaciones), prácticamente cualquier diferencia 
-entre grupos o cualquier correlación distinta de cero tiene una alta probabilidad 
-de resultar estadísticamente significativa, por lo que responder únicamente si 
-una prueba rechaza o no rechaza H₀ sería insuficiente y, en varios casos, incluso 
-engañoso.
+Este enfoque parte de una distinción central a lo largo del capítulo: la significancia estadística y la relevancia práctica no son lo mismo. Dado el gran tamaño de la muestra (1,200,000 observaciones), prácticamente cualquier diferencia entre grupos o cualquier correlación distinta de cero tiene una alta probabilidad de resultar estadísticamente significativa, por lo que responder únicamente si una prueba rechaza o no rechaza $H_0$ sería insuficiente y, en varios casos, incluso engañoso.
 
-Para responder la pregunta, cada variable predictora se somete a una prueba de 
-hipótesis específica frente a Premium Amount, seleccionada según su naturaleza 
-(categórica o numérica) y según se verifique o no el supuesto de normalidad 
-mediante la prueba de Lilliefors:
+## Objetivos específicos
 
-- Categóricas de dos niveles: prueba t de Student (si hay normalidad) o 
-  Mann-Whitney-Wilcoxon (si no la hay).
-- Categóricas de tres o más niveles: ANOVA (si hay normalidad) o Kruskal-Wallis 
-  (si no la hay), con comparaciones post-hoc por pares cuando el resultado global 
-  es significativo.
-- Numéricas: correlación de Pearson (si ambas son normales) o de Spearman (en caso 
-  contrario).
-- Relación entre dos variables categóricas: prueba de Chi-cuadrado de independencia.
+1. Caracterizar la estructura del conjunto de datos, identificando y tratando los valores faltantes mediante imputación por mediana (variables numéricas continuas) y por moda (variables discretas y categóricas).
+2. Describir, mediante análisis univariado y bivariado, el comportamiento de las 18 variables predictoras (10 categóricas y 8 numéricas) y su relación visual con Premium Amount.
+3. Verificar los supuestos de normalidad y de homogeneidad de varianzas para seleccionar, en cada caso, la prueba de hipótesis paramétrica o no paramétrica adecuada.
+4. Contrastar mediante pruebas de hipótesis la asociación entre cada variable predictora y Premium Amount.
+5. Cuantificar la relevancia práctica de las asociaciones detectadas mediante medidas de tamaño del efecto ($r$ de Wilcoxon, $\eta^2$ de Kruskal-Wallis y $\rho$ de Spearman).
+6. Explorar tres relaciones adicionales entre variables independientes para descartar posibles problemas de multicolinealidad.
+7. Determinar qué variables, si alguna, son a la vez estadísticamente significativas y prácticamente relevantes, y qué implica esto para la construcción posterior de un modelo de regresión múltiple que prediga la prima.
 
-En todos los casos donde la prueba resulta significativa, el resultado se 
-complementa con el cálculo del tamaño del efecto correspondiente (r de Wilcoxon, 
-η² de Kruskal-Wallis, o ρ de Spearman), lo que permite cuantificar qué tan grande 
-es realmente la asociación detectada, más allá del p-valor. Esta combinación entre 
-prueba de hipótesis y tamaño del efecto es la que finalmente permite responder si 
-una variable no solo está relacionada con Premium Amount de forma estadísticamente 
-detectable, sino si esa relación tiene algún peso real dentro del comportamiento 
-de la prima.
+## Metodología
 
-De forma complementaria, se seleccionan tres relaciones adicionales entre variables 
-independientes, identificadas en el EDA como potencialmente interesantes o 
-relevantes para descartar problemas de multicolinealidad, con el fin de enriquecer 
-la comprensión del comportamiento conjunto de los clientes, sin que esto constituya 
-el foco principal del análisis.
+El análisis se desarrolló en el lenguaje R mediante un enfoque cuantitativo, descriptivo e inferencial, y se organizó en tres etapas.
+
+**Etapa 1. Preparación de los datos.** Se trabajó con 1,200,000 registros y 21 variables. Los valores faltantes en variables numéricas continuas (Age, Annual Income, Health Score, Credit Score) se imputaron con la mediana, por ser robusta ante sesgos y valores atípicos. En las variables numéricas discretas (Number of Dependents, Previous Claims, Vehicle Age, Insurance Duration) y en las categóricas con pocos faltantes (Marital Status, Customer Feedback) se imputó con la moda. En Occupation, con cerca del 30 % de faltantes, se creó la categoría independiente "No especificado" para no inventar información. Las variables categóricas se convirtieron a factor, declarando como ordenadas Education Level, Customer Feedback y Exercise Frequency.
+
+**Etapa 2. Análisis exploratorio (EDA).** Se resumieron las variables numéricas con medidas de tendencia central, dispersión, asimetría y curtosis. Se construyeron histogramas, diagramas de barras y boxplots para el análisis univariado, y diagramas de dispersión y boxplots agrupados para el análisis bivariado frente a Premium Amount y entre predictores. Por eficiencia computacional, los gráficos se generaron sobre una muestra aleatoria reproducible de 50,000 observaciones (`set.seed(2026)`), mientras que todas las tablas, estimaciones y pruebas se calcularon con los 1,200,000 registros.
+
+**Etapa 3. Inferencia estadística.** Todas las pruebas se realizaron con un nivel de significancia $\alpha = 0.05$ (confianza del 95 %), siguiendo este esquema:
+
+1. *Normalidad.* Se aplicó la prueba de Lilliefors a cada grupo o variable, complementada con Shapiro-Wilk sobre una muestra aleatoria de 5,000 observaciones por grupo en las comparaciones de dos categorías, dado el límite de tamaño de esta prueba.
+2. *Homogeneidad de varianzas.* Se utilizó la prueba de Levene (centrada en la mediana) en las comparaciones entre grupos.
+3. *Selección de la prueba.*
+   - Categórica de dos niveles frente a Premium Amount: prueba t de Student si hay normalidad, o Mann-Whitney-Wilcoxon en caso contrario.
+   - Categórica de tres o más niveles: ANOVA si hay normalidad, o Kruskal-Wallis en caso contrario, con comparaciones por pares de Wilcoxon y ajuste de Bonferroni cuando el resultado global es significativo.
+   - Numérica frente a Premium Amount: correlación de Pearson si ambas variables son normales, o de Spearman en caso contrario.
+   - Dos variables categóricas entre sí: prueba Chi-cuadrado de independencia, verificando previamente que las frecuencias esperadas sean mayores o iguales a 5.
+4. *Tamaño del efecto.* Se calculó $r$ (Mann-Whitney-Wilcoxon), $\eta^2_H$ (Kruskal-Wallis) y $\rho$ (Spearman), para evaluar la relevancia práctica más allá del p-valor.
+5. *Criterio de decisión.* Una variable se considera relevante solo si cumple ambos criterios: rechazo de $H_0$ y tamaño del efecto no despreciable.
+
+Como el supuesto de normalidad no se cumplió en ningún caso, las hipótesis de las pruebas no paramétricas se plantean en términos de medianas o de igualdad de distribuciones, según corresponda.
