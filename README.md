@@ -43,7 +43,7 @@ Por su tamaño (~170 MB), el archivo `train.csv` **no está incluido en este rep
 ```
 ├── index.Rmd            # Página de introducción del libro
 ├── 01-intro.Rmd         # EDA completo y pruebas de hipótesis
-├── bookdown-demo.Rproj  # Proyecto de RStudio
+├── analisis-seguros.Rproj # Proyecto de RStudio
 ├── _bookdown.yml        # Configuración de bookdown
 ├── _output.yml          # Configuración de salida (gitbook, PDF, etc.)
 ├── data/                # Carpeta local para el dataset (no versionada)
@@ -53,9 +53,21 @@ Por su tamaño (~170 MB), el archivo `train.csv` **no está incluido en este rep
 ## Cómo ejecutar el proyecto
 
 1. Clona este repositorio.
-2. Abre el archivo `bookdown-demo.Rproj` en RStudio.
+2. Abre el archivo `analisis-seguros.Rproj` en RStudio.
 3. Descarga el dataset siguiendo las instrucciones de la sección anterior y colócalo en `data/train.csv`.
-4. Instala los paquetes de R necesarios (ver `library()` en `01-intro.Rmd`): `tidyverse`, `Amelia`, `moments`, `ggplot2`, `patchwork`, `GGally`, `readr`, `dplyr`, `car`, `rstatix`, `coin`, `nortest`, `data.table`.
+4. Para reproducir exactamente el entorno registrado, instala `renv` una sola vez y restaura las versiones bloqueadas:
+   ```r
+   install.packages("renv")
+   renv::restore()
+   ```
+
+   Como alternativa, instala manualmente los paquetes de R necesarios:
+   ```r
+   install.packages(c(
+     "bookdown", "tidyverse", "Amelia", "moments", "patchwork", "GGally",
+     "car", "rstatix", "coin", "nortest", "data.table", "knitr", "kableExtra"
+   ))
+   ```
 5. Compila el libro con:
    ```r
    bookdown::render_book("index.Rmd")
@@ -75,4 +87,4 @@ Por su tamaño (~170 MB), el archivo `train.csv` **no está incluido en este rep
 
 ## Librerías principales utilizadas
 
-`tidyverse`, `data.table`, `ggplot2`, `GGally`, `car`, `rstatix`, `coin`, `nortest`, `moments`, `patchwork`.
+`bookdown`, `tidyverse`, `data.table`, `ggplot2`, `GGally`, `car`, `rstatix`, `coin`, `nortest`, `moments`, `patchwork`, `knitr`, `kableExtra`.

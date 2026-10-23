@@ -23,42 +23,7 @@ library(coin)
 library(nortest)
 library(knitr)
 library(kableExtra)
-library(broom)
 ```
-
-
-```{r funciones-tablas, include=FALSE}
-# Tabla general con estilo
-tabla <- function(x, caption = NULL, digits = 4) {
-  x %>%
-    kable(caption = caption, digits = digits, align = "c") %>%
-    kable_styling(bootstrap_options = c("striped", "hover", "condensed"),
-                  full_width = FALSE, position = "center") %>%
-    row_spec(0, bold = TRUE)
-}
-
-# Para pruebas tipo htest: lillie.test, shapiro.test, kruskal.test, cor.test, chisq.test
-tabla_test <- function(test, caption = NULL) {
-  res <- broom::tidy(test)
-  res$p.value <- ifelse(res$p.value < 0.001, "< 0.001",
-                        format(round(res$p.value, 4), nsmall = 4))
-  res <- res %>% mutate(across(where(is.numeric), ~ round(.x, 4)))
-  tabla(res, caption)
-}
-
-# Para leveneTest
-tabla_levene <- function(lev, caption = NULL) {
-  res <- as.data.frame(lev) %>%
-    tibble::rownames_to_column("Fuente")
-  res$Fuente <- c("Grupo", "Residuos")
-  colnames(res) <- c("Fuente", "gl", "Estadístico F", "p-valor")
-  res$`p-valor` <- ifelse(is.na(res$`p-valor`), "",
-                          ifelse(res$`p-valor` < 0.001, "< 0.001",
-                                 format(round(res$`p-valor`, 4), nsmall = 4)))
-  tabla(res, caption, digits = 3)
-}
-```
-
 
 
 ```{r, message=FALSE, warning=FALSE}
@@ -177,23 +142,32 @@ El análisis de valores faltantes muestra que las variables id, Gender, Marital 
 
 Ahora, imputemos los datos faltantes
 ```{r imputacion}
-vars_imp <- c("Age", "Annual Income", "Health Score", "Credit Score",
-              "Number of Dependents", "Previous Claims", "Vehicle Age",
-              "Insurance Duration")
+vars_continuas <- c("Age", "Annual Income", "Health Score", "Credit Score")
+vars_discretas <- c("Number of Dependents", "Previous Claims", "Vehicle Age",
+                    "Insurance Duration")
+vars_imp <- c(vars_continuas, vars_discretas)
 
-# 1. Prueba de normalidad sobre los datos observados y elección del método
+moda <- function(x) {
+  valores <- na.omit(x)
+  unicos <- unique(valores)
+  unicos[which.max(tabulate(match(valores, unicos)))]
+}
+
+# 1. Prueba de normalidad sobre los datos observados y definición del método.
+# Las variables discretas se imputan con la moda para preservar su naturaleza.
 decision <- map_dfr(vars_imp, function(v) {
   x_obs <- df[[v]][!is.na(df[[v]])]
   lil <- nortest::lillie.test(x_obs)
   normal <- lil$p.value >= 0.05
+  es_continua <- v %in% vars_continuas
   tibble(
     Variable = v,
     faltantes = sum(is.na(df[[v]])),
     D = unname(lil$statistic),
     p = lil$p.value,
     Normalidad = ifelse(normal, "Sí", "No"),
-    Método = ifelse(normal, "Media", "Mediana"),
-    valor = ifelse(normal, mean(x_obs), median(x_obs))
+    Método = ifelse(es_continua, "Mediana", "Moda"),
+    valor = ifelse(es_continua, median(x_obs), moda(x_obs))
   )
 })
 
@@ -224,7 +198,7 @@ decision %>%
 ```
 
 
-Para decidir el método de imputación de cada variable numérica se evaluó el supuesto de normalidad mediante la prueba de Lilliefors, aplicada a los valores observados (sin considerar los datos faltantes). Las variables con distribución normal se imputaron con la media, y las que no cumplen la normalidad, con la mediana, por ser más robusta ante sesgos y valores atípicos. Con una confianza del 95%, ninguna de las variables evaluadas presentó distribución normal (p-valor < 0.001 en todos los casos), por lo que todas se imputaron con la mediana.
+Para documentar la forma de las variables numéricas se evaluó el supuesto de normalidad mediante la prueba de Lilliefors, aplicada a los valores observados (sin considerar los datos faltantes). Dado que ninguna variable presentó normalidad (p-valor < 0.001), las variables continuas se imputaron con la mediana, por ser robusta ante sesgos y valores atípicos. Las variables discretas se imputaron con la moda para conservar valores enteros y categorías observadas.
 
 Verificamos otra vez si hay faltantes
 
@@ -304,11 +278,11 @@ df <- df %>%
 
 Se convirtieron a factor todas las variables de tipo carácter: Gender, Marital Status, Occupation, Location, Policy Type, Smoking Status, Property Type, Education Level, Customer Feedback y Exercise Frequency. En el caso de Education Level, Customer Feedback y Exercise Frequency, se declararon además como factores ordenados, respetando una jerarquía lógica en sus categorías, lo que permite que tanto los análisis como las visualizaciones reflejen ese orden natural en lugar de mostrarlas en orden alfabético.
 
-Para que las visualizaciones sean legibles y el documento se pueda compilar de forma eficiente, los diagramas de dispersión se generan a partir de una muestra aleatoria reproducible de 300,000 observaciones (25 % de los datos). Los histogramas, diagramas de barras y boxplots, así como las tablas, estimaciones y pruebas de hipótesis, se calculan con los 1,200,000 registros.
+Para que las visualizaciones sean legibles y el documento se pueda compilar de forma eficiente, los diagramas de dispersión se generan a partir de una muestra aleatoria reproducible de 50,000 observaciones. Los histogramas, diagramas de barras y boxplots, así como las tablas, estimaciones y pruebas de hipótesis, se calculan con los 1,200,000 registros.
 
 ```{r muestra-graficos}
 set.seed(2026)
-df_graficos <- df %>% slice_sample(n = 300000)
+df_graficos <- df %>% slice_sample(n = 50000)
 
 # Los diagramas de dispersión usan la muestra; el resto de gráficos usa los 1,200,000 registros
 geom_point <- function(mapping = NULL, ...) {
@@ -1445,7 +1419,7 @@ Con una confianza del 95%, la prueba de Lilliefors muestra que ni Health Score (
 Dado que ninguna de las dos variables cumple el supuesto de normalidad, se utiliza el coeficiente de correlación de Spearman para evaluar la relación entre Health Score y Premium Amount.
 
 ```{r}
-cor.test(df$Health_Score, df$Premium_Amount, method = "spearman")
+cor.test(df$Health_Score, df$Premium_Amount, method = "spearman", exact = FALSE)
 ```
 
 Con una confianza del 95%, la prueba de correlación de Spearman indica que existe una correlación estadísticamente significativa entre Health Score y Premium Amount (S = 2.3408e+17, p-valor < 0.001, rho = 0.01601). Sin embargo, el valor del coeficiente de correlación (ρ = 0.016) es extremadamente bajo, lo que indica que, a pesar de ser significativa desde el punto de vista estadístico, la relación entre ambas variables es prácticamente nula en términos prácticos.
@@ -1607,7 +1581,7 @@ Con una confianza del 95%, la prueba de Lilliefors muestra que ni Annual Income 
 Dado que ninguna de las dos variables cumple el supuesto de normalidad, se utiliza el coeficiente de correlación de Spearman para evaluar la relación entre Annual Income y Vehicle Age.
 
 ```{r}
-cor.test(df$Annual_Income, df$Vehicle_Age, method = "spearman")
+cor.test(df$Annual_Income, df$Vehicle_Age, method = "spearman", exact = FALSE)
 ```
 
 Con una confianza del 95%, la prueba de correlación de Spearman indica que no existe una correlación estadísticamente significativa entre Annual Income y Vehicle Age (S = 2.5692e+17, p-valor = 0.7118, ρ = -0.0003), por lo que no se rechaza H₀. El coeficiente de correlación, prácticamente nulo, confirma que no existe relación real entre ambas variables, resolviendo la aparente tensión observada en el EDA entre la matriz de correlación y el scatterplot.
@@ -2085,7 +2059,7 @@ Con una confianza del 95%, la prueba de Lilliefors muestra que ni Age (D = 0.066
 Dado que ninguna de las dos variables cumple el supuesto de normalidad, se utiliza el coeficiente de correlación de Spearman para evaluar la relación entre Age y Premium Amount.
 
 ```{r}
-cor.test(df$Age, df$Premium_Amount, method = "spearman")
+cor.test(df$Age, df$Premium_Amount, method = "spearman", exact = FALSE)
 ```
 
 Con una confianza del 95%, la prueba de correlación de Spearman indica que existe una correlación estadísticamente significativa entre Age y Premium Amount (S = 2.8867e+17, p-valor = 0.01129, rho = -0.0023), ya que el p-valor es menor al nivel de significancia establecido. Por lo tanto, se rechaza H₀. Sin embargo, el valor del coeficiente de correlación (rho = -0.0023) es extremadamente bajo, lo que indica que, a pesar de ser significativa desde el punto de vista estadístico, la relación entre ambas variables es prácticamente nula en términos prácticos.
@@ -2116,7 +2090,7 @@ Con una confianza del 95%, la prueba de Lilliefors muestra que ni Annual Income 
 Dado que ninguna de las dos variables cumple el supuesto de normalidad, se utiliza el coeficiente de correlación de Spearman para evaluar la relación entre Annual Income y Premium Amount.
 
 ```{r}
-cor.test(df$Annual_Income, df$Premium_Amount, method = "spearman")
+cor.test(df$Annual_Income, df$Premium_Amount, method = "spearman", exact = FALSE)
 ```
 
 Con una confianza del 95%, la prueba de correlación de Spearman indica que existe una correlación estadísticamente significativa entre Annual Income y Premium Amount (S = 3.0523e+17, p-valor < 0.001, rho = -0.0598), ya que el p-valor es considerablemente menor al nivel de significancia establecido. Por lo tanto, se rechaza H₀. Sin embargo, el valor del coeficiente de correlación (rho = -0.0598) sigue siendo bastante bajo, aunque un poco mayor que en el caso de Age, lo que indica que, a pesar de ser significativa desde el punto de vista estadístico, la relación entre ambas variables continúa siendo prácticamente nula en términos prácticos.
@@ -2143,7 +2117,7 @@ Con una confianza del 95%, la prueba de Lilliefors muestra que ni Previous Claim
 Dado que ninguna de las dos variables cumple el supuesto de normalidad, se utiliza el coeficiente de correlación de Spearman para evaluar la relación entre Previous Claims y Premium Amount.
 
 ```{r}
-cor.test(df$Previous_Claims, df$Premium_Amount, method = "spearman")
+cor.test(df$Previous_Claims, df$Premium_Amount, method = "spearman", exact = FALSE)
 ```
 
 Se rechaza H₀ dado que la prueba de Spearman resulta significativa (rho = 0.0391, p-valor < 0.001). Como ha ocurrido con las demás variables numéricas analizadas, este resultado es producto del tamaño de la muestra más que de una asociación real entre la cantidad de reclamos previos y el monto de la prima.
@@ -2175,7 +2149,7 @@ Con una confianza del 95%, la prueba de Lilliefors muestra que ni Vehicle Age (D
 Dado que ninguna de las dos variables cumple el supuesto de normalidad, se utiliza el coeficiente de correlación de Spearman para evaluar la relación entre Vehicle Age y Premium Amount.
 
 ```{r}
-cor.test(df$Vehicle_Age, df$Premium_Amount, method = "spearman")
+cor.test(df$Vehicle_Age, df$Premium_Amount, method = "spearman", exact = FALSE)
 ```
 
 La prueba de correlación de Spearman entre Vehicle Age y Premium Amount arroja un p-valor de 0.3402, considerablemente mayor al nivel de significancia establecido, por lo que no se rechaza H₀. El coeficiente obtenido (rho = 0.0009) es prácticamente cero, confirmando que no existe ninguna relación entre la antigüedad del vehículo y el monto de la prima.
@@ -2205,7 +2179,7 @@ Con una confianza del 95%, la prueba de Lilliefors muestra que ni Credit Score (
 Dado que ninguna de las dos variables cumple el supuesto de normalidad, se utiliza el coeficiente de correlación de Spearman para evaluar la relación entre Credit Score y Premium Amount.
 
 ```{r}
-cor.test(df$Credit_Score, df$Premium_Amount, method = "spearman")
+cor.test(df$Credit_Score, df$Premium_Amount, method = "spearman", exact = FALSE)
 ```
 
 La prueba de correlación de Spearman entre Credit Score y Premium Amount resulta significativa (S = 2.9989e+17, p-valor < 0.001, rho = -0.0413), por lo que se rechaza H₀. No obstante, el coeficiente sigue siendo muy bajo, en la misma línea que Annual Income y Previous Claims, indicando que aunque existe significancia estadística, la relación real entre el puntaje crediticio y el monto de la prima es insignificante.
@@ -2238,7 +2212,7 @@ Dado que ninguna de las dos variables cumple el supuesto de normalidad, se utili
 
 
 ```{r}
-cor.test(df$Insurance_Duration, df$Premium_Amount, method = "spearman")
+cor.test(df$Insurance_Duration, df$Premium_Amount, method = "spearman", exact = FALSE)
 ```
 
 La prueba de correlación de Spearman entre Insurance Duration y Premium Amount arroja un p-valor de 0.9381, muy por encima del nivel de significancia establecido, por lo que no se rechaza H₀. El coeficiente obtenido (rho = -0.00007) es esencialmente cero, mostrando que no hay absolutamente ninguna asociación entre la duración de la póliza y el monto de la prima.
@@ -2266,7 +2240,7 @@ Con una confianza del 95%, la prueba de Lilliefors muestra que ni Number of Depe
 Dado que ninguna de las dos variables cumple el supuesto de normalidad, se utiliza el coeficiente de correlación de Spearman para evaluar la relación entre Number of Dependents y Premium Amount.
 
 ```{r}
-cor.test(df$Number_of_Dependents, df$Premium_Amount, method = "spearman")
+cor.test(df$Number_of_Dependents, df$Premium_Amount, method = "spearman", exact = FALSE)
 ```
 
 La prueba de correlación de Spearman entre Number of Dependents y Premium Amount arroja un p-valor de 0.6703, muy por encima del nivel de significancia establecido, por lo que no se rechaza H₀. El coeficiente obtenido (rho = -0.0004) es esencialmente cero, mostrando que no hay ninguna asociación entre la cantidad de dependientes de un cliente y el monto de su prima.

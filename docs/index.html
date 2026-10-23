@@ -4,26 +4,26 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Análisis Estadístico del Dataset de Seguros</title>
-  <meta name="description" content="Análisis exploratorio de datos y pruebas de hipótesis paramétricas y no paramétricas aplicadas a un conjunto de datos de pólizas de seguros." />
+  <title>Factores Asociados al Monto de la Prima de Seguro: Análisis Exploratorio y Pruebas de Hipótesis sobre 1,200,000 Pólizas</title>
+  <meta name="description" content="Análisis exploratorio de datos y pruebas de hipótesis paramétricas y no paramétricas para evaluar la asociación estadística y la relevancia práctica de las características de los clientes con el monto de la prima de seguro, como paso previo a la construcción de un modelo de regresión múltiple." />
   <meta name="generator" content="bookdown 0.48 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Análisis Estadístico del Dataset de Seguros" />
+  <meta property="og:title" content="Factores Asociados al Monto de la Prima de Seguro: Análisis Exploratorio y Pruebas de Hipótesis sobre 1,200,000 Pólizas" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="Análisis exploratorio de datos y pruebas de hipótesis paramétricas y no paramétricas aplicadas a un conjunto de datos de pólizas de seguros." />
+  <meta property="og:description" content="Análisis exploratorio de datos y pruebas de hipótesis paramétricas y no paramétricas para evaluar la asociación estadística y la relevancia práctica de las características de los clientes con el monto de la prima de seguro, como paso previo a la construcción de un modelo de regresión múltiple." />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Análisis Estadístico del Dataset de Seguros" />
+  <meta name="twitter:title" content="Factores Asociados al Monto de la Prima de Seguro: Análisis Exploratorio y Pruebas de Hipótesis sobre 1,200,000 Pólizas" />
   
-  <meta name="twitter:description" content="Análisis exploratorio de datos y pruebas de hipótesis paramétricas y no paramétricas aplicadas a un conjunto de datos de pólizas de seguros." />
+  <meta name="twitter:description" content="Análisis exploratorio de datos y pruebas de hipótesis paramétricas y no paramétricas para evaluar la asociación estadística y la relevancia práctica de las características de los clientes con el monto de la prima de seguro, como paso previo a la construcción de un modelo de regresión múltiple." />
   
 
 <meta name="author" content="Fernando Cabrera Marriaga y Keisy Polo Peralta" />
 
 
-<meta name="date" content="2026-09-17" />
+<meta name="date" content="2026-10-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,6 +52,10 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
 
 
 <style type="text/css">
@@ -142,20 +146,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="#introducci%C3%B3n"><i class="fa fa-check"></i><b>1</b> Introducción</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1.1</b> Objetivo</a></li>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1.1</b> Objetivo general</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="#objetivos-espec%C3%ADficos"><i class="fa fa-check"></i><b>1.2</b> Objetivos específicos</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="#metodolog%C3%ADa"><i class="fa fa-check"></i><b>1.3</b> Metodología</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Análisis Exploratorio de Datos (EDA)</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="index.html"><a href="#revisi%C3%B3n-de-datos-faltantes-en-las-variables-num%C3%A9ricas"><i class="fa fa-check"></i><b>2.1</b> Revisión de datos faltantes en las variables numéricas</a></li>
-<li class="chapter" data-level="2.2" data-path="index.html"><a href="#ingenier%C3%ADa-de-caracter%C3%ADsticas-en-variables-num%C3%A9ricas"><i class="fa fa-check"></i><b>2.2</b> Ingeniería de características en variables numéricas</a></li>
-<li class="chapter" data-level="2.3" data-path="index.html"><a href="#revisi%C3%B3n-de-datos-faltantes-en-variables-categ%C3%B3ricas"><i class="fa fa-check"></i><b>2.3</b> Revisión de datos faltantes en variables categóricas</a></li>
-<li class="chapter" data-level="2.4" data-path="index.html"><a href="#ingenier%C3%ADa-de-caracter%C3%ADsticas-en-variables-categ%C3%B3ricas"><i class="fa fa-check"></i><b>2.4</b> Ingeniería de características en variables categóricas</a></li>
-<li class="chapter" data-level="2.5" data-path="index.html"><a href="#conversi%C3%B3n-de-las-variables-categ%C3%B3ricas-a-factor"><i class="fa fa-check"></i><b>2.5</b> Conversión de las variables categóricas a factor</a></li>
-<li class="chapter" data-level="2.6" data-path="index.html"><a href="#resumen-variables-num%C3%A9ricas"><i class="fa fa-check"></i><b>2.6</b> Resumen variables numéricas</a></li>
-<li class="chapter" data-level="2.7" data-path="index.html"><a href="#an%C3%A1lisis-variable-respuesta-premium-amount"><i class="fa fa-check"></i><b>2.7</b> Análisis variable respuesta (Premium Amount)</a></li>
-<li class="chapter" data-level="2.8" data-path="index.html"><a href="#an%C3%A1lisis-de-las-variables-independientes-caracter%C3%ADsticas"><i class="fa fa-check"></i><b>2.8</b> Análisis de las variables independientes (características)</a></li>
-<li class="chapter" data-level="2.9" data-path="index.html"><a href="#an%C3%A1lisis-bivariado-variable-caracter%C3%ADstica-vs-variable-respuesta"><i class="fa fa-check"></i><b>2.9</b> Análisis bivariado (Variable característica vs Variable respuesta)</a></li>
-<li class="chapter" data-level="2.10" data-path="index.html"><a href="#an%C3%A1lisis-bivariado-independienets-vs-independientes"><i class="fa fa-check"></i><b>2.10</b> Análisis bivariado independienets vs independientes</a></li>
+<li class="chapter" data-level="2.1" data-path="index.html"><a href="#clasificaci%C3%B3n-de-las-variables"><i class="fa fa-check"></i><b>2.1</b> Clasificación de las variables</a></li>
+<li class="chapter" data-level="2.2" data-path="index.html"><a href="#revisi%C3%B3n-de-datos-faltantes-en-las-variables-num%C3%A9ricas"><i class="fa fa-check"></i><b>2.2</b> Revisión de datos faltantes en las variables numéricas</a></li>
+<li class="chapter" data-level="2.3" data-path="index.html"><a href="#imputaci%C3%B3n-de-datos-faltantes"><i class="fa fa-check"></i><b>2.3</b> Imputación de datos faltantes</a></li>
+<li class="chapter" data-level="2.4" data-path="index.html"><a href="#revisi%C3%B3n-de-datos-faltantes-en-variables-categ%C3%B3ricas"><i class="fa fa-check"></i><b>2.4</b> Revisión de datos faltantes en variables categóricas</a></li>
+<li class="chapter" data-level="2.5" data-path="index.html"><a href="#imputaci%C3%B3n-de-datos-faltantes-en-variables-categ%C3%B3ricas"><i class="fa fa-check"></i><b>2.5</b> Imputación de datos faltantes en variables categóricas</a></li>
+<li class="chapter" data-level="2.6" data-path="index.html"><a href="#conversi%C3%B3n-de-variables-de-tipo-car%C3%A1cter-a-factor"><i class="fa fa-check"></i><b>2.6</b> Conversión de variables de tipo carácter a factor</a></li>
+<li class="chapter" data-level="2.7" data-path="index.html"><a href="#an%C3%A1lisis-de-la-variable-respuesta-premium-amount"><i class="fa fa-check"></i><b>2.7</b> Análisis de la variable respuesta (Premium Amount)</a>
+<ul>
+<li class="chapter" data-level="2.7.1" data-path="index.html"><a href="#resumen-estad%C3%ADstico"><i class="fa fa-check"></i><b>2.7.1</b> Resumen estadístico</a></li>
+<li class="chapter" data-level="2.7.2" data-path="index.html"><a href="#distribuci%C3%B3n"><i class="fa fa-check"></i><b>2.7.2</b> Distribución</a></li>
+<li class="chapter" data-level="2.7.3" data-path="index.html"><a href="#valores-at%C3%ADpicos"><i class="fa fa-check"></i><b>2.7.3</b> Valores atípicos</a></li>
+<li class="chapter" data-level="2.7.4" data-path="index.html"><a href="#conclusi%C3%B3n-sobre-la-variable-respuesta"><i class="fa fa-check"></i><b>2.7.4</b> Conclusión sobre la variable respuesta</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="index.html"><a href="#resumen-de-las-dem%C3%A1s-variables-num%C3%A9ricas"><i class="fa fa-check"></i><b>2.8</b> Resumen de las demás variables numéricas</a></li>
+<li class="chapter" data-level="2.9" data-path="index.html"><a href="#an%C3%A1lisis-de-las-variables-independientes-caracter%C3%ADsticas"><i class="fa fa-check"></i><b>2.9</b> Análisis de las variables independientes (características)</a></li>
+<li class="chapter" data-level="2.10" data-path="index.html"><a href="#an%C3%A1lisis-bivariado-variable-caracter%C3%ADstica-vs-variable-respuesta"><i class="fa fa-check"></i><b>2.10</b> Análisis bivariado (Variable característica vs Variable respuesta)</a></li>
+<li class="chapter" data-level="2.11" data-path="index.html"><a href="#an%C3%A1lisis-bivariado-independienets-vs-independientes"><i class="fa fa-check"></i><b>2.11</b> Análisis bivariado independienets vs independientes</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="index.html"><a href="#pruebas-de-hip%C3%B3tesis-param%C3%A9tricas-y-no-param%C3%A9tricas"><i class="fa fa-check"></i><b>3</b> Pruebas de hipótesis paramétricas y no paramétricas</a>
 <ul>
@@ -173,7 +186,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Análisis Estadístico del Dataset de Seguros</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Factores Asociados al Monto de la Prima de Seguro: Análisis Exploratorio y Pruebas de Hipótesis sobre 1,200,000 Pólizas</a>
           </h1>
         </div>
 
@@ -182,9 +195,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="header">
-<h1 class="title">Análisis Estadístico del Dataset de Seguros</h1>
+<h1 class="title">Factores Asociados al Monto de la Prima de Seguro: Análisis Exploratorio y Pruebas de Hipótesis sobre 1,200,000 Pólizas</h1>
 <p class="author"><em>Fernando Cabrera Marriaga y Keisy Polo Peralta</em></p>
-<p class="date"><em>2026-09-17</em></p>
+<p class="date"><em>2026-10-22</em></p>
 </div>
 <div id="introducción" class="section level1 hasAnchor" number="1">
 <h1><span class="header-section-number">Capítulo 1</span> Introducción<a href="#introducci%C3%B3n" class="anchor-section" aria-label="Anchor link to header"></a></h1>
@@ -224,48 +237,48 @@ de confirmar dichos patrones mediante herramientas estadísticas formales, en lu
 de basar las conclusiones únicamente en la inspección visual de los gráficos. Es
 precisamente en este punto donde se plantean las pruebas de hipótesis paramétricas
 y no paramétricas que constituyen el núcleo del presente capítulo.</p>
-<div id="objetivo" class="section level2 hasAnchor" number="1.1">
-<h2><span class="header-section-number">1.1</span> Objetivo<a href="index.html#objetivo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>El presente análisis busca responder la siguiente pregunta:</p>
-<blockquote>
-<p><strong>¿Cuáles de las 18 variables predictoras del dataset (10 categóricas y 8
-numéricas) presentan una asociación estadísticamente significativa y, además,
-prácticamente relevante con el monto de la prima de seguro (Premium Amount)?</strong></p>
-</blockquote>
-<p>Esta pregunta parte de una distinción central a lo largo de todo el capítulo: la
-significancia estadística y la relevancia práctica no son lo mismo. Dado el gran
-tamaño de la muestra (1,200,000 observaciones), prácticamente cualquier diferencia
-entre grupos o cualquier correlación distinta de cero tiene una alta probabilidad
-de resultar estadísticamente significativa, por lo que responder únicamente si
-una prueba rechaza o no rechaza H₀ sería insuficiente y, en varios casos, incluso
-engañoso.</p>
-<p>Para responder la pregunta, cada variable predictora se somete a una prueba de
-hipótesis específica frente a Premium Amount, seleccionada según su naturaleza
-(categórica o numérica) y según se verifique o no el supuesto de normalidad
-mediante la prueba de Lilliefors:</p>
+<p>El estudio se concibe como un proceso por etapas. En esta primera etapa se
+exploran los datos y se evalúa, variable por variable, qué características se
+asocian con la prima y con qué magnitud. En etapas posteriores, estos resultados
+servirán de base para construir y evaluar un modelo de regresión lineal múltiple
+que incorpore los predictores de forma conjunta.</p>
+<div id="objetivo-general" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> Objetivo general<a href="index.html#objetivo-general" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Predecir el monto de la prima de seguro (Premium Amount) a partir de las características demográficas, socioeconómicas, de salud y de comportamiento de los clientes. Como primera etapa de este objetivo, el presente capítulo evalúa qué variables presentan una asociación estadísticamente significativa y prácticamente relevante con la prima, para determinar cuáles son candidatas a incluirse en un modelo de regresión múltiple en las etapas siguientes.</p>
+<p>Este enfoque parte de una distinción central a lo largo del capítulo: la significancia estadística y la relevancia práctica no son lo mismo. Dado el gran tamaño de la muestra (1,200,000 observaciones), prácticamente cualquier diferencia entre grupos o cualquier correlación distinta de cero tiene una alta probabilidad de resultar estadísticamente significativa, por lo que responder únicamente si una prueba rechaza o no rechaza <span class="math inline">\(H_0\)</span> sería insuficiente y, en varios casos, incluso engañoso.</p>
+</div>
+<div id="objetivos-específicos" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> Objetivos específicos<a href="#objetivos-espec%C3%ADficos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ol style="list-style-type: decimal">
+<li>Caracterizar la estructura del conjunto de datos, identificando y tratando los valores faltantes mediante imputación por mediana (variables numéricas continuas) y por moda (variables discretas y categóricas).</li>
+<li>Describir, mediante análisis univariado y bivariado, el comportamiento de las 18 variables predictoras (10 categóricas y 8 numéricas) y su relación visual con Premium Amount.</li>
+<li>Verificar los supuestos de normalidad y de homogeneidad de varianzas para seleccionar, en cada caso, la prueba de hipótesis paramétrica o no paramétrica adecuada.</li>
+<li>Contrastar mediante pruebas de hipótesis la asociación entre cada variable predictora y Premium Amount.</li>
+<li>Cuantificar la relevancia práctica de las asociaciones detectadas mediante medidas de tamaño del efecto (<span class="math inline">\(r\)</span> de Wilcoxon, <span class="math inline">\(\eta^2\)</span> de Kruskal-Wallis y <span class="math inline">\(\rho\)</span> de Spearman).</li>
+<li>Explorar tres relaciones adicionales entre variables independientes para descartar posibles problemas de multicolinealidad.</li>
+<li>Determinar qué variables, si alguna, son a la vez estadísticamente significativas y prácticamente relevantes, y qué implica esto para la construcción posterior de un modelo de regresión múltiple que prediga la prima.</li>
+</ol>
+</div>
+<div id="metodología" class="section level2 hasAnchor" number="1.3">
+<h2><span class="header-section-number">1.3</span> Metodología<a href="#metodolog%C3%ADa" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>El análisis se desarrolló en el lenguaje R mediante un enfoque cuantitativo, descriptivo e inferencial, y se organizó en tres etapas.</p>
+<p><strong>Etapa 1. Preparación de los datos.</strong> Se trabajó con 1,200,000 registros y 21 variables. Los valores faltantes en variables numéricas continuas (Age, Annual Income, Health Score, Credit Score) se imputaron con la mediana, por ser robusta ante sesgos y valores atípicos. En las variables numéricas discretas (Number of Dependents, Previous Claims, Vehicle Age, Insurance Duration) y en las categóricas con pocos faltantes (Marital Status, Customer Feedback) se imputó con la moda. En Occupation, con cerca del 30 % de faltantes, se creó la categoría independiente “No especificado” para no inventar información. Las variables categóricas se convirtieron a factor, declarando como ordenadas Education Level, Customer Feedback y Exercise Frequency.</p>
+<p><strong>Etapa 2. Análisis exploratorio (EDA).</strong> Se resumieron las variables numéricas con medidas de tendencia central, dispersión, asimetría y curtosis. Se construyeron histogramas, diagramas de barras y boxplots para el análisis univariado, y diagramas de dispersión y boxplots agrupados para el análisis bivariado frente a Premium Amount y entre predictores. Por eficiencia computacional, los gráficos se generaron sobre una muestra aleatoria reproducible de 50,000 observaciones (<code>set.seed(2026)</code>), mientras que todas las tablas, estimaciones y pruebas se calcularon con los 1,200,000 registros.</p>
+<p><strong>Etapa 3. Inferencia estadística.</strong> Todas las pruebas se realizaron con un nivel de significancia <span class="math inline">\(\alpha = 0.05\)</span> (confianza del 95 %), siguiendo este esquema:</p>
+<ol style="list-style-type: decimal">
+<li><em>Normalidad.</em> Se aplicó la prueba de Lilliefors a cada grupo o variable, complementada con Shapiro-Wilk sobre una muestra aleatoria de 5,000 observaciones por grupo en las comparaciones de dos categorías, dado el límite de tamaño de esta prueba.</li>
+<li><em>Homogeneidad de varianzas.</em> Se utilizó la prueba de Levene (centrada en la mediana) en las comparaciones entre grupos.</li>
+<li><em>Selección de la prueba.</em>
 <ul>
-<li>Categóricas de dos niveles: prueba t de Student (si hay normalidad) o
-Mann-Whitney-Wilcoxon (si no la hay).</li>
-<li>Categóricas de tres o más niveles: ANOVA (si hay normalidad) o Kruskal-Wallis
-(si no la hay), con comparaciones post-hoc por pares cuando el resultado global
-es significativo.</li>
-<li>Numéricas: correlación de Pearson (si ambas son normales) o de Spearman (en caso
-contrario).</li>
-<li>Relación entre dos variables categóricas: prueba de Chi-cuadrado de independencia.</li>
-</ul>
-<p>En todos los casos donde la prueba resulta significativa, el resultado se
-complementa con el cálculo del tamaño del efecto correspondiente (r de Wilcoxon,
-η² de Kruskal-Wallis, o ρ de Spearman), lo que permite cuantificar qué tan grande
-es realmente la asociación detectada, más allá del p-valor. Esta combinación entre
-prueba de hipótesis y tamaño del efecto es la que finalmente permite responder si
-una variable no solo está relacionada con Premium Amount de forma estadísticamente
-detectable, sino si esa relación tiene algún peso real dentro del comportamiento
-de la prima.</p>
-<p>De forma complementaria, se seleccionan tres relaciones adicionales entre variables
-independientes, identificadas en el EDA como potencialmente interesantes o
-relevantes para descartar problemas de multicolinealidad, con el fin de enriquecer
-la comprensión del comportamiento conjunto de los clientes, sin que esto constituya
-el foco principal del análisis.</p>
+<li>Categórica de dos niveles frente a Premium Amount: prueba t de Student si hay normalidad, o Mann-Whitney-Wilcoxon en caso contrario.</li>
+<li>Categórica de tres o más niveles: ANOVA si hay normalidad, o Kruskal-Wallis en caso contrario, con comparaciones por pares de Wilcoxon y ajuste de Bonferroni cuando el resultado global es significativo.</li>
+<li>Numérica frente a Premium Amount: correlación de Pearson si ambas variables son normales, o de Spearman en caso contrario.</li>
+<li>Dos variables categóricas entre sí: prueba Chi-cuadrado de independencia, verificando previamente que las frecuencias esperadas sean mayores o iguales a 5.</li>
+</ul></li>
+<li><em>Tamaño del efecto.</em> Se calculó <span class="math inline">\(r\)</span> (Mann-Whitney-Wilcoxon), <span class="math inline">\(\eta^2_H\)</span> (Kruskal-Wallis) y <span class="math inline">\(\rho\)</span> (Spearman), para evaluar la relevancia práctica más allá del p-valor.</li>
+<li><em>Criterio de decisión.</em> Una variable se considera relevante solo si cumple ambos criterios: rechazo de <span class="math inline">\(H_0\)</span> y tamaño del efecto no despreciable.</li>
+</ol>
+<p>Como el supuesto de normalidad no se cumplió en ningún caso, las hipótesis de las pruebas no paramétricas se plantean en términos de medianas o de igualdad de distribuciones, según corresponda.</p>
 
 </div>
 </div>
@@ -329,6 +342,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>
