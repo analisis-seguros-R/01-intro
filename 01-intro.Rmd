@@ -6,7 +6,7 @@ Primeramente, haremos un análisis exploratorio de los datos
 Librerias
 ```{r librerias, message=FALSE, warning=FALSE}
 if (.Platform$OS.type == "windows") {
-  invisible(Sys.setlocale("LC_CTYPE", "Spanish_Colombia.1252"))
+  invisible(Sys.setlocale("LC_CTYPE", "Spanish_Colombia.utf8"))
 }
 
 library(tidyverse) 
@@ -23,6 +23,7 @@ library(coin)
 library(nortest)
 library(knitr)
 library(kableExtra)
+options(knitr.table.format = "html")
 library(broom)
 ```
 

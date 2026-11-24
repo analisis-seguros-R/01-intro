@@ -1,5 +1,8 @@
 book_filename: "analisis-seguros"
 language:
+  label:
+    fig: "Figura "
+    tab: "Tabla "
   ui:
     chapter_name: "Capítulo "
 delete_merged_file: true
