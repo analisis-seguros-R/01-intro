@@ -564,7 +564,7 @@ ggplot(df, aes(x = `Number of Dependents`)) +
   labs(title = "Distribución de Number of Dependents", x = "Number of Dependents", y = "Frecuencia")
 ```
 
-Number of Dependents solo toma cinco valores posibles (0, 1, 2, 3 y 4), y se nota que las categorías 0, 1, 2 y 4 tienen una frecuencia bastante pareja, alrededor de 215,000-220,000 cada una. El valor 3 sobresale claramente con más de 300,000 registros, probablemente porque ahí se concentraron los datos imputados con la moda de esta variable. Fuera de ese detalle, no hay un patrón de crecimiento o decrecimiento particular entre las categorías, solo esa diferencia puntual en el 3.
+Number of Dependents solo toma cinco valores posibles (0, 1, 2, 3 y 4), y se nota que las categorías 0, 1, 3 y 4 tienen una frecuencia bastante pareja, alrededor de 215,000-220,000 cada una. El valor 2 sobresale claramente con `r format(sum(df[["Number of Dependents"]] == 2), big.mark = ",")` registros, ya que ahí se concentraron los 109,672 datos faltantes imputados con la mediana de esta variable. Fuera de ese detalle, no hay un patrón de crecimiento o decrecimiento particular entre las categorías, solo esa diferencia puntual en el 2.
 
 ```{r}
 ggplot(df, aes(x = "", y =  `Number of Dependents`)) +
@@ -936,7 +936,7 @@ Apartment, Condo y House presentan distribuciones casi idénticas, con la median
 
 Se presenta la matriz de correlación y dispersión de las variables numéricas, calculada con los 1,200,000 registros. Como las variables no son normales, la correlación mostrada es la de Spearman.
 
-```{r ggpairs-spearman, fig.width=12, fig.height=12, message=FALSE, warning=FALSE}
+```{r ggpairs-spearman, fig.width=12, fig.height=14, message=FALSE, warning=FALSE}
 df_num <- df %>% select(where(is.numeric), -id)
 
 dispersion_densidad <- function(data, mapping, ...) {
@@ -958,7 +958,7 @@ grafico_spearman <- GGally::ggpairs(
 suppressWarnings(suppressMessages(print(grafico_spearman)))
 ```
 
-La matriz de correlación muestra que prácticamente no existe asociación monótona relevante entre las variables numéricas del dataset, incluyendo Premium Amount. En general, las relaciones entre las variables resultan bastante débiles, sin destacarse ningún par con una asociación considerable entre sí.
+La matriz de correlación muestra que prácticamente no existe asociación monótona relevante entre las variables numéricas del dataset, incluyendo Premium Amount, ya que la mayoría de los coeficientes son cercanos a $0$. La única excepción es el par Annual Income y Credit Score ($\rho_s = -0.133$), que presenta una relación negativa débil. En la diagonal, las densidades de Previous Claims, Vehicle Age y Number of Dependents se ven en forma de picos porque son variables discretas.
 
 A continuación, se analizará con más detalle la relación entre cada par de variables numéricas, con el fin de complementar lo observado en la matriz de correlación general.
 
@@ -1071,7 +1071,7 @@ ggplot(df, aes(x = `Annual Income`, y = `Vehicle Age`)) +
   labs(title = "Annual Income vs Vehicle Age", x = "Annual Income", y = "Vehicle Age")
 ```
 
-Se forma una cuadrícula bastante uniforme entre ambas variables, con líneas horizontales bien definidas en cada valor de Vehicle Age. Aunque en la matriz de correlación esta pareja mostraba la relación más marcada de todo el conjunto de numéricas, aquí visualmente el patrón se ve bastante disperso y parejo a lo largo de todo el rango de ingresos, sin una tendencia evidente a simple vista.
+Se forma una cuadrícula bastante uniforme entre ambas variables, con líneas horizontales bien definidas en cada valor de Vehicle Age. Los puntos se distribuyen de forma pareja a lo largo de todo el rango de ingresos, con mayor densidad en la zona baja, lo que coincide con el coeficiente prácticamente nulo de la matriz de correlación ($\rho_s \approx 0$) e indica que no existe relación entre ambas variables.
 
 
 Annual Income vs Credit Score
@@ -1083,7 +1083,7 @@ ggplot(df, aes(x = `Annual Income`, y = `Credit Score`)) +
 ```
 
 
-Se observa una línea horizontal bien marcada alrededor de 595, con densidad notablemente mayor que el resto, correspondiente a los valores imputados con la mediana en Credit Score. También se aprecia mayor concentración de puntos en la zona de ingresos bajos, entre 0 y 50,000, en línea con la distribución sesgada de Annual Income. Fuera de esos dos aspectos, los datos se distribuyen de manera uniforme a lo largo de todo el rango de Credit Score, sin importar el nivel de ingreso, por lo que no se identifica una relación clara entre ambas variables.
+Se observa una línea horizontal bien marcada alrededor de $595$, correspondiente a los valores imputados con la mediana en Credit Score, y una mayor concentración de puntos en la zona de ingresos bajos, entre $0$ y $50{,}000$, en línea con la distribución sesgada de Annual Income. Aunque visualmente los datos parecen distribuirse de forma uniforme, la matriz de correlación muestra que este es el par con la asociación más alta entre las variables numéricas ($\rho_s = -0.133$), lo que indica una relación negativa débil: a mayor ingreso anual, el puntaje crediticio tiende ligeramente a disminuir.
 
 
 Annual Income vs Insurance Duration
@@ -1107,7 +1107,7 @@ ggplot(df, aes(x = `Annual Income`, y = `Number of Dependents`)) +
 ```
 
 
-Se forman cinco líneas horizontales bien definidas, correspondientes a cada valor de Number of Dependents (0 a 4), con una densidad ligeramente mayor en el valor 0. Los puntos se reparten de forma pareja a lo largo de todo el rango de ingresos, sin que exista una tendencia que vincule el número de dependientes con el nivel de ingreso anual del cliente.
+Se forman cinco líneas horizontales bien definidas, correspondientes a cada valor de Number of Dependents (0 a 4), con una densidad mayor en el valor 2, donde se concentraron los valores imputados con la mediana. Los puntos se reparten de forma pareja a lo largo de todo el rango de ingresos, sin que exista una tendencia que vincule el número de dependientes con el nivel de ingreso anual del cliente.
 
 
 Health Score vs Previous Claims 
@@ -1285,7 +1285,7 @@ Se forma una cuadrícula uniforme entre ambas variables, ya que las dos toman po
 
 
 
-Tras analizar la relación entre todas las combinaciones posibles de variables numéricas independientes, se observa un patrón bastante consistente a lo largo de todo el análisis: en la mayoría de los casos no se identifica una relación clara entre las variables, ya que los datos se distribuyen de manera uniforme sin mostrar tendencias, agrupaciones o patrones particulares. Las únicas irregularidades visibles corresponden a las variables que fueron imputadas con la mediana (Health Score y Credit Score), donde se aprecia una línea de mayor densidad en el valor imputado, así como en Previous Claims, donde la menor frecuencia de reclamos altos se refleja en una disminución progresiva de la densidad de puntos. En conjunto, estos resultados respaldan lo observado previamente en la matriz de correlación, confirmando que las variables numéricas del dataset no presentan relaciones lineales fuertes entre sí.
+Tras analizar la relación entre todas las combinaciones posibles de variables numéricas independientes, se observa un patrón bastante consistente a lo largo de todo el análisis: en la mayoría de los casos no se identifica una relación clara entre las variables, ya que los datos se distribuyen de manera uniforme sin mostrar tendencias, agrupaciones o patrones particulares. Las únicas irregularidades visibles corresponden a las variables que fueron imputadas con la mediana (Health Score y Credit Score), donde se aprecia una línea de mayor densidad en el valor imputado, así como en Previous Claims, donde la menor frecuencia de reclamos altos se refleja en una disminución progresiva de la densidad de puntos. En conjunto, estos resultados respaldan lo observado previamente en la matriz de correlación, confirmando que las variables numéricas del dataset no presentan relaciones monótonas fuertes entre sí. La única excepción es el par Annual Income y Credit Score ($\rho_s = -0.133$), cuya relación negativa débil no se distingue a simple vista en el gráfico de dispersión.
 
 ```{r}
 df <- dplyr::rename(
@@ -1333,7 +1333,7 @@ ic_spearman <- function(x, y, id, conf = 0.95) {
   t   <- rho * sqrt((n - 2) / (1 - rho^2))
   p   <- 2 * pt(-abs(t), df = n - 2)
   ICS[[id]] <<- c(rho = rho, S = S, p = p, inferior = lim[1], superior = lim[2])
-  c(rho = rho, inferior = lim[1], superior = lim[2])
+  data.frame(rho = rho, inferior = lim[1], superior = lim[2])
 }
 ```
 
@@ -1379,6 +1379,102 @@ txt_cor <- function(id) {
 }
 ```
 
+
+```{r tablas-pruebas, include=FALSE}
+# Salidas de las pruebas como tablas (en lugar de texto con ##)
+
+fmt_p <- function(p) {
+  p <- as.numeric(p)
+  ifelse(is.na(p), "", ifelse(p < 0.001, "< 0.001", formatC(p, format = "f", digits = 4)))
+}
+
+fmt_num <- function(x) {
+  vapply(as.numeric(x), function(v) {
+    if (is.na(v)) return("")
+    if (abs(v) >= 1e15) return(formatC(v, format = "e", digits = 4))
+    if (v == round(v)) return(formatC(v, format = "f", digits = 0, big.mark = ","))
+    if (abs(v) >= 1) return(formatC(v, format = "f", digits = 4, big.mark = ","))
+    formatC(v, format = "fg", digits = 4)
+  }, character(1))
+}
+
+kbl_estilo <- function(d) {
+  k <- knitr::kable(d, align = "c", row.names = FALSE) %>%
+    kable_styling(bootstrap_options = c("striped", "hover", "condensed"),
+                  full_width = FALSE, position = "center") %>%
+    row_spec(0, bold = TRUE)
+  knitr::knit_print(k)
+}
+
+nombres <- c(".y." = "Variable", "group1" = "Grupo 1", "group2" = "Grupo 2",
+             "statistic" = "Estadístico", "p" = "p valor", "p.adj" = "p ajustado",
+             "p.adj.signif" = "Significancia", "effsize" = "Tamaño del efecto",
+             "magnitude" = "Magnitud", "method" = "Método")
+
+# Lilliefors, Kruskal-Wallis, Spearman, Chi-cuadrado
+registerS3method("knit_print", "htest", function(x, ...) {
+  res <- data.frame(Prueba = x$method, Datos = x$data.name, check.names = FALSE)
+  if (!is.null(x$estimate)) res[[names(x$estimate)[1]]] <- fmt_num(x$estimate[1])
+  res[[names(x$statistic)[1]]] <- fmt_num(x$statistic[1])
+  if (!is.null(x$parameter)) res[["gl"]] <- fmt_num(x$parameter[1])
+  res[["p valor"]] <- fmt_p(x$p.value)
+  kbl_estilo(res)
+}, envir = asNamespace("knitr"))
+
+# Levene
+registerS3method("knit_print", "anova", function(x, ...) {
+  d <- as.data.frame(x)
+  if (identical(rownames(d)[1], "group")) {
+    # Levene
+    res <- data.frame(Fuente = c("Grupo", "Residuos")[seq_len(nrow(d))],
+                      gl = fmt_num(d$Df),
+                      `Estadístico F` = fmt_num(d$`F value`),
+                      `p valor` = fmt_p(d$`Pr(>F)`),
+                      check.names = FALSE)
+  } else {
+    # anova() de modelos lineales (tabla ANOVA o comparación de modelos)
+    res <- cbind(` ` = rownames(d), d)
+    for (col in names(res)[-1]) {
+      res[[col]] <- if (grepl("^Pr", col)) fmt_p(res[[col]]) else fmt_num(res[[col]])
+    }
+  }
+  kbl_estilo(res)
+}, envir = asNamespace("knitr"))
+
+# Wilcoxon por pares (Bonferroni)
+registerS3method("knit_print", "pairwise.htest", function(x, ...) {
+  m <- x$p.value
+  d <- as.data.frame(apply(m, 2, function(col) ifelse(is.na(col), "-", fmt_p(col))),
+                     check.names = FALSE)
+  d <- cbind(` ` = rownames(m), d)
+  kbl_estilo(d)
+}, envir = asNamespace("knitr"))
+
+# Tablas de contingencia y valores esperados
+tabla_matriz <- function(x) {
+  m <- unclass(as.matrix(x))
+  d <- as.data.frame(apply(m, 2, fmt_num), check.names = FALSE)
+  d <- cbind(` ` = rownames(m), d)
+  kbl_estilo(d)
+}
+registerS3method("knit_print", "table", function(x, ...) tabla_matriz(x),
+                 envir = asNamespace("knitr"))
+registerS3method("knit_print", "matrix", function(x, ...) tabla_matriz(x),
+                 envir = asNamespace("knitr"))
+
+# Salidas de rstatix (wilcox_test, tamaños del efecto) e intervalos de confianza
+registerS3method("knit_print", "data.frame", function(x, ...) {
+  d <- as.data.frame(x)
+  for (col in names(d)) {
+    if (col %in% c("p", "p.adj", "p.value")) d[[col]] <- fmt_p(d[[col]])
+    else if (is.numeric(d[[col]])) d[[col]] <- fmt_num(d[[col]])
+    else d[[col]] <- as.character(d[[col]])
+  }
+  cambiar <- names(d) %in% names(nombres)
+  names(d)[cambiar] <- nombres[names(d)[cambiar]]
+  kbl_estilo(d)
+}, envir = asNamespace("knitr"))
+```
 
 Pregunta 1: ¿Existe una diferencia significativa en el Premium Amount promedio entre clientes fumadores y no fumadores?
 
@@ -1534,10 +1630,11 @@ Con una confianza del 95%, la prueba de Lilliefors muestra que ni Health Score (
 Dado que ninguna de las dos variables cumple el supuesto de normalidad, se utiliza el coeficiente de correlación de Spearman para evaluar la relación entre Health Score y Premium Amount.
 
 ```{r}
-cor.test(df$Health_Score, df$Premium_Amount, method = "spearman")
+ct_hs <- cor.test(df$Health_Score, df$Premium_Amount, method = "spearman")
+ct_hs
 ```
 
-Con una confianza del 95%, la prueba de correlación de Spearman indica que existe una correlación estadísticamente significativa entre Health Score y Premium Amount ($S = 2.3408 \times 10^{17}$, p valor $< 0.001$, $\rho = 0.01601$). Sin embargo, el valor del coeficiente de correlación ($\rho = 0.016$) es extremadamente bajo, lo que indica que, a pesar de ser significativa desde el punto de vista estadístico, la relación entre ambas variables es prácticamente nula en términos prácticos.
+Con una confianza del 95%, la prueba de correlación de Spearman indica que existe una correlación estadísticamente significativa entre Health Score y Premium Amount ($S = `r fS(ct_hs$statistic)`$, p valor `r fp(ct_hs$p.value)`, $\rho = `r fm(ct_hs$estimate)`$). Sin embargo, el valor del coeficiente de correlación ($\rho = `r fm(ct_hs$estimate, 3)`$) es extremadamente bajo, lo que indica que, a pesar de ser significativa desde el punto de vista estadístico, la relación entre ambas variables es prácticamente nula en términos prácticos.
 
 Para complementar el análisis, se calcula el intervalo de confianza del 95% para el coeficiente de correlación de Spearman entre Health Score y Premium Amount.
 
@@ -1690,9 +1787,11 @@ El tamaño del efecto obtenido ($\eta^2_H = 0$) confirma que no hay ningún efec
 
 Con una confianza del 95%, tanto la prueba de Kruskal-Wallis ($\chi^2_{3} = 2.7564$, p valor $= 0.4307$) como el tamaño del efecto ($\eta^2_H = 0$) indican que no existen diferencias significativas ni relevancia práctica en el Premium Amount entre las cuatro frecuencias de ejercicio, por lo que no se rechaza $H_0$.
 
-Pregunta 7: ¿Existe una correlación significativa entre Annual Income y Vehicle Age?
+Pregunta 7: ¿Existe una correlación significativa entre Annual Income y Credit Score?
 
-Sea $\rho$ el coeficiente de correlación poblacional entre Annual Income y Vehicle Age.
+En la matriz de correlación del EDA, este fue el par con la asociación más alta entre las variables numéricas ($\rho_s = -0.133$), por lo que se evalúa formalmente.
+
+Sea $\rho$ el coeficiente de correlación poblacional entre Annual Income y Credit Score.
 
 $$
 \begin{aligned}
@@ -1703,27 +1802,29 @@ $$
 
 Antes de decidir qué coeficiente de correlación utilizar (Pearson o Spearman), es necesario verificar si ambas variables cumplen el supuesto de normalidad. Para ello, se aplica la prueba de Lilliefors sobre cada una.
 ```{r}
-lillie.test(df$Annual_Income)
-lillie.test(df$Vehicle_Age)
+lil_ai <- lillie.test(df$Annual_Income)
+lil_cs <- lillie.test(df$Credit_Score)
+lil_ai
+lil_cs
 ```
 
-Con una confianza del 95%, la prueba de Lilliefors muestra que ni Annual Income ($D = 0.15453$, p valor $< 0.001$) ni Vehicle Age ($D = 0.083797$, p valor $< 0.001$) provienen de una distribución normal, ya que en ambos casos el p valor es considerablemente menor al nivel de significancia establecido.
+Con una confianza del 95%, la prueba de Lilliefors muestra que ni Annual Income ($D = `r fm(lil_ai$statistic, 5)`$, p valor `r fp(lil_ai$p.value)`) ni Credit Score ($D = `r fm(lil_cs$statistic, 5)`$, p valor `r fp(lil_cs$p.value)`) provienen de una distribución normal, ya que en ambos casos el p valor es considerablemente menor al nivel de significancia establecido.
 
-Dado que ninguna de las dos variables cumple el supuesto de normalidad, se utiliza el coeficiente de correlación de Spearman para evaluar la relación entre Annual Income y Vehicle Age.
+Dado que ninguna de las dos variables cumple el supuesto de normalidad, se utiliza el coeficiente de correlación de Spearman para evaluar la relación entre Annual Income y Credit Score.
 
 ```{r}
-cor.test(df$Annual_Income, df$Vehicle_Age, method = "spearman")
+cor.test(df$Annual_Income, df$Credit_Score, method = "spearman")
 ```
 
-Con una confianza del 95%, la prueba de correlación de Spearman indica que no existe una correlación estadísticamente significativa entre Annual Income y Vehicle Age ($S = 2.5692 \times 10^{17}$, p valor $= 0.7118$, $\rho = -0.0003$), por lo que no se rechaza $H_0$. El coeficiente de correlación, prácticamente nulo, confirma que no existe relación real entre ambas variables, resolviendo la aparente tensión observada en el EDA entre la matriz de correlación y el scatterplot.
-
-Para complementar el análisis, se calcula el intervalo de confianza del 95% para el coeficiente de correlación de Spearman entre Annual Income y Vehicle Age.
+Para complementar el análisis, se calcula el intervalo de confianza del 95% para el coeficiente de correlación de Spearman entre Annual Income y Credit Score.
 
 ```{r}
-ic_spearman(df$Annual_Income, df$Vehicle_Age, "Annual Income - Vehicle Age")
+ic_spearman(df$Annual_Income, df$Credit_Score, "Annual Income - Credit Score")
 ```
 
-`r txt_ic("Annual Income - Vehicle Age")`
+`r txt_cor("Annual Income - Credit Score")`
+
+Aunque el coeficiente supera $0.1$ en valor absoluto, la relación sigue siendo débil: $\rho_s^2 \approx `r fm(ICS[["Annual Income - Credit Score"]]["rho"]^2, 4)`$, es decir, una variable explica menos del `r ceiling(100 * ICS[["Annual Income - Credit Score"]]["rho"]^2)` % de la variabilidad en los rangos de la otra. Por lo tanto, no representa una redundancia importante entre ambos predictores.
 
 Pregunta 8: ¿Existe relación entre Smoking Status y Exercise Frequency?
 
@@ -2301,7 +2402,7 @@ lillie.test(df$Annual_Income)
 ```
 
 
-Con una confianza del 95%, la prueba de Lilliefors muestra que ni Annual Income ($D = 0.15271$, p valor $< 0.001$) ni Premium Amount ($D = 0.11624$, p valor $< 0.001$, ya verificado previamente) provienen de una distribución normal, ya que en ambos casos el p valor es considerablemente menor al nivel de significancia establecido.
+Con una confianza del 95%, la prueba de Lilliefors muestra que ni Annual Income ($D = `r fm(lil_ai$statistic, 5)`$, p valor `r fp(lil_ai$p.value)`) ni Premium Amount ($D = 0.11624$, p valor $< 0.001$, ya verificado previamente) provienen de una distribución normal, ya que en ambos casos el p valor es considerablemente menor al nivel de significancia establecido.
 
 Dado que ninguna de las dos variables cumple el supuesto de normalidad, se utiliza el coeficiente de correlación de Spearman para evaluar la relación entre Annual Income y Premium Amount.
 
@@ -2345,10 +2446,11 @@ Con una confianza del 95%, la prueba de Lilliefors muestra que ni Previous Claim
 Dado que ninguna de las dos variables cumple el supuesto de normalidad, se utiliza el coeficiente de correlación de Spearman para evaluar la relación entre Previous Claims y Premium Amount.
 
 ```{r}
-cor.test(df$Previous_Claims, df$Premium_Amount, method = "spearman")
+ct_pc <- cor.test(df$Previous_Claims, df$Premium_Amount, method = "spearman")
+ct_pc
 ```
 
-Se rechaza $H_0$ dado que la prueba de Spearman resulta significativa ($\rho = 0.0391$, p valor $< 0.001$). Como ha ocurrido con las demás variables numéricas analizadas, este resultado es producto del tamaño de la muestra más que de una asociación real entre la cantidad de reclamos previos y el monto de la prima.
+Se rechaza $H_0$ dado que la prueba de Spearman resulta significativa ($\rho = `r fm(ct_pc$estimate)`$, p valor `r fp(ct_pc$p.value)`). Como ha ocurrido con las demás variables numéricas analizadas, este resultado es producto del tamaño de la muestra más que de una asociación real entre la cantidad de reclamos previos y el monto de la prima.
 
 Para complementar el análisis, se calcula el intervalo de confianza del 95% para el coeficiente de correlación de Spearman entre Previous Claims y Premium Amount.
 
@@ -2358,7 +2460,7 @@ ic_spearman(df$Previous_Claims, df$Premium_Amount, "Previous Claims - Premium Am
 
 `r txt_ic("Previous Claims - Premium Amount")`
 
-En conclusión, con una confianza del 95%, la prueba de correlación de Spearman detecta una asociación estadísticamente significativa entre Previous Claims y Premium Amount ($\rho = 0.0391$, p valor $< 0.001$), sin embargo, se trata de un coeficiente tan bajo que no representa una relación de relevancia práctica. Esto reafirma el patrón visto a lo largo del análisis: el gran tamaño de la muestra permite que asociaciones prácticamente inexistentes terminen siendo estadísticamente significativas.
+En conclusión, con una confianza del 95%, la prueba de correlación de Spearman detecta una asociación estadísticamente significativa entre Previous Claims y Premium Amount ($\rho = `r fm(ct_pc$estimate)`$, p valor `r fp(ct_pc$p.value)`), sin embargo, se trata de un coeficiente tan bajo que no representa una relación de relevancia práctica. Esto reafirma el patrón visto a lo largo del análisis: el gran tamaño de la muestra permite que asociaciones prácticamente inexistentes terminen siendo estadísticamente significativas.
 
 
 Pregunta 18: ¿Existe una correlación significativa entre Vehicle Age y Premium Amount?
@@ -2424,7 +2526,7 @@ Antes de decidir qué coeficiente de correlación utilizar (Pearson o Spearman),
 lillie.test(df$Credit_Score)
 ```
 
-Con una confianza del 95%, la prueba de Lilliefors muestra que ni Credit Score ($D = 0.064415$, p valor $< 0.001$) ni Premium Amount ($D = 0.11624$, p valor $< 0.001$, ya verificado previamente) provienen de una distribución normal, ya que en ambos casos el p valor es considerablemente menor al nivel de significancia establecido.
+Con una confianza del 95%, la prueba de Lilliefors muestra que ni Credit Score ($D = `r fm(lil_cs$statistic, 5)`$, p valor `r fp(lil_cs$p.value)`) ni Premium Amount ($D = 0.11624$, p valor $< 0.001$, ya verificado previamente) provienen de una distribución normal, ya que en ambos casos el p valor es considerablemente menor al nivel de significancia establecido.
 
 Dado que ninguna de las dos variables cumple el supuesto de normalidad, se utiliza el coeficiente de correlación de Spearman para evaluar la relación entre Credit Score y Premium Amount.
 
@@ -2618,7 +2720,7 @@ H_1 &: \rho \neq 0 \quad \text{(existe correlación entre las variables)}
 \end{aligned}
 $$
 
-La prueba de Lilliefors ya mostró que ni Age (Pregunta 15) ni Vehicle Age (Preguntas 7 y 18) provienen de una distribución normal, por lo que se utiliza el coeficiente de correlación de Spearman para evaluar la relación entre ambas variables.
+La prueba de Lilliefors ya mostró que ni Age (Pregunta 15) ni Vehicle Age (Pregunta 18) provienen de una distribución normal, por lo que se utiliza el coeficiente de correlación de Spearman para evaluar la relación entre ambas variables.
 
 ```{r}
 cor.test(df$Age, df$Vehicle_Age, method = "spearman")
@@ -2644,7 +2746,7 @@ H_1 &: \rho \neq 0 \quad \text{(existe correlación entre las variables)}
 \end{aligned}
 $$
 
-La prueba de Lilliefors ya mostró que ni Age (Pregunta 15) ni Credit Score (Pregunta 19) provienen de una distribución normal, por lo que se utiliza el coeficiente de correlación de Spearman para evaluar la relación entre ambas variables.
+La prueba de Lilliefors ya mostró que ni Age (Pregunta 15) ni Credit Score (Preguntas 7 y 19) provienen de una distribución normal, por lo que se utiliza el coeficiente de correlación de Spearman para evaluar la relación entre ambas variables.
 
 ```{r}
 cor.test(df$Age, df$Credit_Score, method = "spearman")
@@ -2763,9 +2865,9 @@ ic_spearman(df$Annual_Income, df$Previous_Claims, "Annual Income - Previous Clai
 `r txt_cor("Annual Income - Previous Claims")`
 
 
-Pregunta 31: ¿Existe una correlación significativa entre Annual Income y Credit Score?
+Pregunta 31: ¿Existe una correlación significativa entre Annual Income y Vehicle Age?
 
-Sea $\rho$ el coeficiente de correlación poblacional entre Annual Income y Credit Score.
+Sea $\rho$ el coeficiente de correlación poblacional entre Annual Income y Vehicle Age.
 
 $$
 \begin{aligned}
@@ -2774,19 +2876,19 @@ H_1 &: \rho \neq 0 \quad \text{(existe correlación entre las variables)}
 \end{aligned}
 $$
 
-La prueba de Lilliefors ya mostró que ni Annual Income (Preguntas 7 y 16) ni Credit Score (Pregunta 19) provienen de una distribución normal, por lo que se utiliza el coeficiente de correlación de Spearman para evaluar la relación entre ambas variables.
+La prueba de Lilliefors ya mostró que ni Annual Income (Preguntas 7 y 16) ni Vehicle Age (Pregunta 18) provienen de una distribución normal, por lo que se utiliza el coeficiente de correlación de Spearman para evaluar la relación entre ambas variables.
 
 ```{r}
-cor.test(df$Annual_Income, df$Credit_Score, method = "spearman")
+cor.test(df$Annual_Income, df$Vehicle_Age, method = "spearman")
 ```
 
 Ahora se calcula el intervalo de confianza del 95% para el coeficiente de correlación de Spearman.
 
 ```{r}
-ic_spearman(df$Annual_Income, df$Credit_Score, "Annual Income - Credit Score")
+ic_spearman(df$Annual_Income, df$Vehicle_Age, "Annual Income - Vehicle Age")
 ```
 
-`r txt_cor("Annual Income - Credit Score")`
+`r txt_cor("Annual Income - Vehicle Age")`
 
 
 Pregunta 32: ¿Existe una correlación significativa entre Annual Income y Insurance Duration?
@@ -2878,7 +2980,7 @@ H_1 &: \rho \neq 0 \quad \text{(existe correlación entre las variables)}
 \end{aligned}
 $$
 
-La prueba de Lilliefors ya mostró que ni Health Score (Pregunta 3) ni Vehicle Age (Preguntas 7 y 18) provienen de una distribución normal, por lo que se utiliza el coeficiente de correlación de Spearman para evaluar la relación entre ambas variables.
+La prueba de Lilliefors ya mostró que ni Health Score (Pregunta 3) ni Vehicle Age (Pregunta 18) provienen de una distribución normal, por lo que se utiliza el coeficiente de correlación de Spearman para evaluar la relación entre ambas variables.
 
 ```{r}
 cor.test(df$Health_Score, df$Vehicle_Age, method = "spearman")
@@ -2904,7 +3006,7 @@ H_1 &: \rho \neq 0 \quad \text{(existe correlación entre las variables)}
 \end{aligned}
 $$
 
-La prueba de Lilliefors ya mostró que ni Health Score (Pregunta 3) ni Credit Score (Pregunta 19) provienen de una distribución normal, por lo que se utiliza el coeficiente de correlación de Spearman para evaluar la relación entre ambas variables.
+La prueba de Lilliefors ya mostró que ni Health Score (Pregunta 3) ni Credit Score (Preguntas 7 y 19) provienen de una distribución normal, por lo que se utiliza el coeficiente de correlación de Spearman para evaluar la relación entre ambas variables.
 
 ```{r}
 cor.test(df$Health_Score, df$Credit_Score, method = "spearman")
@@ -2982,7 +3084,7 @@ H_1 &: \rho \neq 0 \quad \text{(existe correlación entre las variables)}
 \end{aligned}
 $$
 
-La prueba de Lilliefors ya mostró que ni Previous Claims (Pregunta 17) ni Vehicle Age (Preguntas 7 y 18) provienen de una distribución normal, por lo que se utiliza el coeficiente de correlación de Spearman para evaluar la relación entre ambas variables.
+La prueba de Lilliefors ya mostró que ni Previous Claims (Pregunta 17) ni Vehicle Age (Pregunta 18) provienen de una distribución normal, por lo que se utiliza el coeficiente de correlación de Spearman para evaluar la relación entre ambas variables.
 
 ```{r}
 cor.test(df$Previous_Claims, df$Vehicle_Age, method = "spearman")
@@ -3008,7 +3110,7 @@ H_1 &: \rho \neq 0 \quad \text{(existe correlación entre las variables)}
 \end{aligned}
 $$
 
-La prueba de Lilliefors ya mostró que ni Previous Claims (Pregunta 17) ni Credit Score (Pregunta 19) provienen de una distribución normal, por lo que se utiliza el coeficiente de correlación de Spearman para evaluar la relación entre ambas variables.
+La prueba de Lilliefors ya mostró que ni Previous Claims (Pregunta 17) ni Credit Score (Preguntas 7 y 19) provienen de una distribución normal, por lo que se utiliza el coeficiente de correlación de Spearman para evaluar la relación entre ambas variables.
 
 ```{r}
 cor.test(df$Previous_Claims, df$Credit_Score, method = "spearman")
@@ -3086,7 +3188,7 @@ H_1 &: \rho \neq 0 \quad \text{(existe correlación entre las variables)}
 \end{aligned}
 $$
 
-La prueba de Lilliefors ya mostró que ni Vehicle Age (Preguntas 7 y 18) ni Credit Score (Pregunta 19) provienen de una distribución normal, por lo que se utiliza el coeficiente de correlación de Spearman para evaluar la relación entre ambas variables.
+La prueba de Lilliefors ya mostró que ni Vehicle Age (Pregunta 18) ni Credit Score (Preguntas 7 y 19) provienen de una distribución normal, por lo que se utiliza el coeficiente de correlación de Spearman para evaluar la relación entre ambas variables.
 
 ```{r}
 cor.test(df$Vehicle_Age, df$Credit_Score, method = "spearman")
@@ -3112,7 +3214,7 @@ H_1 &: \rho \neq 0 \quad \text{(existe correlación entre las variables)}
 \end{aligned}
 $$
 
-La prueba de Lilliefors ya mostró que ni Vehicle Age (Preguntas 7 y 18) ni Insurance Duration (Pregunta 20) provienen de una distribución normal, por lo que se utiliza el coeficiente de correlación de Spearman para evaluar la relación entre ambas variables.
+La prueba de Lilliefors ya mostró que ni Vehicle Age (Pregunta 18) ni Insurance Duration (Pregunta 20) provienen de una distribución normal, por lo que se utiliza el coeficiente de correlación de Spearman para evaluar la relación entre ambas variables.
 
 ```{r}
 cor.test(df$Vehicle_Age, df$Insurance_Duration, method = "spearman")
@@ -3138,7 +3240,7 @@ H_1 &: \rho \neq 0 \quad \text{(existe correlación entre las variables)}
 \end{aligned}
 $$
 
-La prueba de Lilliefors ya mostró que ni Vehicle Age (Preguntas 7 y 18) ni Number of Dependents (Pregunta 21) provienen de una distribución normal, por lo que se utiliza el coeficiente de correlación de Spearman para evaluar la relación entre ambas variables.
+La prueba de Lilliefors ya mostró que ni Vehicle Age (Pregunta 18) ni Number of Dependents (Pregunta 21) provienen de una distribución normal, por lo que se utiliza el coeficiente de correlación de Spearman para evaluar la relación entre ambas variables.
 
 ```{r}
 cor.test(df$Vehicle_Age, df$Number_of_Dependents, method = "spearman")
@@ -3164,7 +3266,7 @@ H_1 &: \rho \neq 0 \quad \text{(existe correlación entre las variables)}
 \end{aligned}
 $$
 
-La prueba de Lilliefors ya mostró que ni Credit Score (Pregunta 19) ni Insurance Duration (Pregunta 20) provienen de una distribución normal, por lo que se utiliza el coeficiente de correlación de Spearman para evaluar la relación entre ambas variables.
+La prueba de Lilliefors ya mostró que ni Credit Score (Preguntas 7 y 19) ni Insurance Duration (Pregunta 20) provienen de una distribución normal, por lo que se utiliza el coeficiente de correlación de Spearman para evaluar la relación entre ambas variables.
 
 ```{r}
 cor.test(df$Credit_Score, df$Insurance_Duration, method = "spearman")
@@ -3190,7 +3292,7 @@ H_1 &: \rho \neq 0 \quad \text{(existe correlación entre las variables)}
 \end{aligned}
 $$
 
-La prueba de Lilliefors ya mostró que ni Credit Score (Pregunta 19) ni Number of Dependents (Pregunta 21) provienen de una distribución normal, por lo que se utiliza el coeficiente de correlación de Spearman para evaluar la relación entre ambas variables.
+La prueba de Lilliefors ya mostró que ni Credit Score (Preguntas 7 y 19) ni Number of Dependents (Pregunta 21) provienen de una distribución normal, por lo que se utiliza el coeficiente de correlación de Spearman para evaluar la relación entre ambas variables.
 
 ```{r}
 cor.test(df$Credit_Score, df$Number_of_Dependents, method = "spearman")
@@ -3231,13 +3333,13 @@ ic_spearman(df$Insurance_Duration, df$Number_of_Dependents, "Insurance Duration 
 `r txt_cor("Insurance Duration - Number of Dependents")`
 
 
-## Conclusiones
+## Conclusiones del capítulo
 
 ```{r resumen-calculos, include=FALSE}
 resumen <- data.frame(
   Variable = c("Smoking Status", "Policy Type", "Health Score",
                "Smoking Status - Policy Type", "Gender", "Exercise Frequency",
-               "Annual Income - Vehicle Age", "Smoking Status - Exercise Frequency",
+               "Annual Income - Credit Score", "Smoking Status - Exercise Frequency",
                "Marital Status", "Education Level", "Occupation", "Location",
                "Customer Feedback", "Property Type", "Age", "Annual Income",
                "Previous Claims", "Vehicle Age", "Credit Score",
@@ -3279,6 +3381,20 @@ resumen$IC <- sapply(id_ic, function(i) {
   if (is.na(i)) "-" else sprintf("$(%.4f, %.4f)$", ICS[[i]]["inferior"], ICS[[i]]["superior"])
 }, USE.NAMES = FALSE)
 
+# Conclusión según p valor y magnitud del coeficiente
+concl_sp <- function(p, rho) {
+  ifelse(p >= 0.05, "No significativo",
+         ifelse(abs(rho) < 0.1, "Significativo, sin relevancia", "Significativo, débil"))
+}
+
+# p valor, efecto y conclusión de las pruebas de Spearman tomados de los cálculos
+es_sp <- !is.na(id_ic)
+p_sp   <- sapply(id_ic[es_sp], function(i) as.numeric(ICS[[i]]["p"]))
+rho_sp <- sapply(id_ic[es_sp], function(i) as.numeric(ICS[[i]]["rho"]))
+resumen$p_valor[es_sp]    <- ifelse(p_sp < 0.001, "< 0.001", sprintf("%.3f", p_sp))
+resumen$Efecto[es_sp]     <- sprintf("$\\rho = %.4f$", rho_sp)
+resumen$Conclusion[es_sp] <- concl_sp(p_sp, rho_sp)
+
 # Pares de predictores numéricos (preguntas 22 a 48)
 nuevos <- setdiff(names(ICS), id_ic[!is.na(id_ic)])
 
@@ -3291,8 +3407,7 @@ pares <- do.call(rbind, lapply(nuevos, function(i) {
     Prueba = "Spearman",
     p_valor = ifelse(p < 0.001, "< 0.001", sprintf("%.3f", p)),
     Efecto = sprintf("$\\rho = %.4f$", rho),
-    Conclusion = ifelse(p >= 0.05, "No significativo",
-                        ifelse(abs(rho) < 0.1, "Significativo, sin relevancia", "Significativo")),
+    Conclusion = concl_sp(p, rho),
     IC = sprintf("$(%.4f, %.4f)$", as.numeric(v["inferior"]), as.numeric(v["superior"])),
     stringsAsFactors = FALSE
   )
@@ -3334,6 +3449,692 @@ resumen %>%
 
 De las 18 variables predictoras, 8 resultaron estadísticamente significativas (Health Score, Marital Status, Occupation, Customer Feedback, Age, Annual Income, Previous Claims y Credit Score), pero en todas el tamaño del efecto fue prácticamente nulo ($|\rho_s|$ máximo de $0.06$, en Annual Income). Este patrón confirma lo anticipado en el Objetivo: con 1,200,000 observaciones, hasta las asociaciones más débiles alcanzan significancia estadística, por lo que el p valor solo no basta como criterio de decisión. Los intervalos de confianza de los coeficientes de Spearman respaldan este resultado: de los `r length(ic_resp)` intervalos entre las predictoras numéricas y Premium Amount, `r fuera_cero_resp` no contienen al 0, y el límite más alejado del 0 es $`r formatC(max_lim_resp, format = "f", digits = 4)`$ en valor absoluto.
 
-Entre los predictores se evaluaron `r length(ic_pred) + 2` relaciones: `r length(ic_pred)` pares de variables numéricas con la correlación de Spearman y 2 pares de variables categóricas con la prueba chi-cuadrado (Preguntas 4 y 8), que no resultaron significativos. De los `r length(ic_pred)` pares numéricos, `r sig_pred` resultaron estadísticamente significativos y el mayor valor absoluto del coeficiente fue $`r formatC(max_rho_pred, format = "f", digits = 4)`$`r ifelse(max_rho_pred < 0.1, ", por lo que ninguna de estas relaciones es relevante en la práctica y se descartan redundancias importantes entre los predictores.", ", por lo que al menos una de estas relaciones supera $0.1$ en valor absoluto y conviene revisarla.")`
+Entre los predictores se evaluaron `r length(ic_pred) + 2` relaciones: `r length(ic_pred)` pares de variables numéricas con la correlación de Spearman y 2 pares de variables categóricas con la prueba chi-cuadrado (Preguntas 4 y 8), que no resultaron significativos. De los `r length(ic_pred)` pares numéricos, `r sig_pred` resultaron estadísticamente significativos y el mayor valor absoluto del coeficiente fue $`r formatC(max_rho_pred, format = "f", digits = 4)`$, correspondiente al par Annual Income y Credit Score (Pregunta 7). Aunque supera $0.1$, se trata de una relación débil ($\rho_s^2 \approx `r formatC(max_rho_pred^2, format = "f", digits = 4)`$), por lo que no se identifican redundancias importantes entre los predictores.
 
-En conjunto, esto sugiere que ninguna característica individual del cliente, ni siquiera factores intuitivamente relevantes como fumar o el tipo de póliza, explica el monto de la prima en este dataset, lo cual podría deberse a que la relación real sea conjunta o no lineal, no capturable con pruebas univariadas. Como limitación, no se ajustó por comparaciones múltiples en las `r nrow(resumen)` pruebas, aunque esto no afecta la conclusión principal al basarse en el tamaño del efecto y no solo en el p valor. Como trabajo futuro, se recomienda ajustar un modelo de regresión múltiple que incorpore todos los predictores simultáneamente, para evaluar si en conjunto logran explicar una proporción relevante de la variabilidad de Premium Amount.
+En conjunto, esto sugiere que ninguna característica individual del cliente, ni siquiera factores intuitivamente relevantes como fumar o el tipo de póliza, explica el monto de la prima en este dataset, lo cual podría deberse a que la relación real sea conjunta o no lineal, no capturable con pruebas univariadas. Como limitación, no se ajustó por comparaciones múltiples en las `r nrow(resumen)` pruebas, aunque esto no afecta la conclusión principal al basarse en el tamaño del efecto y no solo en el p valor. Por esta razón, en el Capítulo \@ref(rlm) se ajusta un modelo de regresión lineal múltiple que incorpora todos los predictores de forma simultánea, con el fin de evaluar si en conjunto logran explicar una proporción relevante de la variabilidad de Premium Amount.
+
+# Modelo de regresión lineal múltiple {#rlm}
+
+En el capítulo anterior se evaluó la relación de cada variable predictora con Premium Amount de forma individual, y ninguna presentó una asociación relevante en la práctica. En este capítulo se ajusta un modelo de regresión lineal múltiple (RLM), que considera todas las variables predictoras de forma simultánea, con el fin de determinar si en conjunto logran explicar una proporción relevante de la variabilidad de Premium Amount y de identificar cuál es el mejor modelo.
+
+El modelo de RLM con $k$ regresores se expresa como:
+
+$$
+y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \cdots + \beta_k x_{ik} + \varepsilon_i, \qquad \varepsilon_i \sim N(0, \sigma^2), \qquad i = 1, \dots, n
+$$
+
+donde $\beta_0$ es el intercepto, $\beta_j$ mide la influencia de la variable $x_j$ sobre la respuesta manteniendo constantes las demás, y $\varepsilon_i$ es el error aleatorio. Los coeficientes se estiman por mínimos cuadrados ordinarios:
+
+$$
+\hat{\boldsymbol{\beta}} = (\mathbf{X}'\mathbf{X})^{-1}\mathbf{X}'\mathbf{y}
+$$
+
+```{r librerias-rlm, message=FALSE, warning=FALSE}
+library(lmtest)
+```
+
+```{r funciones-rlm, include=FALSE}
+# Formatos de números (iguales a los del capítulo anterior)
+fm <- function(x, d = 4) formatC(as.numeric(x), format = "f", digits = d)
+fp <- function(p) {
+  p <- as.numeric(p)
+  if (p < 0.001) "$< 0.001$" else paste0("$= ", formatC(p, format = "f", digits = 4), "$")
+}
+fmil <- function(x, d = 0) formatC(as.numeric(x), format = "f", digits = d, big.mark = ",")
+fmt_p <- function(p) {
+  p <- as.numeric(p)
+  ifelse(is.na(p), "", ifelse(p < 0.001, "< 0.001", formatC(p, format = "f", digits = 4)))
+}
+fmt_num <- function(x) {
+  vapply(as.numeric(x), function(v) {
+    if (is.na(v)) return("")
+    if (abs(v) >= 1e15) return(formatC(v, format = "e", digits = 4))
+    if (v == round(v)) return(formatC(v, format = "f", digits = 0, big.mark = ","))
+    if (abs(v) >= 1) return(formatC(v, format = "f", digits = 4, big.mark = ","))
+    formatC(v, format = "fg", digits = 4)
+  }, character(1))
+}
+
+# Tabla con el estilo del documento
+tabla_rlm <- function(d, caption = NULL, p_cols = character(0), align = "c") {
+  d <- as.data.frame(d, check.names = FALSE)
+  for (col in names(d)) {
+    if (col %in% p_cols) d[[col]] <- fmt_p(d[[col]])
+    else if (is.numeric(d[[col]])) d[[col]] <- fmt_num(d[[col]])
+  }
+  knitr::kable(d, caption = caption, align = align, row.names = FALSE, escape = FALSE) %>%
+    kable_styling(bootstrap_options = c("striped", "hover", "condensed"),
+                  full_width = FALSE, position = "center") %>%
+    row_spec(0, bold = TRUE)
+}
+
+# Tabla de coeficientes con intervalos de confianza del 95%
+tabla_coef <- function(m, caption) {
+  broom::tidy(m, conf.int = TRUE) %>%
+    transmute(`Término` = term, `Estimación` = estimate, `Error estándar` = std.error,
+              `$t$` = statistic, `p valor` = p.value,
+              `IC 2.5%` = conf.low, `IC 97.5%` = conf.high) %>%
+    tabla_rlm(caption, p_cols = "p valor")
+}
+
+# Variables incluidas en un modelo
+vars_de <- function(m) attr(terms(m), "term.labels")
+
+# Identifica a qué variable (y categoría) corresponde un coeficiente
+info_termino <- function(term, datos) {
+  if (term %in% names(datos)) return(list(var = term, nivel = NA))
+  fac <- names(datos)[sapply(datos, is.factor)]
+  v <- fac[startsWith(term, fac)]
+  v <- v[which.max(nchar(v))]
+  list(var = v, nivel = substring(term, nchar(v) + 1))
+}
+etiqueta <- function(term, datos) {
+  i <- info_termino(term, datos)
+  if (is.na(i$nivel)) gsub("_", " ", i$var) else paste0(gsub("_", " ", i$var), " = ", i$nivel)
+}
+
+# Ecuación del modelo ajustado en LaTeX
+ecuacion_latex <- function(m, datos, por_linea = 3) {
+  b <- coef(m)
+  terminos <- vapply(names(b)[-1], function(t) {
+    paste0(ifelse(b[t] >= 0, "+ ", "- "), formatC(abs(b[t]), format = "fg", digits = 4),
+           "\\,\\text{", etiqueta(t, datos), "}")
+  }, character(1))
+  grupos <- split(terminos, ceiling(seq_along(terminos) / por_linea))
+  lineas <- vapply(grupos, paste, character(1), collapse = " ")
+  paste0("\\begin{aligned}\n\\widehat{\\text{Premium Amount}} &= ",
+         formatC(b[1], format = "f", digits = 2), " ",
+         paste(lineas, collapse = " \\\\\n&\\quad "), "\n\\end{aligned}")
+}
+
+# Interpretación de cada coeficiente
+interpretar <- function(m, datos) {
+  b <- coef(m)[-1]
+  vapply(names(b), function(t) {
+    i <- info_termino(t, datos)
+    mag <- formatC(abs(b[t]), format = "fg", digits = 4)
+    if (is.na(i$nivel)) {
+      paste0("Por cada unidad adicional de ", gsub("_", " ", i$var), ", la prima promedio ",
+             ifelse(b[t] >= 0, "aumenta", "disminuye"), " en ", mag,
+             ", manteniendo constantes las demás variables.")
+    } else {
+      paste0("Los clientes con ", gsub("_", " ", i$var), " = ", i$nivel, " pagan en promedio ",
+             mag, ifelse(b[t] >= 0, " más", " menos"), " que los de la categoría base (",
+             levels(datos[[i$var]])[1], "), manteniendo constantes las demás variables.")
+    }
+  }, character(1))
+}
+```
+
+## Preparación de los datos
+
+Para el modelo se excluyen las variables `id` (identificador) y `Policy Start Date` (fecha/hora), igual que en los capítulos anteriores. Además, los factores ordenados (Education Level, Customer Feedback y Exercise Frequency) se convierten en factores sin orden: en `lm()`, un factor ordenado se codifica con contrastes polinómicos (`.L`, `.Q`, `.C`), que son difíciles de interpretar, mientras que un factor sin orden se codifica con variables dummy respecto a una categoría base.
+
+```{r datos-rlm}
+df_mod <- df %>%
+  dplyr::select(-id, -`Policy Start Date`) %>%
+  mutate(across(where(is.ordered), ~ factor(.x, levels = levels(.x), ordered = FALSE)))
+
+fac_vars <- names(df_mod)[sapply(df_mod, is.factor)]
+num_vars <- setdiff(names(df_mod)[sapply(df_mod, is.numeric)], "Premium_Amount")
+n_dummies <- sum(sapply(fac_vars, function(v) nlevels(df_mod[[v]]) - 1))
+```
+
+Cada variable categórica con $c$ categorías se representa mediante $c - 1$ variables dummy, que valen 1 si el cliente pertenece a esa categoría y 0 en otro caso. La categoría restante actúa como base o referencia, y cada coeficiente asociado a una dummy se interpreta como la diferencia en la prima promedio respecto a esa categoría base.
+
+```{r dummies}
+tibble(Variable = gsub("_", " ", fac_vars),
+       `Categoría base` = sapply(fac_vars, function(v) levels(df_mod[[v]])[1]),
+       `Variables dummy` = sapply(fac_vars, function(v) nlevels(df_mod[[v]]) - 1)) %>%
+  tabla_rlm("Codificación de las variables categóricas en variables dummy")
+```
+
+Las `r length(fac_vars)` variables categóricas generan en total `r n_dummies` variables dummy que, junto con las `r length(num_vars)` variables numéricas y el intercepto, dan un total de $p = `r n_dummies + length(num_vars) + 1`$ parámetros en el modelo completo.
+
+Para evaluar la capacidad predictiva de los modelos, los datos se dividen aleatoriamente en un conjunto de entrenamiento (80%), con el que se ajustan los modelos, y un conjunto de prueba (20%), que se reserva para medir qué tan bien predicen observaciones que no se usaron en el ajuste.
+
+```{r particion}
+set.seed(123)
+idx_train <- sample(nrow(df_mod), size = round(0.8 * nrow(df_mod)))
+train <- df_mod[idx_train, ]
+test  <- df_mod[-idx_train, ]
+```
+
+El conjunto de entrenamiento queda con `r fmil(nrow(train))` observaciones y el de prueba con `r fmil(nrow(test))`.
+
+## Regresión lineal simple como punto de partida
+
+Antes de ajustar el modelo múltiple, se ajusta un modelo de regresión lineal simple (RLS) con Annual Income, que en el capítulo anterior fue la variable numérica con mayor correlación con Premium Amount ($\rho_s = `r fm(ICS[["Annual Income - Premium Amount"]]["rho"])`$). El modelo se expresa como:
+
+$$
+y_i = \beta_0 + \beta_1 x_i + \varepsilon_i, \qquad \varepsilon_i \sim N(0, \sigma^2)
+$$
+
+donde $y_i$ es Premium Amount y $x_i$ es Annual Income. Para evaluar si el ingreso anual tiene un efecto lineal sobre la prima se plantea:
+
+$$
+\begin{aligned}
+H_0 &: \beta_1 = 0 \quad \text{(Annual Income no tiene efecto lineal sobre la prima)} \\
+H_1 &: \beta_1 \neq 0 \quad \text{(Annual Income tiene efecto lineal sobre la prima)}
+\end{aligned}
+$$
+
+```{r rls}
+modelo_rls <- lm(Premium_Amount ~ Annual_Income, data = train)
+tabla_coef(modelo_rls, "Coeficientes estimados del modelo de regresión lineal simple e intervalos de confianza del 95%")
+
+s_rls  <- summary(modelo_rls)
+b_rls  <- coef(modelo_rls)
+t_b1   <- coef(s_rls)[2, "t value"]
+p_b1   <- coef(s_rls)[2, "Pr(>|t|)"]
+r2_rls <- s_rls$r.squared
+```
+
+```{r rls-grafico, message=FALSE}
+set.seed(123)
+idx_rls <- sample(nrow(train), 20000)
+ggplot(train[idx_rls, ], aes(x = Annual_Income, y = Premium_Amount)) +
+  geom_point(color = "#5B7C99", alpha = 0.15, size = 0.6) +
+  geom_abline(intercept = b_rls[1], slope = b_rls[2], color = "#B22222", linewidth = 1) +
+  labs(title = "Recta de regresión de Premium Amount sobre Annual Income (muestra de 20,000)",
+       x = "Annual Income", y = "Premium Amount")
+```
+
+El modelo estimado es:
+
+$$
+\widehat{\text{Premium Amount}} = `r fm(b_rls[1], 2)` `r ifelse(b_rls[2] >= 0, "+", "-")` `r formatC(abs(b_rls[2]), format = "fg", digits = 4)`\,\text{Annual Income}
+$$
+
+Con una confianza del 95%, la prueba t indica que `r ifelse(p_b1 < 0.05, "Annual Income tiene un efecto lineal estadísticamente significativo sobre la prima", "Annual Income no tiene un efecto lineal estadísticamente significativo sobre la prima")` ($t = `r fm(t_b1, 2)`$, p valor `r fp(p_b1)`), por lo que `r ifelse(p_b1 < 0.05, "se rechaza", "no se rechaza")` $H_0$. Según el coeficiente estimado, por cada 1,000 unidades adicionales de ingreso anual la prima promedio `r ifelse(b_rls[2] >= 0, "aumenta", "disminuye")` en `r fm(abs(1000 * b_rls[2]), 2)`. Sin embargo, el coeficiente de determinación es $R^2 = `r fm(r2_rls)`$, es decir, el ingreso anual explica apenas el `r fm(100 * r2_rls, 2)`% de la variabilidad de Premium Amount. En el gráfico se observa que la recta es casi horizontal frente a la gran dispersión de los puntos.
+
+```{r rls-prueba}
+rmse_nulo <- sqrt(mean((test$Premium_Amount - mean(train$Premium_Amount))^2))
+rmse_rls  <- sqrt(mean((test$Premium_Amount - predict(modelo_rls, test))^2))
+```
+
+En el conjunto de prueba, el modelo simple tiene un $RMSE = `r fm(rmse_rls, 2)`$, frente a `r fm(rmse_nulo, 2)` del modelo que predice el promedio para todos los clientes, una reducción de apenas el `r fm(100 * (1 - rmse_rls / rmse_nulo), 2)`%. Como una sola variable `r ifelse(r2_rls < 0.01, "explica menos del 1% de la variabilidad de la prima", "explica una proporción muy baja de la variabilidad de la prima")`, a continuación se ajusta un modelo de regresión lineal múltiple que incorpora todas las variables predictoras.
+
+## Modelo completo
+
+Se ajusta primero el modelo completo, con las 18 variables predictoras:
+
+```{r modelo-completo}
+modelo_full <- lm(Premium_Amount ~ ., data = train)
+```
+
+### Prueba de significancia global
+
+La prueba de significancia global determina si existe una relación lineal entre Premium Amount y al menos una de las variables regresoras:
+
+$$
+\begin{aligned}
+H_0 &: \beta_1 = \beta_2 = \cdots = \beta_k = 0 \\
+H_1 &: \beta_j \neq 0 \quad \text{para al menos una } j
+\end{aligned}
+$$
+
+El estadístico de prueba es $F_0 = \dfrac{SSR/k}{SSE/(n-k-1)} = \dfrac{MSR}{MSE}$, que bajo $H_0$ sigue una distribución $F_{k,\, n-k-1}$. Se construye la tabla ANOVA a partir de la descomposición $SST = SSR + SSE$:
+
+```{r anova-global}
+y_tr <- train$Premium_Amount
+n  <- nrow(train)
+p  <- length(coef(modelo_full))
+k  <- p - 1
+
+SST <- sum((y_tr - mean(y_tr))^2)
+SSE <- sum(residuals(modelo_full)^2)
+SSR <- SST - SSE
+MSR <- SSR / k
+MSE <- SSE / (n - p)
+F0  <- MSR / MSE
+p_F <- pf(F0, k, n - p, lower.tail = FALSE)
+
+tibble(`Fuente de variación` = c("Regresión", "Residuales", "Total"),
+       `Suma de cuadrados` = c(SSR, SSE, SST),
+       gl = c(k, n - p, n - 1),
+       `Cuadrado medio` = c(MSR, MSE, NA),
+       `$F_0$` = c(F0, NA, NA),
+       `p valor` = c(p_F, NA, NA)) %>%
+  tabla_rlm("Tabla ANOVA del modelo completo", p_cols = "p valor")
+
+r2_full   <- SSR / SST
+r2aj_full <- 1 - (SSE / (n - p)) / (SST / (n - 1))
+```
+
+Con una confianza del 95%, la prueba F global indica que `r ifelse(p_F < 0.05, "al menos una de las variables predictoras contribuye de manera significativa al modelo", "ninguna de las variables predictoras contribuye de manera significativa al modelo")` ($F_{`r k`,\, `r fmil(n - p)`} = `r fm(F0, 2)`$, p valor `r fp(p_F)`), por lo que `r ifelse(p_F < 0.05, "se rechaza", "no se rechaza")` $H_0$.
+
+Sin embargo, el coeficiente de determinación es $R^2 = `r fm(r2_full)`$ y el ajustado es $R^2_{aj} = `r fm(r2aj_full)`$, es decir, el modelo completo explica apenas el `r fm(100 * r2_full, 2)`% de la variabilidad de Premium Amount. Al igual que en el capítulo anterior, con un tamaño de muestra tan grande la prueba F detecta efectos muy pequeños, pero la capacidad explicativa del modelo es prácticamente nula.
+
+### Pruebas individuales e intervalos de confianza
+
+Para cada coeficiente se plantea:
+
+$$
+\begin{aligned}
+H_0 &: \beta_j = 0 \\
+H_1 &: \beta_j \neq 0
+\end{aligned}
+$$
+
+con el estadístico $t_j = \dfrac{\hat\beta_j}{\sqrt{\hat\sigma^2 (\mathbf{X}'\mathbf{X})^{-1}_{jj}}} \sim t_{n-p}$ y el intervalo de confianza del 95% $\hat\beta_j \pm t_{\alpha/2,\, n-p}\sqrt{\hat\sigma^2 (\mathbf{X}'\mathbf{X})^{-1}_{jj}}$.
+
+```{r coef-completo}
+tabla_coef(modelo_full, "Coeficientes estimados del modelo completo e intervalos de confianza del 95%") %>%
+  scroll_box(height = "450px")
+
+coef_full <- broom::tidy(modelo_full)[-1, ]
+sig_full  <- coef_full$term[coef_full$p.value < 0.05]
+```
+
+Con una confianza del 95%, de los `r k` coeficientes asociados a las variables predictoras, `r length(sig_full)` resultan estadísticamente significativos (`r paste(sapply(sig_full, etiqueta, datos = train), collapse = ", ")`), ya que su p valor es menor a $0.05$ y su intervalo de confianza no contiene al 0. Los demás coeficientes no son significativos, lo que sugiere que esas variables podrían eliminarse del modelo.
+
+### Análisis de multicolinealidad
+
+Antes de seleccionar variables, se verifica que no exista multicolinealidad, es decir, que ninguna variable predictora pueda expresarse como combinación lineal de las demás. Como el modelo incluye variables categóricas con varias dummies, se usa el factor de inflación de varianza generalizado (GVIF). El valor $GVIF^{1/(2\,gl)}$ es comparable entre variables con distinto número de dummies, y el criterio $VIF > 5$ equivale a $GVIF^{1/(2\,gl)} > \sqrt{5} \approx 2.24$.
+
+```{r vif-completo}
+vif_full <- car::vif(modelo_full)
+tabla_vif <- as.data.frame(vif_full) %>%
+  tibble::rownames_to_column("Variable") %>%
+  mutate(Variable = gsub("_", " ", Variable))
+names(tabla_vif) <- c("Variable", "GVIF", "gl", "$GVIF^{1/(2\\,gl)}$")
+tabla_vif %>% tabla_rlm("Factor de inflación de varianza generalizado del modelo completo")
+
+gvif_max <- max(vif_full[, 3])
+```
+
+Además, se calcula el número de condición (ICN) de la matriz de diseño. Como las variables tienen escalas muy distintas (por ejemplo, Annual Income llega a 150,000 y las dummies solo valen 0 o 1), el ICN se calcula sobre las columnas estandarizadas, ya que de lo contrario reflejaría la diferencia de escalas y no la dependencia entre variables.
+
+```{r icn}
+X_std <- scale(model.matrix(modelo_full)[, -1])
+icn <- kappa(X_std, exact = TRUE)
+rm(X_std); invisible(gc())
+```
+
+El mayor valor de $GVIF^{1/(2\,gl)}$ es $`r fm(gvif_max)`$, muy por debajo de $2.24$, y el número de condición es $ICN = `r fm(icn, 2)`$, `r ifelse(icn < 30, "menor a 30", "mayor a 30")`. Por lo tanto, `r ifelse(gvif_max < sqrt(5) & icn < 30, "se concluye que no existe multicolinealidad entre las variables predictoras", "existe evidencia de multicolinealidad que conviene revisar")`, lo cual es coherente con la matriz de correlación del EDA, donde ningún par de variables numéricas superaba $|\rho_s| = 0.133$.
+
+## Selección de variables
+
+El método de todas las regresiones posibles requeriría ajustar $2^{18} - 1 = 262{,}143$ modelos sobre `r fmil(nrow(train))` observaciones, lo cual no es viable computacionalmente. Por ello se usa la selección secuencial con los métodos forward, backward y stepwise.
+
+Como criterio se usa principalmente el BIC, $BIC = n\ln(SSE/n) + p\ln n$, ya que penaliza más la inclusión de variables cuando el tamaño de muestra es grande: con $n$ cercano a un millón, el AIC tiende a conservar variables que, aunque mejoran un poco el ajuste, no aportan en la práctica. Para comparar, se incluye también el método stepwise con el AIC. En `stepAIC()`, el BIC se obtiene con el argumento `k = log(n)`.
+
+Este paso puede tardar varios minutos por el tamaño de los datos.
+
+```{r seleccion, message=FALSE}
+modelo_nulo <- lm(Premium_Amount ~ 1, data = train)
+k_bic <- log(nrow(train))
+alcance <- list(lower = modelo_nulo, upper = modelo_full)
+
+# Método forward (BIC)
+sel_forward <- MASS::stepAIC(modelo_nulo, scope = alcance, direction = "forward",
+                             k = k_bic, trace = FALSE)
+
+# Método backward (BIC)
+sel_backward <- MASS::stepAIC(modelo_full, direction = "backward",
+                              k = k_bic, trace = FALSE)
+
+# Método stepwise (BIC)
+sel_both <- MASS::stepAIC(modelo_nulo, scope = alcance, direction = "both",
+                          k = k_bic, trace = FALSE)
+
+# Método stepwise (AIC), para comparar
+sel_aic <- MASS::stepAIC(modelo_nulo, scope = alcance, direction = "both",
+                         k = 2, trace = FALSE)
+```
+
+```{r tabla-seleccion}
+sel <- list("Forward (BIC)" = sel_forward, "Backward (BIC)" = sel_backward,
+            "Stepwise (BIC)" = sel_both, "Stepwise (AIC)" = sel_aic)
+
+tibble(`Método` = names(sel),
+       `Número de variables` = sapply(sel, function(m) length(vars_de(m))),
+       Variables = sapply(sel, function(m) paste(gsub("_", " ", sort(vars_de(m))), collapse = ", ")),
+       AIC = sapply(sel, AIC),
+       BIC = sapply(sel, BIC)) %>%
+  tabla_rlm("Modelos obtenidos con la selección secuencial", align = "lclcc")
+
+mismas_bic <- identical(sort(vars_de(sel_forward)), sort(vars_de(sel_backward))) &&
+  identical(sort(vars_de(sel_forward)), sort(vars_de(sel_both)))
+
+modelo_bic <- sel_both
+vars_bic   <- vars_de(modelo_bic)
+vars_elim  <- setdiff(vars_de(modelo_full), vars_bic)
+vars_aic   <- vars_de(sel_aic)
+
+rm(sel_forward, sel_backward, sel); invisible(gc())
+```
+
+`r ifelse(mismas_bic, "Los tres métodos con el criterio BIC (forward, backward y stepwise) coinciden en el mismo modelo", "Los tres métodos con el criterio BIC no coinciden en el mismo modelo, por lo que se toma el obtenido con el método stepwise, que combina los otros dos")`, que incluye `r length(vars_bic)` variables: `r paste(gsub("_", " ", vars_bic), collapse = ", ")`. Las `r length(vars_elim)` variables eliminadas son: `r paste(gsub("_", " ", vars_elim), collapse = ", ")`. Por su parte, el método stepwise con el AIC conserva `r length(vars_aic)` variables, `r ifelse(length(vars_aic) > length(vars_bic), "más que con el BIC, como era de esperarse por su menor penalización", "las mismas que con el BIC")`.
+
+Para verificar si las variables eliminadas aportan al modelo, se compara el modelo seleccionado (reducido) con el completo mediante la prueba F parcial:
+
+$$
+\begin{aligned}
+H_0 &: \text{los coeficientes de las variables eliminadas son todos iguales a 0} \\
+H_1 &: \text{al menos uno de esos coeficientes es distinto de 0}
+\end{aligned}
+\qquad
+F = \frac{(SSE_{\text{reduc}} - SSE_{\text{full}})/(p_{\text{full}} - p_{\text{reduc}})}{SSE_{\text{full}}/(n - p_{\text{full}})}
+$$
+
+```{r f-parcial}
+f_parcial <- anova(modelo_bic, modelo_full)
+f_parcial
+p_parcial <- f_parcial$`Pr(>F)`[2]
+```
+
+Con una confianza del 95%, la prueba F parcial `r ifelse(p_parcial < 0.05, "indica que al menos una de las variables eliminadas aporta de forma estadísticamente significativa al modelo", "indica que las variables eliminadas no aportan de forma estadísticamente significativa al modelo")` ($F = `r fm(f_parcial$F[2], 4)`$, p valor `r fp(p_parcial)`), por lo que `r ifelse(p_parcial < 0.05, "se rechaza", "no se rechaza")` $H_0$. `r ifelse(p_parcial < 0.05, "Sin embargo, con un tamaño de muestra tan grande esta prueba detecta aportes mínimos; el BIC, que tiene en cuenta el tamaño de la muestra, indica que el modelo reducido ofrece un mejor balance entre ajuste y simplicidad.", "Esto respalda el uso del modelo reducido, que es más simple y explica prácticamente lo mismo que el modelo completo.")`
+
+Los coeficientes del modelo seleccionado son:
+
+```{r coef-bic}
+tabla_coef(modelo_bic, "Coeficientes estimados del modelo seleccionado por BIC e intervalos de confianza del 95%")
+r2_bic   <- summary(modelo_bic)$r.squared
+r2aj_bic <- summary(modelo_bic)$adj.r.squared
+```
+
+El modelo seleccionado tiene $R^2 = `r fm(r2_bic)`$ y $R^2_{aj} = `r fm(r2aj_bic)`$, prácticamente iguales a los del modelo completo ($R^2_{aj} = `r fm(r2aj_full)`$), pero con `r length(coef(modelo_full)) - length(coef(modelo_bic))` parámetros menos.
+
+## Análisis de residuales
+
+A continuación se validan los supuestos del modelo seleccionado: independencia, normalidad, media cero y varianza constante de los errores. Además, se identifican observaciones atípicas e influyentes. Para los gráficos se usa una muestra aleatoria de 20,000 residuales, ya que con cerca de un millón de puntos los gráficos se saturan; las pruebas sí se calculan con todos los residuales.
+
+```{r residuos-bic}
+res_bic <- residuals(modelo_bic)
+aj_bic  <- fitted(modelo_bic)
+set.seed(123)
+idx_graf <- sample(length(res_bic), 20000)
+```
+
+### Independencia de los errores
+
+$$
+\begin{aligned}
+H_0 &: \text{los errores son independientes (no hay autocorrelación)} \\
+H_1 &: \text{los errores están autocorrelacionados}
+\end{aligned}
+$$
+
+```{r durbin-watson}
+dw <- lmtest::dwtest(modelo_bic, alternative = "two.sided")
+dw
+```
+
+Con una confianza del 95%, la prueba de Durbin-Watson `r ifelse(dw$p.value < 0.05, "indica que los errores presentan autocorrelación", "indica que no hay evidencia de autocorrelación en los errores")` ($DW = `r fm(dw$statistic)`$, p valor `r fp(dw$p.value)`), por lo que `r ifelse(dw$p.value < 0.05, "no se cumple", "se cumple")` el supuesto de independencia. Un valor de $DW$ cercano a 2 indica ausencia de autocorrelación.
+
+### Normalidad de los errores
+
+$$
+\begin{aligned}
+H_0 &: \text{los errores siguen una distribución normal} \\
+H_1 &: \text{los errores no siguen una distribución normal}
+\end{aligned}
+$$
+
+La prueba de Shapiro-Wilk solo admite hasta 5,000 observaciones, por lo que se usa la prueba de Lilliefors, igual que en el capítulo anterior.
+
+```{r normalidad-res}
+lil_res <- lillie.test(res_bic)
+lil_res
+```
+
+```{r qq-res}
+car::qqPlot(res_bic[idx_graf], las = 1, id = FALSE,
+            xlab = "Cuantiles teóricos", ylab = "Residuales",
+            main = "Gráfico Q-Q de los residuales (muestra de 20,000)")
+```
+
+Con una confianza del 95%, la prueba de Lilliefors indica que los residuales `r ifelse(lil_res$p.value < 0.05, "no siguen", "siguen")` una distribución normal ($D = `r fm(lil_res$statistic, 5)`$, p valor `r fp(lil_res$p.value)`). En el gráfico Q-Q se observa que los puntos se alejan de la línea de referencia en la cola derecha, reflejo del sesgo hacia la derecha de Premium Amount que ya se había identificado en el EDA.
+
+### Media cero de los errores
+
+$$
+\begin{aligned}
+H_0 &: E(\varepsilon) = 0 \\
+H_1 &: E(\varepsilon) \neq 0
+\end{aligned}
+$$
+
+```{r media-res}
+t_res <- t.test(res_bic, mu = 0)
+t_res
+```
+
+Con una confianza del 95%, `r ifelse(t_res$p.value < 0.05, "la media de los residuales es distinta de cero", "no hay evidencia para afirmar que la media de los residuales sea distinta de cero")` (p valor `r fp(t_res$p.value)`). Esto es esperable, ya que en un modelo con intercepto ajustado por mínimos cuadrados los residuales siempre suman cero.
+
+### Varianza constante de los errores
+
+$$
+\begin{aligned}
+H_0 &: \text{la varianza de los errores es constante (homocedasticidad)} \\
+H_1 &: \text{la varianza de los errores no es constante (heterocedasticidad)}
+\end{aligned}
+$$
+
+```{r breusch-pagan}
+bp_bic <- lmtest::bptest(modelo_bic)
+bp_bic
+```
+
+```{r res-vs-ajustados, message=FALSE}
+tibble(ajustado = aj_bic[idx_graf], residuo = res_bic[idx_graf]) %>%
+  ggplot(aes(x = ajustado, y = residuo)) +
+  geom_point(color = "#5B7C99", alpha = 0.15, size = 0.6) +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  geom_smooth(se = FALSE, color = "#B22222") +
+  labs(title = "Residuales vs valores ajustados (muestra de 20,000)",
+       x = "Valores ajustados", y = "Residuales")
+```
+
+Con una confianza del 95%, la prueba de Breusch-Pagan `r ifelse(bp_bic$p.value < 0.05, "indica que la varianza de los errores no es constante", "no indica diferencias en la varianza de los errores")` ($BP = `r fm(bp_bic$statistic, 2)`$, gl $= `r bp_bic$parameter`$, p valor `r fp(bp_bic$p.value)`), por lo que `r ifelse(bp_bic$p.value < 0.05, "no se cumple", "se cumple")` el supuesto de homocedasticidad. En el gráfico de residuales vs valores ajustados se observa que los valores ajustados ocupan un rango muy estrecho comparado con el de los residuales, lo que refleja que el modelo predice casi el mismo valor para todos los clientes. Además, los residuales son asimétricos, con una cola larga de valores positivos.
+
+### Identificación de outliers
+
+Una observación se considera atípica si su residual estudentizado $r_i$ está fuera del intervalo $(-3, 3)$. Adicionalmente, se aplica la prueba de Bonferroni sobre el mayor residual estudentizado.
+
+```{r outliers}
+r_est <- rstudent(modelo_bic)
+n_out <- sum(abs(r_est) > 3)
+esperados <- 2 * pnorm(-3) * length(r_est)
+
+ot <- car::outlierTest(modelo_bic, n.max = 5)
+tibble(`Observación` = names(ot$rstudent),
+       `Residual estudentizado` = ot$rstudent,
+       `p valor` = ot$p,
+       `p Bonferroni` = ot$bonf.p) %>%
+  tabla_rlm("Prueba de Bonferroni para outliers", p_cols = c("p valor", "p Bonferroni"))
+rm(r_est); invisible(gc())
+```
+
+Se encontraron `r fmil(n_out)` observaciones con $|r_i| > 3$, el `r fm(100 * n_out / length(res_bic), 2)`% del total. Bajo normalidad se esperarían alrededor de `r fmil(esperados)` (el 0.27%) solo por azar, `r ifelse(n_out > esperados, "por lo que hay más atípicos de lo esperado, lo cual es coherente con la cola derecha larga de Premium Amount", "por lo que la cantidad de atípicos es la esperada")`. `r ifelse(any(ot$bonf.p < 0.05), "La prueba de Bonferroni confirma que las observaciones de la tabla son outliers", "La prueba de Bonferroni no identifica ninguna observación como outlier")`.
+
+### Identificación de observaciones influyentes
+
+La influencia de cada observación se mide con la distancia de Cook, $D_i = \dfrac{r_i^2}{p}\dfrac{h_{ii}}{1 - h_{ii}}$, y se considera influyente si $D_i > \dfrac{4}{n - p - 2}$.
+
+```{r cook}
+cook <- cooks.distance(modelo_bic)
+p_bic <- length(coef(modelo_bic))
+umbral <- 4 / (length(cook) - p_bic - 2)
+n_infl <- sum(cook > umbral)
+
+plot(cook, type = "h", las = 1, xlab = "Índice", ylab = "Distancia de Cook",
+     main = "Distancia de Cook (línea = umbral)")
+abline(h = umbral, lty = 2, col = "#B22222")
+```
+
+```{r cook-tabla}
+ord <- order(cook, decreasing = TRUE)[1:10]
+tibble(`Observación` = names(cook)[ord], `Distancia de Cook` = cook[ord]) %>%
+  tabla_rlm("Observaciones con mayor distancia de Cook")
+cook_max <- max(cook)
+rm(cook); invisible(gc())
+```
+
+Con un tamaño de muestra tan grande, el umbral $4/(n-p-2) = `r formatC(umbral, format = "e", digits = 2)`$ es muy pequeño, por lo que `r fmil(n_infl)` observaciones lo superan. Sin embargo, la mayor distancia de Cook es $`r formatC(cook_max, format = "e", digits = 2)`$, muy lejos de 1, por lo que ninguna observación individual controla el modelo: retirar cualquiera de ellas no cambiaría los coeficientes estimados de forma apreciable.
+
+## Transformación de Box-Cox
+
+Dado que los residuales no cumplen los supuestos de normalidad y homocedasticidad, se evalúa la transformación de Box-Cox de la variable respuesta:
+
+$$
+y^{(\lambda)} =
+\begin{cases}
+\dfrac{y^\lambda - 1}{\lambda}, & \lambda \neq 0 \\
+\ln y, & \lambda = 0
+\end{cases}
+$$
+
+donde $\lambda$ se elige maximizando la verosimilitud del modelo. Para estimar $\lambda$ se usa una muestra aleatoria de 100,000 observaciones del conjunto de entrenamiento, ya que el procedimiento ajusta el modelo una vez por cada valor de $\lambda$.
+
+```{r boxcox}
+stopifnot(min(train$Premium_Amount) > 0)
+set.seed(123)
+idx_bc <- sample(nrow(train), 100000)
+bc <- MASS::boxcox(formula(modelo_bic), data = train[idx_bc, ],
+                   lambda = seq(-0.5, 1.5, 0.05))
+lambda_hat <- bc$x[which.max(bc$y)]
+ic_lambda  <- range(bc$x[bc$y > max(bc$y) - qchisq(0.95, 1) / 2])
+lambda     <- round(lambda_hat, 2)
+```
+
+El valor de $\lambda$ que maximiza la verosimilitud es $\hat\lambda = `r fm(lambda_hat, 2)`$, con un intervalo de confianza del 95% de $(`r fm(ic_lambda[1], 2)`, `r fm(ic_lambda[2], 2)`)$. `r ifelse(ic_lambda[1] <= 1 & ic_lambda[2] >= 1, "Como el intervalo contiene al 1, la transformación no es necesaria", "Como el intervalo no contiene al 1, se justifica transformar la respuesta")`. Se ajusta el modelo con las mismas variables del modelo seleccionado y la respuesta transformada con $\lambda = `r lambda`$.
+
+```{r modelo-bc}
+bc_trans <- function(y, l) if (abs(l) < 1e-8) log(y) else (y^l - 1) / l
+bc_inv   <- function(z, l) if (abs(l) < 1e-8) exp(z) else pmax(l * z + 1, 0)^(1 / l)
+
+train$Premium_BC <- bc_trans(train$Premium_Amount, lambda)
+modelo_bc <- lm(update(formula(modelo_bic), Premium_BC ~ .), data = train)
+train$Premium_BC <- NULL
+
+res_bc <- residuals(modelo_bc)
+lil_bc <- lillie.test(res_bc)
+lil_bc
+bp_bc <- lmtest::bptest(modelo_bc)
+bp_bc
+```
+
+```{r qq-bc}
+car::qqPlot(res_bc[idx_graf], las = 1, id = FALSE,
+            xlab = "Cuantiles teóricos", ylab = "Residuales",
+            main = "Gráfico Q-Q de los residuales del modelo Box-Cox (muestra de 20,000)")
+```
+
+Con la transformación, el estadístico de Lilliefors pasa de $D = `r fm(lil_res$statistic, 5)`$ a $D = `r fm(lil_bc$statistic, 5)`$, `r ifelse(lil_bc$statistic < lil_res$statistic, "es decir, los residuales se acercan más a la normalidad", "es decir, los residuales no se acercan a la normalidad")`, aunque con una confianza del 95% `r ifelse(lil_bc$p.value < 0.05, "siguen sin cumplir", "ya cumplen")` el supuesto (p valor `r fp(lil_bc$p.value)`). Por su parte, la prueba de Breusch-Pagan da $BP = `r fm(bp_bc$statistic, 2)`$ (p valor `r fp(bp_bc$p.value)`), por lo que `r ifelse(bp_bc$p.value < 0.05, "tampoco se cumple", "sí se cumple")` el supuesto de homocedasticidad.
+
+## Comparación de modelos
+
+Se comparan los modelos obtenidos en el conjunto de prueba, que no se usó en el ajuste. Como referencia se incluye el modelo nulo, que predice para todos los clientes el promedio de Premium Amount del conjunto de entrenamiento. Las predicciones del modelo Box-Cox se devuelven a la escala original con la transformación inversa, $y = (\lambda\, y^{(\lambda)} + 1)^{1/\lambda}$, para que sus errores sean comparables con los de los demás modelos.
+
+Las métricas usadas son la raíz del error cuadrático medio, $RMSE = \sqrt{\frac{1}{m}\sum (y_i - \hat y_i)^2}$, el error absoluto medio, $MAE = \frac{1}{m}\sum |y_i - \hat y_i|$, y el $R^2$ en el conjunto de prueba.
+
+```{r comparacion}
+y_te <- test$Premium_Amount
+media_tr <- mean(train$Premium_Amount)
+
+pred <- list(
+  "Nulo"               = rep(media_tr, nrow(test)),
+  "Simple (Annual Income)" = predict(modelo_rls, test),
+  "Completo"           = predict(modelo_full, test),
+  "Seleccionado (BIC)" = predict(modelo_bic, test),
+  "Seleccionado (AIC)" = predict(sel_aic, test),
+  "Box-Cox (BIC)"      = bc_inv(predict(modelo_bc, test), lambda)
+)
+mods <- list(modelo_nulo, modelo_rls, modelo_full, modelo_bic, sel_aic, modelo_bc)
+
+comp <- tibble(
+  Modelo = names(pred),
+  p = sapply(mods, function(m) length(coef(m))),
+  r2aj = sapply(mods, function(m) summary(m)$adj.r.squared),
+  AIC = c(sapply(mods[1:5], AIC), NA),
+  BIC = c(sapply(mods[1:5], BIC), NA),
+  RMSE = sapply(pred, function(pr) sqrt(mean((y_te - pr)^2))),
+  MAE  = sapply(pred, function(pr) mean(abs(y_te - pr))),
+  r2p  = sapply(pred, function(pr) 1 - sum((y_te - pr)^2) / sum((y_te - media_tr)^2))
+)
+
+comp %>%
+  rename(`$p$` = p, `$R^2_{aj}$ (entrenamiento)` = r2aj,
+         `RMSE (prueba)` = RMSE, `MAE (prueba)` = MAE, `$R^2$ (prueba)` = r2p) %>%
+  tabla_rlm("Comparación de los modelos ajustados")
+
+rmse <- setNames(comp$RMSE, comp$Modelo)
+mae  <- setNames(comp$MAE, comp$Modelo)
+r2p  <- setNames(comp$r2p, comp$Modelo)
+mejora_rmse <- 100 * (1 - rmse["Seleccionado (BIC)"] / rmse["Nulo"])
+```
+
+El $R^2_{aj}$ del modelo Box-Cox está en la escala transformada, por lo que no es directamente comparable con el de los demás; por la misma razón no se reportan su AIC ni su BIC.
+
+El modelo con menor error de predicción en el conjunto de prueba es el modelo `r comp$Modelo[which.min(comp$RMSE)]` ($RMSE = `r fm(min(comp$RMSE), 2)`$). Frente al modelo nulo ($RMSE = `r fm(rmse["Nulo"], 2)`$), el modelo seleccionado por BIC ($RMSE = `r fm(rmse["Seleccionado (BIC)"], 2)`$) reduce el error apenas en un `r fm(mejora_rmse, 2)`%, y su $R^2$ en el conjunto de prueba es de $`r fm(r2p["Seleccionado (BIC)"])`$. Esto confirma que, aunque varias variables resultan estadísticamente significativas, el modelo predice prácticamente igual que usar el promedio de la prima para todos los clientes.
+
+`r ifelse(rmse["Box-Cox (BIC)"] < rmse["Seleccionado (BIC)"], paste0("Aunque el modelo Box-Cox obtiene un RMSE ligeramente menor (", fm(rmse["Box-Cox (BIC)"], 2), " frente a ", fm(rmse["Seleccionado (BIC)"], 2), "), la diferencia es mínima y la transformación dificulta la interpretación de los coeficientes, por lo que se elige como modelo final el seleccionado por BIC en la escala original."), paste0("El modelo Box-Cox no mejora el error de predicción en la escala original (RMSE de ", fm(rmse["Box-Cox (BIC)"], 2), " frente a ", fm(rmse["Seleccionado (BIC)"], 2), "), ya que al devolver las predicciones a la escala original se estima la mediana y no la media de la prima. Como además dificulta la interpretación de los coeficientes, se elige como modelo final el seleccionado por BIC en la escala original."))` Este modelo tiene un error similar al del modelo completo y al seleccionado por AIC, pero con menos variables.
+
+```{r limpiar-modelos, include=FALSE}
+modelo_final <- modelo_bic
+rm(sel_aic, modelo_bc, modelo_rls, res_bc, pred); invisible(gc())
+```
+
+## Modelo final
+
+El modelo final ajustado es:
+
+$$
+`r ecuacion_latex(modelo_final, train)`
+$$
+
+La interpretación de cada coeficiente es la siguiente:
+
+```{r interpretacion}
+coef_fin <- broom::tidy(modelo_final)[-1, ]
+tibble(`Término` = sapply(coef_fin$term, etiqueta, datos = train),
+       `Estimación` = coef_fin$estimate,
+       `p valor` = coef_fin$p.value,
+       `Interpretación` = interpretar(modelo_final, train)) %>%
+  tabla_rlm("Interpretación de los coeficientes del modelo final",
+            p_cols = "p valor", align = "lccl")
+```
+
+El intercepto, $\hat\beta_0 = `r fm(coef(modelo_final)[1], 2)`$, representa la prima promedio estimada para un cliente que pertenece a todas las categorías base y cuyas variables numéricas del modelo valen cero; es un valor teórico de referencia, ya que esas condiciones no se presentan en los datos. Aunque los coeficientes anteriores son estadísticamente significativos, sus efectos son muy pequeños en relación con la variabilidad de la prima (desviación estándar de `r fm(sd(train$Premium_Amount), 2)`), lo que explica el bajo $R^2_{aj} = `r fm(r2aj_bic)`$.
+
+## Inferencia para la respuesta
+
+Como ejemplo, se estima la prima de un cliente con un perfil típico: el valor mediano en cada variable numérica y la categoría más frecuente en cada variable categórica.
+
+```{r dato-nuevo}
+moda <- function(x) names(which.max(table(x)))
+
+dato_nuevo <- train %>%
+  dplyr::select(-Premium_Amount) %>%
+  summarise(across(where(is.numeric), median),
+            across(where(is.factor), ~ factor(moda(.x), levels = levels(.x))))
+
+tibble(Variable = gsub("_", " ", names(dato_nuevo)),
+       Valor = sapply(dato_nuevo, function(x) as.character(x))) %>%
+  filter(gsub(" ", "_", Variable) %in% vars_bic) %>%
+  tabla_rlm("Perfil del cliente típico (variables del modelo final)")
+```
+
+El intervalo de confianza del 95% para la prima promedio, $E[Y \mid \mathbf{x}_0]$, es $\hat y_0 \pm t_{\alpha/2,\, n-p}\sqrt{\hat\sigma^2\, \mathbf{x}_0'(\mathbf{X}'\mathbf{X})^{-1}\mathbf{x}_0}$, y el intervalo de predicción del 95% para la prima de un cliente nuevo, $Y_0$, es $\hat y_0 \pm t_{\alpha/2,\, n-p}\sqrt{\hat\sigma^2\,\left(1 + \mathbf{x}_0'(\mathbf{X}'\mathbf{X})^{-1}\mathbf{x}_0\right)}$.
+
+```{r intervalos-respuesta}
+ic_media <- predict(modelo_final, newdata = dato_nuevo, interval = "confidence")
+ic_pred  <- predict(modelo_final, newdata = dato_nuevo, interval = "prediction")
+
+tibble(Intervalo = c("Confianza para la media", "Predicción para un cliente nuevo"),
+       `Estimación` = c(ic_media[1, "fit"], ic_pred[1, "fit"]),
+       `Límite inferior` = c(ic_media[1, "lwr"], ic_pred[1, "lwr"]),
+       `Límite superior` = c(ic_media[1, "upr"], ic_pred[1, "upr"])) %>%
+  tabla_rlm("Intervalos del 95% para la prima del cliente típico")
+```
+
+Para un cliente con este perfil, se espera que la prima promedio sea de `r fm(ic_media[1, "fit"], 2)`. A nivel poblacional, con una confianza del 95%, dicho promedio se encuentra en el intervalo $(`r fm(ic_media[1, "lwr"], 2)`, `r fm(ic_media[1, "upr"], 2)`)$, que es muy estrecho gracias al gran tamaño de la muestra. En cambio, el intervalo de predicción para un cliente nuevo es $(`r fm(ic_pred[1, "lwr"], 2)`, `r fm(ic_pred[1, "upr"], 2)`)$, con una amplitud de `r fm(ic_pred[1, "upr"] - ic_pred[1, "lwr"], 2)`, lo que muestra que el modelo no permite predecir con precisión la prima de un cliente individual. `r ifelse(ic_pred[1, "lwr"] < 0, "Además, su límite inferior es negativo, algo imposible para una prima, lo cual se debe a que este intervalo supone errores normales y simétricos, supuesto que no se cumple. ", "")`Como no se cumplen los supuestos de normalidad y homocedasticidad, este intervalo de predicción debe tomarse solo como aproximado.
+
+## Conclusiones del capítulo
+
+El modelo de regresión lineal múltiple confirma lo encontrado en los capítulos anteriores. Aunque la prueba F global y varias pruebas individuales resultan significativas, el modelo final, con `r length(vars_bic)` variables seleccionadas por BIC, explica apenas el `r fm(100 * r2aj_bic, 2)`% de la variabilidad de Premium Amount ($R^2_{aj} = `r fm(r2aj_bic)`$) y reduce el error de predicción solo en un `r fm(mejora_rmse, 2)`% frente a predecir el promedio para todos los clientes. No se encontró multicolinealidad entre las variables predictoras, pero los residuales no cumplen los supuestos de normalidad ni de homocedasticidad, y la transformación de Box-Cox, aunque acerca los residuales a la normalidad, no mejora la capacidad predictiva del modelo.
+
+En conjunto, las características disponibles de los clientes no permiten explicar el monto de la prima mediante una relación lineal, ni de forma individual ni de forma conjunta. Esto sugiere que la prima depende de factores no incluidos en el dataset, o que su relación con las variables disponibles no es lineal, por lo que como trabajo futuro se podrían explorar modelos no lineales, como árboles de decisión o métodos de ensamble.
