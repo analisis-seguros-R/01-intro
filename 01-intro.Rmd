@@ -401,6 +401,24 @@ ggplot(df, aes(x = Age)) +
   labs(title = "Distribución de Age", x = "Age", y = "Frecuencia")
 ```
 La distribución de Age se ve bastante uniforme a lo largo de todo el rango de edades, sin un sesgo marcado hacia ningún extremo, lo que coincide con lo que ya se había visto en el resumen numérico (media y 50% muy parecidos). Se nota un patrón repetitivo de barras altas y bajas alternadas, y destaca un pico bastante más alto que el resto alrededor de los 40-41 años, donde la frecuencia supera las 60,000, mientras que en el resto de las edades la frecuencia se mantiene relativamente estable entre 25,000 y 50,000 aproximadamente.
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
 
 
 
