@@ -11,6 +11,8 @@ El trabajo incluye:
 - **Análisis Exploratorio de Datos (EDA):** limpieza e imputación de valores faltantes, caracterización univariada de variables numéricas y categóricas, análisis bivariado (variables independientes vs. Premium Amount) y análisis de independientes entre sí.
 - **Pruebas de hipótesis paramétricas y no paramétricas:** verificación de supuestos (normalidad, homogeneidad de varianzas) y aplicación de pruebas como Wilcoxon, Kruskal-Wallis, correlación de Spearman y Chi-cuadrado, para confirmar estadísticamente los patrones observados en el EDA.
 
+- **Regresión lineal múltiple:** partición previa a la imputación, validación cruzada en entrenamiento, comparación contra el promedio e inferencia con errores estándar robustos HC1.
+
 El documento completo se genera como un libro con **bookdown**.
 
 ## Versión para presentación
@@ -42,7 +44,8 @@ Por su tamaño (~170 MB), el archivo `train.csv` **no está incluido en este rep
 
 ```
 ├── index.Rmd            # Página de introducción del libro
-├── 01-intro.Rmd         # EDA completo y pruebas de hipótesis
+├── 01-intro.Rmd         # EDA, pruebas de hipótesis y regresión
+├── evaluacion.R         # Imputación por partición y validación cruzada
 ├── analisis-seguros.Rproj # Proyecto de RStudio
 ├── _bookdown.yml        # Configuración de bookdown
 ├── _output.yml          # Configuración de salida (gitbook, PDF, etc.)
@@ -65,12 +68,13 @@ Por su tamaño (~170 MB), el archivo `train.csv` **no está incluido en este rep
    ```r
    install.packages(c(
      "bookdown", "tidyverse", "Amelia", "moments", "patchwork", "GGally",
-     "car", "rstatix", "coin", "nortest", "data.table", "knitr", "kableExtra"
+     "car", "rstatix", "coin", "nortest", "data.table", "knitr", "kableExtra",
+     "lmtest", "sandwich"
    ))
    ```
 5. Compila el libro con:
    ```r
-   bookdown::render_book("index.Rmd")
+   bookdown::render_book("index.Rmd", "bookdown::gitbook")
    ```
    o usando el botón **Build Book** en el panel "Build" de RStudio.
 
@@ -79,7 +83,7 @@ Por su tamaño (~170 MB), el archivo `train.csv` **no está incluido en este rep
    así antes de renderizar:
    ```r
    Sys.setenv(RSTUDIO_PANDOC = "C:/Program Files/RStudio/resources/app/bin/quarto/bin/tools")
-   bookdown::render_book("index.Rmd")
+   bookdown::render_book("index.Rmd", "bookdown::gitbook")
    ```
 
 6. Copia el contenido generado de `_book/` a `docs/`, confirma los cambios y
@@ -88,3 +92,5 @@ Por su tamaño (~170 MB), el archivo `train.csv` **no está incluido en este rep
 ## Librerías principales utilizadas
 
 `bookdown`, `tidyverse`, `data.table`, `ggplot2`, `GGally`, `car`, `rstatix`, `coin`, `nortest`, `moments`, `patchwork`, `knitr`, `kableExtra`.
+
+El HTML generado incluye el resumen de prueba y los diagnósticos. El flujo de Pages publica el HTML estático; la compilación con el CSV se hace localmente. La semilla externa es 123 y la de los pliegues es 124.

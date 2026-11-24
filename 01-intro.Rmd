@@ -933,7 +933,7 @@ Apartment, Condo y House presentan distribuciones casi idénticas, con la median
 
 
 
-## Análisis bivariado independientes vs independientes 
+## Apéndice gráfico de asociaciones entre predictores
 
 Se presenta la matriz de correlación y dispersión de las variables numéricas, calculada con los 1,200,000 registros. Como las variables no son normales, la correlación mostrada es la de Spearman.
 
@@ -3509,10 +3509,15 @@ tabla_rlm <- function(d, caption = NULL, p_cols = character(0), align = "c") {
     row_spec(0, bold = TRUE)
 }
 
-# Tabla de coeficientes con intervalos de confianza del 95%
-tabla_coef <- function(m, caption) {
-  broom::tidy(m, conf.int = TRUE) %>%
-    transmute(`Término` = term, `Estimación` = estimate, `Error estándar` = std.error,
+# Inferencia de coeficientes con ajuste por heterocedasticidad
+coef_robustos <- function(modelo, covarianza = sandwich::vcovHC(modelo, type = "HC1")) {
+  prueba <- lmtest::coeftest(modelo, vcov. = covarianza)
+  broom::tidy(prueba, conf.int = TRUE)
+}
+
+tabla_coef <- function(m, caption, covarianza = sandwich::vcovHC(m, type = "HC1")) {
+  coef_robustos(m, covarianza) %>%
+    transmute(`Término` = term, `Estimación` = estimate, `Error estándar HC1` = std.error,
               `$t$` = statistic, `p valor` = p.value,
               `IC 2.5%` = conf.low, `IC 97.5%` = conf.high) %>%
     tabla_rlm(caption, p_cols = "p valor")
@@ -3569,39 +3574,45 @@ interpretar <- function(m, datos) {
 
 ## Preparación de los datos
 
-Para el modelo se excluyen las variables `id` (identificador) y `Policy Start Date` (fecha/hora), igual que en los capítulos anteriores. Además, los factores ordenados (Education Level, Customer Feedback y Exercise Frequency) se convierten en factores sin orden: en `lm()`, un factor ordenado se codifica con contrastes polinómicos (`.L`, `.Q`, `.C`), que son difíciles de interpretar, mientras que un factor sin orden se codifica con variables dummy respecto a una categoría base.
+El análisis predictivo parte del CSV original, independientemente de la imputación descriptiva de los capítulos anteriores. Se excluyen `id` (identificador) y `Policy Start Date` (fecha), y los predictores categóricos se codifican con una categoría de referencia. La partición externa 80/20 se realiza antes de calcular la imputación. Las medianas, modas y niveles se estiman en cada conjunto de ajuste; Occupation conserva «No especificado».
 
 ```{r datos-rlm}
-df_mod <- df %>%
-  dplyr::select(-id, -`Policy Start Date`) %>%
-  mutate(across(where(is.ordered), ~ factor(.x, levels = levels(.x), ordered = FALSE)))
-
-fac_vars <- names(df_mod)[sapply(df_mod, is.factor)]
-num_vars <- setdiff(names(df_mod)[sapply(df_mod, is.numeric)], "Premium_Amount")
-n_dummies <- sum(sapply(fac_vars, function(v) nlevels(df_mod[[v]]) - 1))
+source("evaluacion.R")
+datos_modelo <- as.data.frame(data.table::fread("data/train.csv", na.strings = c("", "NA")))
+names(datos_modelo) <- gsub(" ", "_", names(datos_modelo), fixed = TRUE)
+datos_modelo <- dplyr::select(datos_modelo, -id, -Policy_Start_Date)
+set.seed(123)
+idx_train <- sample(nrow(datos_modelo), size = round(0.8 * nrow(datos_modelo)))
+datos_entrenamiento <- datos_modelo[idx_train, ]
+particion <- preparar_particion(datos_entrenamiento, datos_modelo[-idx_train, ])
+train <- particion$ajuste
+test <- particion$evaluacion
+rm(datos_modelo, particion)
+fac_vars <- names(train)[sapply(train, is.factor)]
+num_vars <- setdiff(names(train)[sapply(train, is.numeric)], "Premium_Amount")
+n_dummies <- sum(sapply(fac_vars, function(v) nlevels(train[[v]]) - 1))
 ```
 
 Cada variable categórica con $c$ categorías se representa mediante $c - 1$ variables dummy, que valen 1 si el cliente pertenece a esa categoría y 0 en otro caso. La categoría restante actúa como base o referencia, y cada coeficiente asociado a una dummy se interpreta como la diferencia en la prima promedio respecto a esa categoría base.
 
 ```{r dummies}
 tibble(Variable = gsub("_", " ", fac_vars),
-       `Categoría base` = sapply(fac_vars, function(v) levels(df_mod[[v]])[1]),
-       `Variables dummy` = sapply(fac_vars, function(v) nlevels(df_mod[[v]]) - 1)) %>%
+       `Categoría base` = sapply(fac_vars, function(v) levels(train[[v]])[1]),
+       `Variables dummy` = sapply(fac_vars, function(v) nlevels(train[[v]]) - 1)) %>%
   tabla_rlm("Codificación de las variables categóricas en variables dummy")
 ```
 
 Las `r length(fac_vars)` variables categóricas generan en total `r n_dummies` variables dummy que, junto con las `r length(num_vars)` variables numéricas y el intercepto, dan un total de $p = `r n_dummies + length(num_vars) + 1`$ parámetros en el modelo completo.
 
-Para evaluar la capacidad predictiva de los modelos, los datos se dividen aleatoriamente en un conjunto de entrenamiento (80%), con el que se ajustan los modelos, y un conjunto de prueba (20%), que se reserva para medir qué tan bien predicen observaciones que no se usaron en el ajuste.
+El conjunto de entrenamiento contiene `r fmil(nrow(train))` registros y el conjunto de prueba contiene `r fmil(nrow(test))`. Se comparan cinco procedimientos mediante validación cruzada de cinco pliegues dentro del entrenamiento. En cada pliegue se vuelven a calcular la imputación, la codificación, los coeficientes y la selección por AIC o BIC. El criterio predictivo se decide por RMSE de validación; se conserva BIC como modelo interpretable por su penalización más fuerte.
 
-```{r particion}
-set.seed(123)
-idx_train <- sample(nrow(df_mod), size = round(0.8 * nrow(df_mod)))
-train <- df_mod[idx_train, ]
-test  <- df_mod[-idx_train, ]
+```{r validacion-cruzada}
+set.seed(124)
+pliegues <- sample(rep(seq_len(5), length.out = nrow(datos_entrenamiento)))
+cv <- validar_modelos(datos_entrenamiento, pliegues)
+rm(datos_entrenamiento, pliegues)
+invisible(gc())
 ```
-
-El conjunto de entrenamiento queda con `r fmil(nrow(train))` observaciones y el de prueba con `r fmil(nrow(test))`.
 
 ## Regresión lineal simple como punto de partida
 
@@ -3718,13 +3729,14 @@ H_1 &: \beta_j \neq 0
 \end{aligned}
 $$
 
-con el estadístico $t_j = \dfrac{\hat\beta_j}{\sqrt{\hat\sigma^2 (\mathbf{X}'\mathbf{X})^{-1}_{jj}}} \sim t_{n-p}$ y el intervalo de confianza del 95% $\hat\beta_j \pm t_{\alpha/2,\, n-p}\sqrt{\hat\sigma^2 (\mathbf{X}'\mathbf{X})^{-1}_{jj}}$.
+Los intervalos del 95 % y los valores p usan errores estándar robustos HC1. Las pruebas F clásicas se muestran como parte del ejercicio de mínimos cuadrados y su calibración depende de los supuestos del modelo. Los intervalos del modelo seleccionado son exploratorios porque no incorporan incertidumbre por selección de variables.
 
 ```{r coef-completo}
-tabla_coef(modelo_full, "Coeficientes estimados del modelo completo e intervalos de confianza del 95%") %>%
+cov_full <- sandwich::vcovHC(modelo_full, type = "HC1")
+tabla_coef(modelo_full, "Coeficientes del modelo completo e IC robustos del 95%", cov_full) %>%
   scroll_box(height = "450px")
 
-coef_full <- broom::tidy(modelo_full)[-1, ]
+coef_full <- coef_robustos(modelo_full, cov_full)[-1, ]
 sig_full  <- coef_full$term[coef_full$p.value < 0.05]
 ```
 
@@ -3761,7 +3773,7 @@ El método de todas las regresiones posibles requeriría ajustar $2^{18} - 1 = 2
 
 Como criterio se usa principalmente el BIC, $BIC = n\ln(SSE/n) + p\ln n$, ya que penaliza más la inclusión de variables cuando el tamaño de muestra es grande: con $n$ cercano a un millón, el AIC tiende a conservar variables que, aunque mejoran un poco el ajuste, no aportan en la práctica. Para comparar, se incluye también el método stepwise con el AIC. En `stepAIC()`, el BIC se obtiene con el argumento `k = log(n)`.
 
-Este paso puede tardar varios minutos por el tamaño de los datos.
+Estos ajustes sobre todo el entrenamiento describen la selección de variables. La evaluación del procedimiento de selección se realizó por separado y de nuevo en cada pliegue.
 
 ```{r seleccion, message=FALSE}
 modelo_nulo <- lm(Premium_Amount ~ 1, data = train)
@@ -4070,9 +4082,35 @@ mejora_rmse <- 100 * (1 - rmse["Seleccionado (BIC)"] / rmse["Nulo"])
 
 El $R^2_{aj}$ del modelo Box-Cox está en la escala transformada, por lo que no es directamente comparable con el de los demás; por la misma razón no se reportan su AIC ni su BIC.
 
-El modelo con menor error de predicción en el conjunto de prueba es el modelo `r comp$Modelo[which.min(comp$RMSE)]` ($RMSE = `r fm(min(comp$RMSE), 2)`$). Frente al modelo nulo ($RMSE = `r fm(rmse["Nulo"], 2)`$), el modelo seleccionado por BIC ($RMSE = `r fm(rmse["Seleccionado (BIC)"], 2)`$) reduce el error apenas en un `r fm(mejora_rmse, 2)`%, y su $R^2$ en el conjunto de prueba es de $`r fm(r2p["Seleccionado (BIC)"])`$. Esto confirma que, aunque varias variables resultan estadísticamente significativas, el modelo predice prácticamente igual que usar el promedio de la prima para todos los clientes.
+### Validación cruzada y prueba final
 
-`r ifelse(rmse["Box-Cox (BIC)"] < rmse["Seleccionado (BIC)"], paste0("Aunque el modelo Box-Cox obtiene un RMSE ligeramente menor (", fm(rmse["Box-Cox (BIC)"], 2), " frente a ", fm(rmse["Seleccionado (BIC)"], 2), "), la diferencia es mínima y la transformación dificulta la interpretación de los coeficientes, por lo que se elige como modelo final el seleccionado por BIC en la escala original."), paste0("El modelo Box-Cox no mejora el error de predicción en la escala original (RMSE de ", fm(rmse["Box-Cox (BIC)"], 2), " frente a ", fm(rmse["Seleccionado (BIC)"], 2), "), ya que al devolver las predicciones a la escala original se estima la mediana y no la media de la prima. Como además dificulta la interpretación de los coeficientes, se elige como modelo final el seleccionado por BIC en la escala original."))` Este modelo tiene un error similar al del modelo completo y al seleccionado por AIC, pero con menos variables.
+```{r resultados-cv}
+tabla_rlm(cv, "Validación cruzada de cinco pliegues en entrenamiento")
+ganador_cv <- cv$Modelo[which.min(cv$RMSE)]
+mejora_cv <- 100 * (1 - min(cv$RMSE) / cv$RMSE[cv$Modelo == "Nulo"])
+```
+
+Según la validación cruzada, **`r ganador_cv`** obtuvo el menor RMSE. La reducción frente al promedio fue de **`r fm(mejora_cv, 2)` %**. Este criterio se definió antes de examinar los resultados de prueba. Box–Cox se presenta como diagnóstico adicional; no participó en la selección por validación cruzada.
+
+::: {#resultados-ejecutivos}
+El modelo BIC obtuvo en prueba un **RMSE de `r fm(rmse["Seleccionado (BIC)"], 2)`**, frente a **`r fm(rmse["Nulo"], 2)`** del promedio. La mejora fue de **`r fm(mejora_rmse, 2)` %** y el R² predictivo, medido frente al promedio de entrenamiento, fue **`r fm(r2p["Seleccionado (BIC)"])`**.
+
+```{r tabla-ejecutiva, echo=FALSE}
+tres_modelos <- comp[c(1, 4, 5), c("Modelo", "RMSE", "MAE", "r2p")]
+names(tres_modelos)[4] <- "R² de prueba"
+tabla_rlm(tres_modelos, "Resultados en el conjunto de prueba")
+```
+:::
+
+Se conserva BIC para la interpretación porque usa `r length(vars_bic)` predictores frente a `r length(vars_aic)` de AIC. Las métricas de prueba cuantifican la diferencia real restante; no se usaron para cambiar el procedimiento elegido. Se informa Box–Cox como diagnóstico exploratorio y las predicciones invertidas se comparan en las unidades originales.
+
+```{r comparacion-rmse, echo=FALSE, fig.alt="RMSE en prueba: promedio, BIC y AIC"}
+ggplot(tres_modelos, aes(x = RMSE, y = reorder(Modelo, RMSE))) +
+  geom_point(size = 3, colour = "#24576c") +
+  labs(x = "RMSE en prueba (unidades de prima)", y = NULL,
+       subtitle = "Una distancia menor corresponde a un menor error") +
+  theme_minimal(base_size = 12)
+```
 
 ```{r limpiar-modelos, include=FALSE}
 modelo_final <- modelo_bic
@@ -4090,13 +4128,14 @@ $$
 La interpretación de cada coeficiente es la siguiente:
 
 ```{r interpretacion}
-coef_fin <- broom::tidy(modelo_final)[-1, ]
+coef_fin <- coef_robustos(modelo_final)[-1, ]
 tibble(`Término` = sapply(coef_fin$term, etiqueta, datos = train),
        `Estimación` = coef_fin$estimate,
+       `IC 2.5%` = coef_fin$conf.low, `IC 97.5%` = coef_fin$conf.high,
        `p valor` = coef_fin$p.value,
        `Interpretación` = interpretar(modelo_final, train)) %>%
   tabla_rlm("Interpretación de los coeficientes del modelo final",
-            p_cols = "p valor", align = "lccl")
+            p_cols = "p valor", align = "lccccl")
 ```
 
 El intercepto, $\hat\beta_0 = `r fm(coef(modelo_final)[1], 2)`$, representa la prima promedio estimada para un cliente que pertenece a todas las categorías base y cuyas variables numéricas del modelo valen cero; es un valor teórico de referencia, ya que esas condiciones no se presentan en los datos. Aunque los coeficientes anteriores son estadísticamente significativos, sus efectos son muy pequeños en relación con la variabilidad de la prima (desviación estándar de `r fm(sd(train$Premium_Amount), 2)`), lo que explica el bajo $R^2_{aj} = `r fm(r2aj_bic)`$.
@@ -4132,10 +4171,10 @@ tibble(Intervalo = c("Confianza para la media", "Predicción para un cliente nue
   tabla_rlm("Intervalos del 95% para la prima del cliente típico")
 ```
 
-Para un cliente con este perfil, se espera que la prima promedio sea de `r fm(ic_media[1, "fit"], 2)`. A nivel poblacional, con una confianza del 95%, dicho promedio se encuentra en el intervalo $(`r fm(ic_media[1, "lwr"], 2)`, `r fm(ic_media[1, "upr"], 2)`)$, que es muy estrecho gracias al gran tamaño de la muestra. En cambio, el intervalo de predicción para un cliente nuevo es $(`r fm(ic_pred[1, "lwr"], 2)`, `r fm(ic_pred[1, "upr"], 2)`)$, con una amplitud de `r fm(ic_pred[1, "upr"] - ic_pred[1, "lwr"], 2)`, lo que muestra que el modelo no permite predecir con precisión la prima de un cliente individual. `r ifelse(ic_pred[1, "lwr"] < 0, "Además, su límite inferior es negativo, algo imposible para una prima, lo cual se debe a que este intervalo supone errores normales y simétricos, supuesto que no se cumple. ", "")`Como no se cumplen los supuestos de normalidad y homocedasticidad, este intervalo de predicción debe tomarse solo como aproximado.
+Para un cliente con este perfil, se espera que la prima promedio sea de `r fm(ic_media[1, "fit"], 2)`. Como ejercicio bajo el modelo clásico, el intervalo para dicho promedio se encuentra en el intervalo $(`r fm(ic_media[1, "lwr"], 2)`, `r fm(ic_media[1, "upr"], 2)`)$, que es muy estrecho gracias al gran tamaño de la muestra. En cambio, el intervalo de predicción para un cliente nuevo es $(`r fm(ic_pred[1, "lwr"], 2)`, `r fm(ic_pred[1, "upr"], 2)`)$, con una amplitud de `r fm(ic_pred[1, "upr"] - ic_pred[1, "lwr"], 2)`, lo que muestra que el modelo no permite predecir con precisión la prima de un cliente individual. `r ifelse(ic_pred[1, "lwr"] < 0, "Además, su límite inferior es negativo, algo imposible para una prima, lo cual se debe a que este intervalo supone errores normales y simétricos, supuesto que no se cumple. ", "")`Como no se cumplen los supuestos de normalidad y homocedasticidad, este intervalo de predicción debe tomarse solo como aproximado.
 
 ## Conclusiones del capítulo
 
 El modelo de regresión lineal múltiple confirma lo encontrado en los capítulos anteriores. Aunque la prueba F global y varias pruebas individuales resultan significativas, el modelo final, con `r length(vars_bic)` variables seleccionadas por BIC, explica apenas el `r fm(100 * r2aj_bic, 2)`% de la variabilidad de Premium Amount ($R^2_{aj} = `r fm(r2aj_bic)`$) y reduce el error de predicción solo en un `r fm(mejora_rmse, 2)`% frente a predecir el promedio para todos los clientes. No se encontró multicolinealidad entre las variables predictoras, pero los residuales no cumplen los supuestos de normalidad ni de homocedasticidad, y la transformación de Box-Cox, aunque acerca los residuales a la normalidad, no mejora la capacidad predictiva del modelo.
 
-En conjunto, las características disponibles de los clientes no permiten explicar el monto de la prima mediante una relación lineal, ni de forma individual ni de forma conjunta. Esto sugiere que la prima depende de factores no incluidos en el dataset, o que su relación con las variables disponibles no es lineal, por lo que como trabajo futuro se podrían explorar modelos no lineales, como árboles de decisión o métodos de ensamble.
+En este conjunto de datos, los modelos lineales evaluados apenas mejoran el pronóstico basado en el promedio. El análisis mide asociación y rendimiento interno; una cartera real o futura requeriría validación externa, y una evaluación temporal serviría para estudiar estabilidad entre periodos.

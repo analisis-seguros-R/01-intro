@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Factores Asociados al Monto de la Prima de Seguro: Análisis Exploratorio, Pruebas de Hipótesis y Regresión Lineal Múltiple sobre 1,200,000 Pólizas</title>
+  <title>Factores asociados a la prima de seguro</title>
   <meta name="description" content="Análisis exploratorio de datos, pruebas de hipótesis paramétricas y no paramétricas y modelo de regresión lineal múltiple para evaluar la asociación estadística, la relevancia práctica y la capacidad predictiva de las características de los clientes sobre el monto de la prima de seguro." />
   <meta name="generator" content="bookdown 0.48 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Factores Asociados al Monto de la Prima de Seguro: Análisis Exploratorio, Pruebas de Hipótesis y Regresión Lineal Múltiple sobre 1,200,000 Pólizas" />
+  <meta property="og:title" content="Factores asociados a la prima de seguro" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Análisis exploratorio de datos, pruebas de hipótesis paramétricas y no paramétricas y modelo de regresión lineal múltiple para evaluar la asociación estadística, la relevancia práctica y la capacidad predictiva de las características de los clientes sobre el monto de la prima de seguro." />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Factores Asociados al Monto de la Prima de Seguro: Análisis Exploratorio, Pruebas de Hipótesis y Regresión Lineal Múltiple sobre 1,200,000 Pólizas" />
+  <meta name="twitter:title" content="Factores asociados a la prima de seguro" />
   
   <meta name="twitter:description" content="Análisis exploratorio de datos, pruebas de hipótesis paramétricas y no paramétricas y modelo de regresión lineal múltiple para evaluar la asociación estadística, la relevancia práctica y la capacidad predictiva de las características de los clientes sobre el monto de la prima de seguro." />
   
@@ -142,11 +142,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <ul class="summary">
 <li><a href="./">Análisis Estadístico del Dataset de Seguros</a></li>
+
+<li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introducción</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#objetivo-general"><i class="fa fa-check"></i><b>1.1</b> Objetivo general</a></li>
-<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#objetivos-espec%C3%ADficos"><i class="fa fa-check"></i><b>1.2</b> Objetivos específicos</a></li>
-<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#metodolog%C3%ADa"><i class="fa fa-check"></i><b>1.3</b> Metodología</a></li>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#resumen-ejecutivo"><i class="fa fa-check"></i><b>1.1</b> Resumen ejecutivo</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#datos-y-alcance"><i class="fa fa-check"></i><b>1.2</b> Datos y alcance</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#contexto-y-objetivos"><i class="fa fa-check"></i><b>1.3</b> Contexto y objetivos</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#objetivo-general"><i class="fa fa-check"></i><b>1.4</b> Objetivo general</a></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#objetivos-espec%C3%ADficos"><i class="fa fa-check"></i><b>1.5</b> Objetivos específicos</a></li>
+<li class="chapter" data-level="1.6" data-path="index.html"><a href="index.html#metodolog%C3%ADa"><i class="fa fa-check"></i><b>1.6</b> Metodología</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Análisis Exploratorio de Datos (EDA)</a>
 <ul>
@@ -166,7 +171,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.8" data-path="intro.html"><a href="intro.html#resumen-de-las-dem%C3%A1s-variables-num%C3%A9ricas"><i class="fa fa-check"></i><b>2.8</b> Resumen de las demás variables numéricas</a></li>
 <li class="chapter" data-level="2.9" data-path="intro.html"><a href="intro.html#an%C3%A1lisis-de-las-variables-independientes-caracter%C3%ADsticas"><i class="fa fa-check"></i><b>2.9</b> Análisis de las variables independientes (características)</a></li>
 <li class="chapter" data-level="2.10" data-path="intro.html"><a href="intro.html#an%C3%A1lisis-bivariado-variable-caracter%C3%ADstica-vs-variable-respuesta"><i class="fa fa-check"></i><b>2.10</b> Análisis bivariado (Variable característica vs Variable respuesta)</a></li>
-<li class="chapter" data-level="2.11" data-path="intro.html"><a href="intro.html#an%C3%A1lisis-bivariado-independientes-vs-independientes"><i class="fa fa-check"></i><b>2.11</b> Análisis bivariado independientes vs independientes</a></li>
+<li class="chapter" data-level="2.11" data-path="intro.html"><a href="intro.html#ap%C3%A9ndice-gr%C3%A1fico-de-asociaciones-entre-predictores"><i class="fa fa-check"></i><b>2.11</b> Apéndice gráfico de asociaciones entre predictores</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="pruebas-de-hipótesis-paramétricas-y-no-paramétricas.html"><a href="pruebas-de-hipótesis-paramétricas-y-no-paramétricas.html"><i class="fa fa-check"></i><b>3</b> Pruebas de hipótesis paramétricas y no paramétricas</a>
 <ul>
@@ -193,12 +198,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.5.6" data-path="rlm.html"><a href="rlm.html#identificaci%C3%B3n-de-observaciones-influyentes"><i class="fa fa-check"></i><b>4.5.6</b> Identificación de observaciones influyentes</a></li>
 </ul></li>
 <li class="chapter" data-level="4.6" data-path="rlm.html"><a href="rlm.html#transformaci%C3%B3n-de-box-cox"><i class="fa fa-check"></i><b>4.6</b> Transformación de Box-Cox</a></li>
-<li class="chapter" data-level="4.7" data-path="rlm.html"><a href="rlm.html#comparaci%C3%B3n-de-modelos"><i class="fa fa-check"></i><b>4.7</b> Comparación de modelos</a></li>
+<li class="chapter" data-level="4.7" data-path="rlm.html"><a href="rlm.html#comparaci%C3%B3n-de-modelos"><i class="fa fa-check"></i><b>4.7</b> Comparación de modelos</a>
+<ul>
+<li class="chapter" data-level="4.7.1" data-path="rlm.html"><a href="rlm.html#validaci%C3%B3n-cruzada-y-prueba-final"><i class="fa fa-check"></i><b>4.7.1</b> Validación cruzada y prueba final</a></li>
+</ul></li>
 <li class="chapter" data-level="4.8" data-path="rlm.html"><a href="rlm.html#modelo-final"><i class="fa fa-check"></i><b>4.8</b> Modelo final</a></li>
 <li class="chapter" data-level="4.9" data-path="rlm.html"><a href="rlm.html#inferencia-para-la-respuesta"><i class="fa fa-check"></i><b>4.9</b> Inferencia para la respuesta</a></li>
 <li class="chapter" data-level="4.10" data-path="rlm.html"><a href="rlm.html#conclusiones-del-cap%C3%ADtulo-1"><i class="fa fa-check"></i><b>4.10</b> Conclusiones del capítulo</a></li>
 </ul></li>
+<li class="divider"></li>
 <li><a href="https://github.com/analisis-seguros-R/01-intro" target="_blank">Ver repositorio en GitHub</a></li>
+
 </ul>
 
       </nav>
@@ -208,7 +218,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Factores Asociados al Monto de la Prima de Seguro: Análisis Exploratorio, Pruebas de Hipótesis y Regresión Lineal Múltiple sobre 1,200,000 Pólizas</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Factores asociados a la prima de seguro</a>
           </h1>
         </div>
 
@@ -217,12 +227,99 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="header">
-<h1 class="title">Factores Asociados al Monto de la Prima de Seguro: Análisis Exploratorio, Pruebas de Hipótesis y Regresión Lineal Múltiple sobre 1,200,000 Pólizas</h1>
+<h1 class="title">Factores asociados a la prima de seguro</h1>
 <p class="author"><em>Fernando Cabrera Marriaga y Keisy Polo Peralta</em></p>
 <p class="date"><em>2026-11-24</em></p>
 </div>
 <div id="introducción" class="section level1 hasAnchor" number="1">
 <h1><span class="header-section-number">Capítulo 1</span> Introducción<a href="index.html#introducci%C3%B3n" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="resumen-ejecutivo" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> Resumen ejecutivo<a href="index.html#resumen-ejecutivo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>Pregunta.</strong> ¿Cuánto mejora la estimación de la prima cuando incorporamos las características de los clientes y de sus pólizas?</p>
+<p>El análisis abarca <strong>1,2 millones de registros</strong> y 21 variables del conjunto de seguros de Kaggle. Los modelos lineales evaluados mejoran muy poco frente a predecir la prima promedio. La conclusión se limita a estos datos y a los modelos evaluados.</p>
+<div id="resumen-portada" class="resumen-portada" aria-live="polite">
+<p>
+<a href="rlm.html#resultados-ejecutivos">Ver las métricas del promedio, BIC y AIC</a>
+</p>
+</div>
+<script>
+(function () {
+  const resumen = document.getElementById("resumen-portada");
+  if (!resumen) return;
+  fetch("rlm.html")
+    .then(function (response) {
+      if (!response.ok) throw new Error("Resultados no disponibles");
+      return response.text();
+    })
+    .then(function (html) {
+      const resultados = new DOMParser()
+        .parseFromString(html, "text/html")
+        .getElementById("resultados-ejecutivos");
+      if (resultados) resumen.replaceChildren(...resultados.childNodes);
+    })
+    .catch(function () {});
+})();
+</script>
+<div class="graficos-portada">
+<figure>
+<a href="intro.html#distribuci%C3%B3n"><img src="analisis-seguros_files/figure-html/histograma-respuesta-1.png" alt="Histograma de la prima de seguro"></a>
+<figcaption>
+Distribución de la prima
+</figcaption>
+</figure>
+<figure>
+<a href="rlm.html#comparaci%C3%B3n-de-modelos"><img src="analisis-seguros_files/figure-html/comparacion-rmse-1.png" alt="Comparación del RMSE del promedio, BIC y AIC"></a>
+<figcaption>
+Error en prueba
+</figcaption>
+</figure>
+<figure>
+<a href="rlm.html#varianza-constante-de-los-errores"><img src="analisis-seguros_files/figure-html/res-vs-ajustados-1.png" alt="Gráfico de residuales frente a valores ajustados"></a>
+<figcaption>
+Diagnóstico de residuales
+</figcaption>
+</figure>
+</div>
+</div>
+<div id="datos-y-alcance" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> Datos y alcance<a href="index.html#datos-y-alcance" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<table>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Aspecto</th>
+<th align="left">Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Fuente</td>
+<td align="left"><a href="https://www.kaggle.com/competitions/playground-series-s4e12/data">Kaggle Playground Series S4E12</a>, archivo <code>train.csv</code>.</td>
+</tr>
+<tr class="even">
+<td align="left">Unidad de análisis</td>
+<td align="left">Registro de póliza. La variable objetivo es <code>Premium Amount</code>.</td>
+</tr>
+<tr class="odd">
+<td align="left">Variables excluidas del modelo</td>
+<td align="left"><code>id</code> y <code>Policy Start Date</code>.</td>
+</tr>
+<tr class="even">
+<td align="left">Datos faltantes</td>
+<td align="left">Mediana para numéricas, moda para categóricas y categoría «No especificado» para <code>Occupation</code>. En predicción, las referencias se calculan solo con los datos de ajuste de cada partición.</td>
+</tr>
+<tr class="odd">
+<td align="left">Alcance</td>
+<td align="left">Evaluación interna en una partición aleatoria. El diseño permite estudiar asociaciones, con generalización temporal y a otras carteras pendiente de validación.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="contexto-y-objetivos" class="section level2 hasAnchor" number="1.3">
+<h2><span class="header-section-number">1.3</span> Contexto y objetivos<a href="index.html#contexto-y-objetivos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>El presente trabajo tiene como objetivo realizar un análisis estadístico completo
 sobre un conjunto de datos relacionado con pólizas de seguros, el cual contiene
 1,200,000 registros de clientes y 21 variables entre características demográficas,
@@ -264,13 +361,14 @@ con la prima y con qué magnitud.</p>
 múltiple que incorpora todos los predictores de forma conjunta, con el fin de
 evaluar si en conjunto logran explicar y predecir el monto de la prima,
 seleccionar el mejor modelo y validar sus supuestos.</p>
-<div id="objetivo-general" class="section level2 hasAnchor" number="1.1">
-<h2><span class="header-section-number">1.1</span> Objetivo general<a href="index.html#objetivo-general" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="objetivo-general" class="section level2 hasAnchor" number="1.4">
+<h2><span class="header-section-number">1.4</span> Objetivo general<a href="index.html#objetivo-general" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Predecir el monto de la prima de seguro (Premium Amount) a partir de las características demográficas, socioeconómicas, de salud y de comportamiento de los clientes. Para ello, primero se evalúa qué variables presentan una asociación estadísticamente significativa y prácticamente relevante con la prima, y luego se construye y evalúa un modelo de regresión lineal múltiple que las incorpore de forma conjunta.</p>
 <p>Este enfoque parte de una distinción central a lo largo del trabajo: la significancia estadística y la relevancia práctica no son lo mismo. Dado el gran tamaño de la muestra (1,200,000 observaciones), prácticamente cualquier diferencia entre grupos o cualquier correlación distinta de cero tiene una alta probabilidad de resultar estadísticamente significativa, por lo que responder únicamente si una prueba rechaza o no rechaza <span class="math inline">\(H_0\)</span> sería insuficiente y, en varios casos, incluso engañoso.</p>
 </div>
-<div id="objetivos-específicos" class="section level2 hasAnchor" number="1.2">
-<h2><span class="header-section-number">1.2</span> Objetivos específicos<a href="index.html#objetivos-espec%C3%ADficos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="objetivos-específicos" class="section level2 hasAnchor" number="1.5">
+<h2><span class="header-section-number">1.5</span> Objetivos específicos<a href="index.html#objetivos-espec%C3%ADficos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ol style="list-style-type: decimal">
 <li>Caracterizar la estructura del conjunto de datos, identificando y tratando los valores faltantes mediante imputación por mediana (variables numéricas) y por moda (variables categóricas con pocos faltantes).</li>
 <li>Describir, mediante análisis univariado y bivariado, el comportamiento de las 18 variables predictoras (10 categóricas y 8 numéricas) y su relación visual con Premium Amount.</li>
@@ -282,8 +380,8 @@ seleccionar el mejor modelo y validar sus supuestos.</p>
 <li>Evaluar la capacidad predictiva del modelo final en un conjunto de prueba y compararla con la de modelos alternativos.</li>
 </ol>
 </div>
-<div id="metodología" class="section level2 hasAnchor" number="1.3">
-<h2><span class="header-section-number">1.3</span> Metodología<a href="index.html#metodolog%C3%ADa" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="metodología" class="section level2 hasAnchor" number="1.6">
+<h2><span class="header-section-number">1.6</span> Metodología<a href="index.html#metodolog%C3%ADa" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>El análisis se desarrolló en el lenguaje R mediante un enfoque cuantitativo, descriptivo e inferencial, y se organizó en cuatro etapas.</p>
 <p><strong>Etapa 1. Preparación de los datos.</strong> Se trabajó con 1,200,000 registros y 21 variables. Para las variables numéricas con datos faltantes (Age, Annual Income, Health Score, Credit Score, Number of Dependents, Previous Claims, Vehicle Age e Insurance Duration) se evaluó la normalidad con la prueba de Lilliefors; como ninguna resultó normal, todas se imputaron con la mediana, por ser robusta ante sesgos y valores atípicos. En las variables categóricas con pocos faltantes (Marital Status y Customer Feedback) se imputó con la moda. En Occupation, con cerca del 30 % de faltantes, se creó la categoría independiente “No especificado” para no inventar información. Las variables categóricas se convirtieron a factor, declarando como ordenadas Education Level, Customer Feedback y Exercise Frequency.</p>
 <p><strong>Etapa 2. Análisis exploratorio (EDA).</strong> Se resumieron las variables numéricas con medidas de tendencia central, dispersión, asimetría y curtosis. Se construyeron histogramas, diagramas de barras y boxplots para el análisis univariado, y diagramas de dispersión, boxplots agrupados y una matriz de correlación de Spearman para el análisis bivariado frente a Premium Amount y entre predictores. Todos los gráficos, tablas y estimaciones se calcularon con los 1,200,000 registros.</p>
@@ -302,7 +400,7 @@ seleccionar el mejor modelo y validar sus supuestos.</p>
 <li><em>Criterio de decisión.</em> Una variable se considera relevante solo si cumple ambos criterios: rechazo de <span class="math inline">\(H_0\)</span> y tamaño del efecto no despreciable.</li>
 </ol>
 <p>Como el supuesto de normalidad no se cumplió en ningún caso, las hipótesis de las pruebas no paramétricas se plantean en términos de medianas o de igualdad de distribuciones, según corresponda.</p>
-<p><strong>Etapa 4. Regresión lineal múltiple.</strong> Los datos se dividieron aleatoriamente en un conjunto de entrenamiento (80 %) y uno de prueba (20 %). Con el conjunto de entrenamiento se ajustó primero una regresión lineal simple con Annual Income, la variable con mayor correlación con la prima, y luego el modelo completo y se evaluaron su significancia global (prueba F), la significancia individual de los coeficientes (pruebas t e intervalos de confianza) y la multicolinealidad (GVIF y número de condición). Las variables se seleccionaron mediante los métodos forward, backward y stepwise con el criterio BIC, y se validaron los supuestos de independencia, normalidad, media cero y homocedasticidad de los errores, además de identificar observaciones atípicas e influyentes. Se evaluó también la transformación de Box-Cox de la variable respuesta. Finalmente, los modelos se compararon en el conjunto de prueba mediante el RMSE, el MAE y el <span class="math inline">\(R^2\)</span>.</p>
+<p><strong>Etapa 4. Regresión lineal múltiple.</strong> Antes de imputar, los registros se dividieron aleatoriamente en entrenamiento (80 %) y prueba (20 %). Se compararon cinco procedimientos con validación cruzada de cinco pliegues en entrenamiento, repitiendo la imputación y la selección dentro de cada pliegue. El rendimiento final se midió en prueba mediante RMSE, MAE y un <span class="math inline">\(R^2\)</span> predictivo frente al promedio de entrenamiento. Para describir el modelo se informan tamaños de efecto, intervalos de confianza robustos HC1 y diagnósticos de residuos. Box–Cox se examina como diagnóstico adicional.</p>
 
 </div>
 </div>

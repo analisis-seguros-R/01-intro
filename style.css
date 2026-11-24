@@ -12,3 +12,23 @@ pre {
 pre code {
   white-space: inherit;
 }
+
+.resumen-portada {
+  margin: 1rem 0 1.5rem;
+  padding: 0.8rem 1.2rem;
+  background: #edf5f7;
+  border-left: 4px solid #24576c;
+}
+.graficos-portada {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 0.8rem;
+  margin: 1.5rem 0;
+}
+.graficos-portada figure {
+  margin: 0;
+  border: 1px solid #d8e3e8;
+  padding: 0.45rem;
+}
+.graficos-portada img { display: block; width: 100%; }
+.graficos-portada figcaption { padding: 0.4rem; font-size: 0.9em; }

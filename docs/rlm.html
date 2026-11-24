@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Capítulo 4 Modelo de regresión lineal múltiple | Factores Asociados al Monto de la Prima de Seguro: Análisis Exploratorio, Pruebas de Hipótesis y Regresión Lineal Múltiple sobre 1,200,000 Pólizas</title>
+  <title>Capítulo 4 Modelo de regresión lineal múltiple | Factores asociados a la prima de seguro</title>
   <meta name="description" content="Análisis exploratorio de datos, pruebas de hipótesis paramétricas y no paramétricas y modelo de regresión lineal múltiple para evaluar la asociación estadística, la relevancia práctica y la capacidad predictiva de las características de los clientes sobre el monto de la prima de seguro." />
   <meta name="generator" content="bookdown 0.48 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Capítulo 4 Modelo de regresión lineal múltiple | Factores Asociados al Monto de la Prima de Seguro: Análisis Exploratorio, Pruebas de Hipótesis y Regresión Lineal Múltiple sobre 1,200,000 Pólizas" />
+  <meta property="og:title" content="Capítulo 4 Modelo de regresión lineal múltiple | Factores asociados a la prima de seguro" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Análisis exploratorio de datos, pruebas de hipótesis paramétricas y no paramétricas y modelo de regresión lineal múltiple para evaluar la asociación estadística, la relevancia práctica y la capacidad predictiva de las características de los clientes sobre el monto de la prima de seguro." />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Capítulo 4 Modelo de regresión lineal múltiple | Factores Asociados al Monto de la Prima de Seguro: Análisis Exploratorio, Pruebas de Hipótesis y Regresión Lineal Múltiple sobre 1,200,000 Pólizas" />
+  <meta name="twitter:title" content="Capítulo 4 Modelo de regresión lineal múltiple | Factores asociados a la prima de seguro" />
   
   <meta name="twitter:description" content="Análisis exploratorio de datos, pruebas de hipótesis paramétricas y no paramétricas y modelo de regresión lineal múltiple para evaluar la asociación estadística, la relevancia práctica y la capacidad predictiva de las características de los clientes sobre el monto de la prima de seguro." />
   
@@ -142,11 +142,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <ul class="summary">
 <li><a href="./">Análisis Estadístico del Dataset de Seguros</a></li>
+
+<li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introducción</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#objetivo-general"><i class="fa fa-check"></i><b>1.1</b> Objetivo general</a></li>
-<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#objetivos-espec%C3%ADficos"><i class="fa fa-check"></i><b>1.2</b> Objetivos específicos</a></li>
-<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#metodolog%C3%ADa"><i class="fa fa-check"></i><b>1.3</b> Metodología</a></li>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#resumen-ejecutivo"><i class="fa fa-check"></i><b>1.1</b> Resumen ejecutivo</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#datos-y-alcance"><i class="fa fa-check"></i><b>1.2</b> Datos y alcance</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#contexto-y-objetivos"><i class="fa fa-check"></i><b>1.3</b> Contexto y objetivos</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#objetivo-general"><i class="fa fa-check"></i><b>1.4</b> Objetivo general</a></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#objetivos-espec%C3%ADficos"><i class="fa fa-check"></i><b>1.5</b> Objetivos específicos</a></li>
+<li class="chapter" data-level="1.6" data-path="index.html"><a href="index.html#metodolog%C3%ADa"><i class="fa fa-check"></i><b>1.6</b> Metodología</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Análisis Exploratorio de Datos (EDA)</a>
 <ul>
@@ -166,7 +171,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.8" data-path="intro.html"><a href="intro.html#resumen-de-las-dem%C3%A1s-variables-num%C3%A9ricas"><i class="fa fa-check"></i><b>2.8</b> Resumen de las demás variables numéricas</a></li>
 <li class="chapter" data-level="2.9" data-path="intro.html"><a href="intro.html#an%C3%A1lisis-de-las-variables-independientes-caracter%C3%ADsticas"><i class="fa fa-check"></i><b>2.9</b> Análisis de las variables independientes (características)</a></li>
 <li class="chapter" data-level="2.10" data-path="intro.html"><a href="intro.html#an%C3%A1lisis-bivariado-variable-caracter%C3%ADstica-vs-variable-respuesta"><i class="fa fa-check"></i><b>2.10</b> Análisis bivariado (Variable característica vs Variable respuesta)</a></li>
-<li class="chapter" data-level="2.11" data-path="intro.html"><a href="intro.html#an%C3%A1lisis-bivariado-independientes-vs-independientes"><i class="fa fa-check"></i><b>2.11</b> Análisis bivariado independientes vs independientes</a></li>
+<li class="chapter" data-level="2.11" data-path="intro.html"><a href="intro.html#ap%C3%A9ndice-gr%C3%A1fico-de-asociaciones-entre-predictores"><i class="fa fa-check"></i><b>2.11</b> Apéndice gráfico de asociaciones entre predictores</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="pruebas-de-hipótesis-paramétricas-y-no-paramétricas.html"><a href="pruebas-de-hipótesis-paramétricas-y-no-paramétricas.html"><i class="fa fa-check"></i><b>3</b> Pruebas de hipótesis paramétricas y no paramétricas</a>
 <ul>
@@ -193,12 +198,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.5.6" data-path="rlm.html"><a href="rlm.html#identificaci%C3%B3n-de-observaciones-influyentes"><i class="fa fa-check"></i><b>4.5.6</b> Identificación de observaciones influyentes</a></li>
 </ul></li>
 <li class="chapter" data-level="4.6" data-path="rlm.html"><a href="rlm.html#transformaci%C3%B3n-de-box-cox"><i class="fa fa-check"></i><b>4.6</b> Transformación de Box-Cox</a></li>
-<li class="chapter" data-level="4.7" data-path="rlm.html"><a href="rlm.html#comparaci%C3%B3n-de-modelos"><i class="fa fa-check"></i><b>4.7</b> Comparación de modelos</a></li>
+<li class="chapter" data-level="4.7" data-path="rlm.html"><a href="rlm.html#comparaci%C3%B3n-de-modelos"><i class="fa fa-check"></i><b>4.7</b> Comparación de modelos</a>
+<ul>
+<li class="chapter" data-level="4.7.1" data-path="rlm.html"><a href="rlm.html#validaci%C3%B3n-cruzada-y-prueba-final"><i class="fa fa-check"></i><b>4.7.1</b> Validación cruzada y prueba final</a></li>
+</ul></li>
 <li class="chapter" data-level="4.8" data-path="rlm.html"><a href="rlm.html#modelo-final"><i class="fa fa-check"></i><b>4.8</b> Modelo final</a></li>
 <li class="chapter" data-level="4.9" data-path="rlm.html"><a href="rlm.html#inferencia-para-la-respuesta"><i class="fa fa-check"></i><b>4.9</b> Inferencia para la respuesta</a></li>
 <li class="chapter" data-level="4.10" data-path="rlm.html"><a href="rlm.html#conclusiones-del-cap%C3%ADtulo-1"><i class="fa fa-check"></i><b>4.10</b> Conclusiones del capítulo</a></li>
 </ul></li>
+<li class="divider"></li>
 <li><a href="https://github.com/analisis-seguros-R/01-intro" target="_blank">Ver repositorio en GitHub</a></li>
+
 </ul>
 
       </nav>
@@ -208,7 +218,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Factores Asociados al Monto de la Prima de Seguro: Análisis Exploratorio, Pruebas de Hipótesis y Regresión Lineal Múltiple sobre 1,200,000 Pólizas</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Factores asociados a la prima de seguro</a>
           </h1>
         </div>
 
@@ -227,22 +237,29 @@ y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \cdots + \beta_k x_{ik} + \var
 <p><span class="math display">\[
 \hat{\boldsymbol{\beta}} = (\mathbf{X}&#39;\mathbf{X})^{-1}\mathbf{X}&#39;\mathbf{y}
 \]</span></p>
-<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="rlm.html#cb296-1" tabindex="-1"></a><span class="fu">library</span>(lmtest)</span></code></pre></div>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="rlm.html#cb221-1" tabindex="-1"></a><span class="fu">library</span>(lmtest)</span></code></pre></div>
 <div id="preparación-de-los-datos" class="section level2 hasAnchor" number="4.1">
 <h2><span class="header-section-number">4.1</span> Preparación de los datos<a href="rlm.html#preparaci%C3%B3n-de-los-datos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Para el modelo se excluyen las variables <code>id</code> (identificador) y <code>Policy Start Date</code> (fecha/hora), igual que en los capítulos anteriores. Además, los factores ordenados (Education Level, Customer Feedback y Exercise Frequency) se convierten en factores sin orden: en <code>lm()</code>, un factor ordenado se codifica con contrastes polinómicos (<code>.L</code>, <code>.Q</code>, <code>.C</code>), que son difíciles de interpretar, mientras que un factor sin orden se codifica con variables dummy respecto a una categoría base.</p>
-<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="rlm.html#cb297-1" tabindex="-1"></a>df_mod <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb297-2"><a href="rlm.html#cb297-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>id, <span class="sc">-</span><span class="st">`</span><span class="at">Policy Start Date</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb297-3"><a href="rlm.html#cb297-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.ordered), <span class="sc">~</span> <span class="fu">factor</span>(.x, <span class="at">levels =</span> <span class="fu">levels</span>(.x), <span class="at">ordered =</span> <span class="cn">FALSE</span>)))</span>
-<span id="cb297-4"><a href="rlm.html#cb297-4" tabindex="-1"></a></span>
-<span id="cb297-5"><a href="rlm.html#cb297-5" tabindex="-1"></a>fac_vars <span class="ot">&lt;-</span> <span class="fu">names</span>(df_mod)[<span class="fu">sapply</span>(df_mod, is.factor)]</span>
-<span id="cb297-6"><a href="rlm.html#cb297-6" tabindex="-1"></a>num_vars <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(<span class="fu">names</span>(df_mod)[<span class="fu">sapply</span>(df_mod, is.numeric)], <span class="st">&quot;Premium_Amount&quot;</span>)</span>
-<span id="cb297-7"><a href="rlm.html#cb297-7" tabindex="-1"></a>n_dummies <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">sapply</span>(fac_vars, <span class="cf">function</span>(v) <span class="fu">nlevels</span>(df_mod[[v]]) <span class="sc">-</span> <span class="dv">1</span>))</span></code></pre></div>
+<p>El análisis predictivo parte del CSV original, independientemente de la imputación descriptiva de los capítulos anteriores. Se excluyen <code>id</code> (identificador) y <code>Policy Start Date</code> (fecha), y los predictores categóricos se codifican con una categoría de referencia. La partición externa 80/20 se realiza antes de calcular la imputación. Las medianas, modas y niveles se estiman en cada conjunto de ajuste; Occupation conserva «No especificado».</p>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="rlm.html#cb222-1" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;evaluacion.R&quot;</span>)</span>
+<span id="cb222-2"><a href="rlm.html#cb222-2" tabindex="-1"></a>datos_modelo <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(data.table<span class="sc">::</span><span class="fu">fread</span>(<span class="st">&quot;data/train.csv&quot;</span>, <span class="at">na.strings =</span> <span class="fu">c</span>(<span class="st">&quot;&quot;</span>, <span class="st">&quot;NA&quot;</span>)))</span>
+<span id="cb222-3"><a href="rlm.html#cb222-3" tabindex="-1"></a><span class="fu">names</span>(datos_modelo) <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot; &quot;</span>, <span class="st">&quot;_&quot;</span>, <span class="fu">names</span>(datos_modelo), <span class="at">fixed =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb222-4"><a href="rlm.html#cb222-4" tabindex="-1"></a>datos_modelo <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">select</span>(datos_modelo, <span class="sc">-</span>id, <span class="sc">-</span>Policy_Start_Date)</span>
+<span id="cb222-5"><a href="rlm.html#cb222-5" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb222-6"><a href="rlm.html#cb222-6" tabindex="-1"></a>idx_train <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">nrow</span>(datos_modelo), <span class="at">size =</span> <span class="fu">round</span>(<span class="fl">0.8</span> <span class="sc">*</span> <span class="fu">nrow</span>(datos_modelo)))</span>
+<span id="cb222-7"><a href="rlm.html#cb222-7" tabindex="-1"></a>datos_entrenamiento <span class="ot">&lt;-</span> datos_modelo[idx_train, ]</span>
+<span id="cb222-8"><a href="rlm.html#cb222-8" tabindex="-1"></a>particion <span class="ot">&lt;-</span> <span class="fu">preparar_particion</span>(datos_entrenamiento, datos_modelo[<span class="sc">-</span>idx_train, ])</span>
+<span id="cb222-9"><a href="rlm.html#cb222-9" tabindex="-1"></a>train <span class="ot">&lt;-</span> particion<span class="sc">$</span>ajuste</span>
+<span id="cb222-10"><a href="rlm.html#cb222-10" tabindex="-1"></a>test <span class="ot">&lt;-</span> particion<span class="sc">$</span>evaluacion</span>
+<span id="cb222-11"><a href="rlm.html#cb222-11" tabindex="-1"></a><span class="fu">rm</span>(datos_modelo, particion)</span>
+<span id="cb222-12"><a href="rlm.html#cb222-12" tabindex="-1"></a>fac_vars <span class="ot">&lt;-</span> <span class="fu">names</span>(train)[<span class="fu">sapply</span>(train, is.factor)]</span>
+<span id="cb222-13"><a href="rlm.html#cb222-13" tabindex="-1"></a>num_vars <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(<span class="fu">names</span>(train)[<span class="fu">sapply</span>(train, is.numeric)], <span class="st">&quot;Premium_Amount&quot;</span>)</span>
+<span id="cb222-14"><a href="rlm.html#cb222-14" tabindex="-1"></a>n_dummies <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">sapply</span>(fac_vars, <span class="cf">function</span>(v) <span class="fu">nlevels</span>(train[[v]]) <span class="sc">-</span> <span class="dv">1</span>))</span></code></pre></div>
 <p>Cada variable categórica con <span class="math inline">\(c\)</span> categorías se representa mediante <span class="math inline">\(c - 1\)</span> variables dummy, que valen 1 si el cliente pertenece a esa categoría y 0 en otro caso. La categoría restante actúa como base o referencia, y cada coeficiente asociado a una dummy se interpreta como la diferencia en la prima promedio respecto a esa categoría base.</p>
-<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb298-1"><a href="rlm.html#cb298-1" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">Variable =</span> <span class="fu">gsub</span>(<span class="st">&quot;_&quot;</span>, <span class="st">&quot; &quot;</span>, fac_vars),</span>
-<span id="cb298-2"><a href="rlm.html#cb298-2" tabindex="-1"></a>       <span class="st">`</span><span class="at">Categoría base</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sapply</span>(fac_vars, <span class="cf">function</span>(v) <span class="fu">levels</span>(df_mod[[v]])[<span class="dv">1</span>]),</span>
-<span id="cb298-3"><a href="rlm.html#cb298-3" tabindex="-1"></a>       <span class="st">`</span><span class="at">Variables dummy</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sapply</span>(fac_vars, <span class="cf">function</span>(v) <span class="fu">nlevels</span>(df_mod[[v]]) <span class="sc">-</span> <span class="dv">1</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb298-4"><a href="rlm.html#cb298-4" tabindex="-1"></a>  <span class="fu">tabla_rlm</span>(<span class="st">&quot;Codificación de las variables categóricas en variables dummy&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="rlm.html#cb223-1" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">Variable =</span> <span class="fu">gsub</span>(<span class="st">&quot;_&quot;</span>, <span class="st">&quot; &quot;</span>, fac_vars),</span>
+<span id="cb223-2"><a href="rlm.html#cb223-2" tabindex="-1"></a>       <span class="st">`</span><span class="at">Categoría base</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sapply</span>(fac_vars, <span class="cf">function</span>(v) <span class="fu">levels</span>(train[[v]])[<span class="dv">1</span>]),</span>
+<span id="cb223-3"><a href="rlm.html#cb223-3" tabindex="-1"></a>       <span class="st">`</span><span class="at">Variables dummy</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sapply</span>(fac_vars, <span class="cf">function</span>(v) <span class="fu">nlevels</span>(train[[v]]) <span class="sc">-</span> <span class="dv">1</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb223-4"><a href="rlm.html#cb223-4" tabindex="-1"></a>  <span class="fu">tabla_rlm</span>(<span class="st">&quot;Codificación de las variables categóricas en variables dummy&quot;</span>)</span></code></pre></div>
 <table class="table table-striped table-hover table-condensed" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:dummies">Tabla 4.1: </span>Codificación de las variables categóricas en variables dummy
@@ -288,7 +305,7 @@ Divorced
 Education Level
 </td>
 <td style="text-align:center;">
-High School
+Bachelor’s
 </td>
 <td style="text-align:center;">
 3
@@ -332,7 +349,7 @@ Basic
 Customer Feedback
 </td>
 <td style="text-align:center;">
-Poor
+Average
 </td>
 <td style="text-align:center;">
 2
@@ -354,7 +371,7 @@ No
 Exercise Frequency
 </td>
 <td style="text-align:center;">
-Rarely
+Daily
 </td>
 <td style="text-align:center;">
 3
@@ -374,12 +391,12 @@ Apartment
 </tbody>
 </table>
 <p>Las 10 variables categóricas generan en total 21 variables dummy que, junto con las 8 variables numéricas y el intercepto, dan un total de <span class="math inline">\(p = 30\)</span> parámetros en el modelo completo.</p>
-<p>Para evaluar la capacidad predictiva de los modelos, los datos se dividen aleatoriamente en un conjunto de entrenamiento (80%), con el que se ajustan los modelos, y un conjunto de prueba (20%), que se reserva para medir qué tan bien predicen observaciones que no se usaron en el ajuste.</p>
-<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb299-1"><a href="rlm.html#cb299-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb299-2"><a href="rlm.html#cb299-2" tabindex="-1"></a>idx_train <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">nrow</span>(df_mod), <span class="at">size =</span> <span class="fu">round</span>(<span class="fl">0.8</span> <span class="sc">*</span> <span class="fu">nrow</span>(df_mod)))</span>
-<span id="cb299-3"><a href="rlm.html#cb299-3" tabindex="-1"></a>train <span class="ot">&lt;-</span> df_mod[idx_train, ]</span>
-<span id="cb299-4"><a href="rlm.html#cb299-4" tabindex="-1"></a>test  <span class="ot">&lt;-</span> df_mod[<span class="sc">-</span>idx_train, ]</span></code></pre></div>
-<p>El conjunto de entrenamiento queda con 960,000 observaciones y el de prueba con 240,000.</p>
+<p>El conjunto de entrenamiento contiene 960,000 registros y el conjunto de prueba contiene 240,000. Se comparan cinco procedimientos mediante validación cruzada de cinco pliegues dentro del entrenamiento. En cada pliegue se vuelven a calcular la imputación, la codificación, los coeficientes y la selección por AIC o BIC. El criterio predictivo se decide por RMSE de validación; se conserva BIC como modelo interpretable por su penalización más fuerte.</p>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="rlm.html#cb224-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">124</span>)</span>
+<span id="cb224-2"><a href="rlm.html#cb224-2" tabindex="-1"></a>pliegues <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">rep</span>(<span class="fu">seq_len</span>(<span class="dv">5</span>), <span class="at">length.out =</span> <span class="fu">nrow</span>(datos_entrenamiento)))</span>
+<span id="cb224-3"><a href="rlm.html#cb224-3" tabindex="-1"></a>cv <span class="ot">&lt;-</span> <span class="fu">validar_modelos</span>(datos_entrenamiento, pliegues)</span>
+<span id="cb224-4"><a href="rlm.html#cb224-4" tabindex="-1"></a><span class="fu">rm</span>(datos_entrenamiento, pliegues)</span>
+<span id="cb224-5"><a href="rlm.html#cb224-5" tabindex="-1"></a><span class="fu">invisible</span>(<span class="fu">gc</span>())</span></code></pre></div>
 </div>
 <div id="regresión-lineal-simple-como-punto-de-partida" class="section level2 hasAnchor" number="4.2">
 <h2><span class="header-section-number">4.2</span> Regresión lineal simple como punto de partida<a href="rlm.html#regresi%C3%B3n-lineal-simple-como-punto-de-partida" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -394,8 +411,8 @@ H_0 &amp;: \beta_1 = 0 \quad \text{(Annual Income no tiene efecto lineal sobre l
 H_1 &amp;: \beta_1 \neq 0 \quad \text{(Annual Income tiene efecto lineal sobre la prima)}
 \end{aligned}
 \]</span></p>
-<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="rlm.html#cb300-1" tabindex="-1"></a>modelo_rls <span class="ot">&lt;-</span> <span class="fu">lm</span>(Premium_Amount <span class="sc">~</span> Annual_Income, <span class="at">data =</span> train)</span>
-<span id="cb300-2"><a href="rlm.html#cb300-2" tabindex="-1"></a><span class="fu">tabla_coef</span>(modelo_rls, <span class="st">&quot;Coeficientes estimados del modelo de regresión lineal simple e intervalos de confianza del 95%&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="rlm.html#cb225-1" tabindex="-1"></a>modelo_rls <span class="ot">&lt;-</span> <span class="fu">lm</span>(Premium_Amount <span class="sc">~</span> Annual_Income, <span class="at">data =</span> train)</span>
+<span id="cb225-2"><a href="rlm.html#cb225-2" tabindex="-1"></a><span class="fu">tabla_coef</span>(modelo_rls, <span class="st">&quot;Coeficientes estimados del modelo de regresión lineal simple e intervalos de confianza del 95%&quot;</span>)</span></code></pre></div>
 <table class="table table-striped table-hover table-condensed" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:rls">Tabla 4.2: </span>Coeficientes estimados del modelo de regresión lineal simple e intervalos de confianza del 95%
@@ -409,7 +426,7 @@ Término
 Estimación
 </th>
 <th style="text-align:center;font-weight: bold;">
-Error estándar
+Error estándar HC1
 </th>
 <th style="text-align:center;font-weight: bold;">
 <span class="math inline">\(t\)</span>
@@ -431,22 +448,22 @@ IC 97.5%
 (Intercept)
 </td>
 <td style="text-align:center;">
-1,112.1333
+1,112.1378
 </td>
 <td style="text-align:center;">
-1.2644
+1.2648
 </td>
 <td style="text-align:center;">
-879.5543
+879.3025
 </td>
 <td style="text-align:center;">
 &lt; 0.001
 </td>
 <td style="text-align:center;">
-1,109.6550
+1,109.6588
 </td>
 <td style="text-align:center;">
-1,114.6115
+1,114.6168
 </td>
 </tr>
 <tr>
@@ -454,52 +471,52 @@ IC 97.5%
 Annual_Income
 </td>
 <td style="text-align:center;">
--0.0002867
+-0.0002868
 </td>
 <td style="text-align:center;">
-0.00002793
+0.00003207
 </td>
 <td style="text-align:center;">
--10.2659
+-8.9424
 </td>
 <td style="text-align:center;">
 &lt; 0.001
 </td>
 <td style="text-align:center;">
--0.0003414
+-0.0003497
 </td>
 <td style="text-align:center;">
--0.000232
+-0.000224
 </td>
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="rlm.html#cb301-1" tabindex="-1"></a>s_rls  <span class="ot">&lt;-</span> <span class="fu">summary</span>(modelo_rls)</span>
-<span id="cb301-2"><a href="rlm.html#cb301-2" tabindex="-1"></a>b_rls  <span class="ot">&lt;-</span> <span class="fu">coef</span>(modelo_rls)</span>
-<span id="cb301-3"><a href="rlm.html#cb301-3" tabindex="-1"></a>t_b1   <span class="ot">&lt;-</span> <span class="fu">coef</span>(s_rls)[<span class="dv">2</span>, <span class="st">&quot;t value&quot;</span>]</span>
-<span id="cb301-4"><a href="rlm.html#cb301-4" tabindex="-1"></a>p_b1   <span class="ot">&lt;-</span> <span class="fu">coef</span>(s_rls)[<span class="dv">2</span>, <span class="st">&quot;Pr(&gt;|t|)&quot;</span>]</span>
-<span id="cb301-5"><a href="rlm.html#cb301-5" tabindex="-1"></a>r2_rls <span class="ot">&lt;-</span> s_rls<span class="sc">$</span>r.squared</span></code></pre></div>
-<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb302-1"><a href="rlm.html#cb302-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb302-2"><a href="rlm.html#cb302-2" tabindex="-1"></a>idx_rls <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">nrow</span>(train), <span class="dv">20000</span>)</span>
-<span id="cb302-3"><a href="rlm.html#cb302-3" tabindex="-1"></a><span class="fu">ggplot</span>(train[idx_rls, ], <span class="fu">aes</span>(<span class="at">x =</span> Annual_Income, <span class="at">y =</span> Premium_Amount)) <span class="sc">+</span></span>
-<span id="cb302-4"><a href="rlm.html#cb302-4" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">&quot;#5B7C99&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.15</span>, <span class="at">size =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
-<span id="cb302-5"><a href="rlm.html#cb302-5" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> b_rls[<span class="dv">1</span>], <span class="at">slope =</span> b_rls[<span class="dv">2</span>], <span class="at">color =</span> <span class="st">&quot;#B22222&quot;</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb302-6"><a href="rlm.html#cb302-6" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Recta de regresión de Premium Amount sobre Annual Income (muestra de 20,000)&quot;</span>,</span>
-<span id="cb302-7"><a href="rlm.html#cb302-7" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Annual Income&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Premium Amount&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="rlm.html#cb226-1" tabindex="-1"></a>s_rls  <span class="ot">&lt;-</span> <span class="fu">summary</span>(modelo_rls)</span>
+<span id="cb226-2"><a href="rlm.html#cb226-2" tabindex="-1"></a>b_rls  <span class="ot">&lt;-</span> <span class="fu">coef</span>(modelo_rls)</span>
+<span id="cb226-3"><a href="rlm.html#cb226-3" tabindex="-1"></a>t_b1   <span class="ot">&lt;-</span> <span class="fu">coef</span>(s_rls)[<span class="dv">2</span>, <span class="st">&quot;t value&quot;</span>]</span>
+<span id="cb226-4"><a href="rlm.html#cb226-4" tabindex="-1"></a>p_b1   <span class="ot">&lt;-</span> <span class="fu">coef</span>(s_rls)[<span class="dv">2</span>, <span class="st">&quot;Pr(&gt;|t|)&quot;</span>]</span>
+<span id="cb226-5"><a href="rlm.html#cb226-5" tabindex="-1"></a>r2_rls <span class="ot">&lt;-</span> s_rls<span class="sc">$</span>r.squared</span></code></pre></div>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="rlm.html#cb227-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb227-2"><a href="rlm.html#cb227-2" tabindex="-1"></a>idx_rls <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">nrow</span>(train), <span class="dv">20000</span>)</span>
+<span id="cb227-3"><a href="rlm.html#cb227-3" tabindex="-1"></a><span class="fu">ggplot</span>(train[idx_rls, ], <span class="fu">aes</span>(<span class="at">x =</span> Annual_Income, <span class="at">y =</span> Premium_Amount)) <span class="sc">+</span></span>
+<span id="cb227-4"><a href="rlm.html#cb227-4" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">&quot;#5B7C99&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.15</span>, <span class="at">size =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb227-5"><a href="rlm.html#cb227-5" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> b_rls[<span class="dv">1</span>], <span class="at">slope =</span> b_rls[<span class="dv">2</span>], <span class="at">color =</span> <span class="st">&quot;#B22222&quot;</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb227-6"><a href="rlm.html#cb227-6" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Recta de regresión de Premium Amount sobre Annual Income (muestra de 20,000)&quot;</span>,</span>
+<span id="cb227-7"><a href="rlm.html#cb227-7" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Annual Income&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Premium Amount&quot;</span>)</span></code></pre></div>
 <p><img src="analisis-seguros_files/figure-html/rls-grafico-1.png" alt="" width="672" /></p>
 <p>El modelo estimado es:</p>
 <p><span class="math display">\[
-\widehat{\text{Premium Amount}} = 1112.13 - 0.0002867\,\text{Annual Income}
+\widehat{\text{Premium Amount}} = 1112.14 - 0.0002868\,\text{Annual Income}
 \]</span></p>
 <p>Con una confianza del 95%, la prueba t indica que Annual Income tiene un efecto lineal estadísticamente significativo sobre la prima (<span class="math inline">\(t = -10.27\)</span>, p valor <span class="math inline">\(&lt; 0.001\)</span>), por lo que se rechaza <span class="math inline">\(H_0\)</span>. Según el coeficiente estimado, por cada 1,000 unidades adicionales de ingreso anual la prima promedio disminuye en 0.29. Sin embargo, el coeficiente de determinación es <span class="math inline">\(R^2 = 0.0001\)</span>, es decir, el ingreso anual explica apenas el 0.01% de la variabilidad de Premium Amount. En el gráfico se observa que la recta es casi horizontal frente a la gran dispersión de los puntos.</p>
-<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="rlm.html#cb303-1" tabindex="-1"></a>rmse_nulo <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">mean</span>((test<span class="sc">$</span>Premium_Amount <span class="sc">-</span> <span class="fu">mean</span>(train<span class="sc">$</span>Premium_Amount))<span class="sc">^</span><span class="dv">2</span>))</span>
-<span id="cb303-2"><a href="rlm.html#cb303-2" tabindex="-1"></a>rmse_rls  <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">mean</span>((test<span class="sc">$</span>Premium_Amount <span class="sc">-</span> <span class="fu">predict</span>(modelo_rls, test))<span class="sc">^</span><span class="dv">2</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="rlm.html#cb228-1" tabindex="-1"></a>rmse_nulo <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">mean</span>((test<span class="sc">$</span>Premium_Amount <span class="sc">-</span> <span class="fu">mean</span>(train<span class="sc">$</span>Premium_Amount))<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb228-2"><a href="rlm.html#cb228-2" tabindex="-1"></a>rmse_rls  <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">mean</span>((test<span class="sc">$</span>Premium_Amount <span class="sc">-</span> <span class="fu">predict</span>(modelo_rls, test))<span class="sc">^</span><span class="dv">2</span>))</span></code></pre></div>
 <p>En el conjunto de prueba, el modelo simple tiene un <span class="math inline">\(RMSE = 864.90\)</span>, frente a 864.93 del modelo que predice el promedio para todos los clientes, una reducción de apenas el 0.00%. Como una sola variable explica menos del 1% de la variabilidad de la prima, a continuación se ajusta un modelo de regresión lineal múltiple que incorpora todas las variables predictoras.</p>
 </div>
 <div id="modelo-completo" class="section level2 hasAnchor" number="4.3">
 <h2><span class="header-section-number">4.3</span> Modelo completo<a href="rlm.html#modelo-completo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Se ajusta primero el modelo completo, con las 18 variables predictoras:</p>
-<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="rlm.html#cb304-1" tabindex="-1"></a>modelo_full <span class="ot">&lt;-</span> <span class="fu">lm</span>(Premium_Amount <span class="sc">~</span> ., <span class="at">data =</span> train)</span></code></pre></div>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="rlm.html#cb229-1" tabindex="-1"></a>modelo_full <span class="ot">&lt;-</span> <span class="fu">lm</span>(Premium_Amount <span class="sc">~</span> ., <span class="at">data =</span> train)</span></code></pre></div>
 <div id="prueba-de-significancia-global" class="section level3 hasAnchor" number="4.3.1">
 <h3><span class="header-section-number">4.3.1</span> Prueba de significancia global<a href="rlm.html#prueba-de-significancia-global" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>La prueba de significancia global determina si existe una relación lineal entre Premium Amount y al menos una de las variables regresoras:</p>
@@ -510,26 +527,26 @@ H_1 &amp;: \beta_j \neq 0 \quad \text{para al menos una } j
 \end{aligned}
 \]</span></p>
 <p>El estadístico de prueba es <span class="math inline">\(F_0 = \dfrac{SSR/k}{SSE/(n-k-1)} = \dfrac{MSR}{MSE}\)</span>, que bajo <span class="math inline">\(H_0\)</span> sigue una distribución <span class="math inline">\(F_{k,\, n-k-1}\)</span>. Se construye la tabla ANOVA a partir de la descomposición <span class="math inline">\(SST = SSR + SSE\)</span>:</p>
-<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="rlm.html#cb305-1" tabindex="-1"></a>y_tr <span class="ot">&lt;-</span> train<span class="sc">$</span>Premium_Amount</span>
-<span id="cb305-2"><a href="rlm.html#cb305-2" tabindex="-1"></a>n  <span class="ot">&lt;-</span> <span class="fu">nrow</span>(train)</span>
-<span id="cb305-3"><a href="rlm.html#cb305-3" tabindex="-1"></a>p  <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">coef</span>(modelo_full))</span>
-<span id="cb305-4"><a href="rlm.html#cb305-4" tabindex="-1"></a>k  <span class="ot">&lt;-</span> p <span class="sc">-</span> <span class="dv">1</span></span>
-<span id="cb305-5"><a href="rlm.html#cb305-5" tabindex="-1"></a></span>
-<span id="cb305-6"><a href="rlm.html#cb305-6" tabindex="-1"></a>SST <span class="ot">&lt;-</span> <span class="fu">sum</span>((y_tr <span class="sc">-</span> <span class="fu">mean</span>(y_tr))<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb305-7"><a href="rlm.html#cb305-7" tabindex="-1"></a>SSE <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">residuals</span>(modelo_full)<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb305-8"><a href="rlm.html#cb305-8" tabindex="-1"></a>SSR <span class="ot">&lt;-</span> SST <span class="sc">-</span> SSE</span>
-<span id="cb305-9"><a href="rlm.html#cb305-9" tabindex="-1"></a>MSR <span class="ot">&lt;-</span> SSR <span class="sc">/</span> k</span>
-<span id="cb305-10"><a href="rlm.html#cb305-10" tabindex="-1"></a>MSE <span class="ot">&lt;-</span> SSE <span class="sc">/</span> (n <span class="sc">-</span> p)</span>
-<span id="cb305-11"><a href="rlm.html#cb305-11" tabindex="-1"></a>F0  <span class="ot">&lt;-</span> MSR <span class="sc">/</span> MSE</span>
-<span id="cb305-12"><a href="rlm.html#cb305-12" tabindex="-1"></a>p_F <span class="ot">&lt;-</span> <span class="fu">pf</span>(F0, k, n <span class="sc">-</span> p, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb305-13"><a href="rlm.html#cb305-13" tabindex="-1"></a></span>
-<span id="cb305-14"><a href="rlm.html#cb305-14" tabindex="-1"></a><span class="fu">tibble</span>(<span class="st">`</span><span class="at">Fuente de variación</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;Regresión&quot;</span>, <span class="st">&quot;Residuales&quot;</span>, <span class="st">&quot;Total&quot;</span>),</span>
-<span id="cb305-15"><a href="rlm.html#cb305-15" tabindex="-1"></a>       <span class="st">`</span><span class="at">Suma de cuadrados</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(SSR, SSE, SST),</span>
-<span id="cb305-16"><a href="rlm.html#cb305-16" tabindex="-1"></a>       <span class="at">gl =</span> <span class="fu">c</span>(k, n <span class="sc">-</span> p, n <span class="sc">-</span> <span class="dv">1</span>),</span>
-<span id="cb305-17"><a href="rlm.html#cb305-17" tabindex="-1"></a>       <span class="st">`</span><span class="at">Cuadrado medio</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(MSR, MSE, <span class="cn">NA</span>),</span>
-<span id="cb305-18"><a href="rlm.html#cb305-18" tabindex="-1"></a>       <span class="st">`</span><span class="at">$F_0$</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(F0, <span class="cn">NA</span>, <span class="cn">NA</span>),</span>
-<span id="cb305-19"><a href="rlm.html#cb305-19" tabindex="-1"></a>       <span class="st">`</span><span class="at">p valor</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(p_F, <span class="cn">NA</span>, <span class="cn">NA</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb305-20"><a href="rlm.html#cb305-20" tabindex="-1"></a>  <span class="fu">tabla_rlm</span>(<span class="st">&quot;Tabla ANOVA del modelo completo&quot;</span>, <span class="at">p_cols =</span> <span class="st">&quot;p valor&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="rlm.html#cb230-1" tabindex="-1"></a>y_tr <span class="ot">&lt;-</span> train<span class="sc">$</span>Premium_Amount</span>
+<span id="cb230-2"><a href="rlm.html#cb230-2" tabindex="-1"></a>n  <span class="ot">&lt;-</span> <span class="fu">nrow</span>(train)</span>
+<span id="cb230-3"><a href="rlm.html#cb230-3" tabindex="-1"></a>p  <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">coef</span>(modelo_full))</span>
+<span id="cb230-4"><a href="rlm.html#cb230-4" tabindex="-1"></a>k  <span class="ot">&lt;-</span> p <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb230-5"><a href="rlm.html#cb230-5" tabindex="-1"></a></span>
+<span id="cb230-6"><a href="rlm.html#cb230-6" tabindex="-1"></a>SST <span class="ot">&lt;-</span> <span class="fu">sum</span>((y_tr <span class="sc">-</span> <span class="fu">mean</span>(y_tr))<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb230-7"><a href="rlm.html#cb230-7" tabindex="-1"></a>SSE <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">residuals</span>(modelo_full)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb230-8"><a href="rlm.html#cb230-8" tabindex="-1"></a>SSR <span class="ot">&lt;-</span> SST <span class="sc">-</span> SSE</span>
+<span id="cb230-9"><a href="rlm.html#cb230-9" tabindex="-1"></a>MSR <span class="ot">&lt;-</span> SSR <span class="sc">/</span> k</span>
+<span id="cb230-10"><a href="rlm.html#cb230-10" tabindex="-1"></a>MSE <span class="ot">&lt;-</span> SSE <span class="sc">/</span> (n <span class="sc">-</span> p)</span>
+<span id="cb230-11"><a href="rlm.html#cb230-11" tabindex="-1"></a>F0  <span class="ot">&lt;-</span> MSR <span class="sc">/</span> MSE</span>
+<span id="cb230-12"><a href="rlm.html#cb230-12" tabindex="-1"></a>p_F <span class="ot">&lt;-</span> <span class="fu">pf</span>(F0, k, n <span class="sc">-</span> p, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb230-13"><a href="rlm.html#cb230-13" tabindex="-1"></a></span>
+<span id="cb230-14"><a href="rlm.html#cb230-14" tabindex="-1"></a><span class="fu">tibble</span>(<span class="st">`</span><span class="at">Fuente de variación</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;Regresión&quot;</span>, <span class="st">&quot;Residuales&quot;</span>, <span class="st">&quot;Total&quot;</span>),</span>
+<span id="cb230-15"><a href="rlm.html#cb230-15" tabindex="-1"></a>       <span class="st">`</span><span class="at">Suma de cuadrados</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(SSR, SSE, SST),</span>
+<span id="cb230-16"><a href="rlm.html#cb230-16" tabindex="-1"></a>       <span class="at">gl =</span> <span class="fu">c</span>(k, n <span class="sc">-</span> p, n <span class="sc">-</span> <span class="dv">1</span>),</span>
+<span id="cb230-17"><a href="rlm.html#cb230-17" tabindex="-1"></a>       <span class="st">`</span><span class="at">Cuadrado medio</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(MSR, MSE, <span class="cn">NA</span>),</span>
+<span id="cb230-18"><a href="rlm.html#cb230-18" tabindex="-1"></a>       <span class="st">`</span><span class="at">$F_0$</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(F0, <span class="cn">NA</span>, <span class="cn">NA</span>),</span>
+<span id="cb230-19"><a href="rlm.html#cb230-19" tabindex="-1"></a>       <span class="st">`</span><span class="at">p valor</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(p_F, <span class="cn">NA</span>, <span class="cn">NA</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb230-20"><a href="rlm.html#cb230-20" tabindex="-1"></a>  <span class="fu">tabla_rlm</span>(<span class="st">&quot;Tabla ANOVA del modelo completo&quot;</span>, <span class="at">p_cols =</span> <span class="st">&quot;p valor&quot;</span>)</span></code></pre></div>
 <table class="table table-striped table-hover table-condensed" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:anova-global">Tabla 4.3: </span>Tabla ANOVA del modelo completo
@@ -562,16 +579,16 @@ p valor
 Regresión
 </td>
 <td style="text-align:center;">
-2,007,202,137.8898
+2,007,317,882.8408
 </td>
 <td style="text-align:center;">
 29
 </td>
 <td style="text-align:center;">
-69,213,866.8238
+69,217,858.0290
 </td>
 <td style="text-align:center;">
-92.7570
+92.7624
 </td>
 <td style="text-align:center;">
 &lt; 0.001
@@ -582,13 +599,13 @@ Regresión
 Residuales
 </td>
 <td style="text-align:center;">
-716,315,030,992.8740
+716,314,915,247.9230
 </td>
 <td style="text-align:center;">
 959,970
 </td>
 <td style="text-align:center;">
-746,184.8089
+746,184.6883
 </td>
 <td style="text-align:center;">
 </td>
@@ -614,8 +631,8 @@ Total
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="rlm.html#cb306-1" tabindex="-1"></a>r2_full   <span class="ot">&lt;-</span> SSR <span class="sc">/</span> SST</span>
-<span id="cb306-2"><a href="rlm.html#cb306-2" tabindex="-1"></a>r2aj_full <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> (SSE <span class="sc">/</span> (n <span class="sc">-</span> p)) <span class="sc">/</span> (SST <span class="sc">/</span> (n <span class="sc">-</span> <span class="dv">1</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="rlm.html#cb231-1" tabindex="-1"></a>r2_full   <span class="ot">&lt;-</span> SSR <span class="sc">/</span> SST</span>
+<span id="cb231-2"><a href="rlm.html#cb231-2" tabindex="-1"></a>r2aj_full <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> (SSE <span class="sc">/</span> (n <span class="sc">-</span> p)) <span class="sc">/</span> (SST <span class="sc">/</span> (n <span class="sc">-</span> <span class="dv">1</span>))</span></code></pre></div>
 <p>Con una confianza del 95%, la prueba F global indica que al menos una de las variables predictoras contribuye de manera significativa al modelo (<span class="math inline">\(F_{29,\, 959,970} = 92.76\)</span>, p valor <span class="math inline">\(&lt; 0.001\)</span>), por lo que se rechaza <span class="math inline">\(H_0\)</span>.</p>
 <p>Sin embargo, el coeficiente de determinación es <span class="math inline">\(R^2 = 0.0028\)</span> y el ajustado es <span class="math inline">\(R^2_{aj} = 0.0028\)</span>, es decir, el modelo completo explica apenas el 0.28% de la variabilidad de Premium Amount. Al igual que en el capítulo anterior, con un tamaño de muestra tan grande la prueba F detecta efectos muy pequeños, pero la capacidad explicativa del modelo es prácticamente nula.</p>
 </div>
@@ -628,13 +645,14 @@ H_0 &amp;: \beta_j = 0 \\
 H_1 &amp;: \beta_j \neq 0
 \end{aligned}
 \]</span></p>
-<p>con el estadístico <span class="math inline">\(t_j = \dfrac{\hat\beta_j}{\sqrt{\hat\sigma^2 (\mathbf{X}&#39;\mathbf{X})^{-1}_{jj}}} \sim t_{n-p}\)</span> y el intervalo de confianza del 95% <span class="math inline">\(\hat\beta_j \pm t_{\alpha/2,\, n-p}\sqrt{\hat\sigma^2 (\mathbf{X}&#39;\mathbf{X})^{-1}_{jj}}\)</span>.</p>
-<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb307-1"><a href="rlm.html#cb307-1" tabindex="-1"></a><span class="fu">tabla_coef</span>(modelo_full, <span class="st">&quot;Coeficientes estimados del modelo completo e intervalos de confianza del 95%&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb307-2"><a href="rlm.html#cb307-2" tabindex="-1"></a>  <span class="fu">scroll_box</span>(<span class="at">height =</span> <span class="st">&quot;450px&quot;</span>)</span></code></pre></div>
+<p>Los intervalos del 95 % y los valores p usan errores estándar robustos HC1. Las pruebas F clásicas se muestran como parte del ejercicio de mínimos cuadrados y su calibración depende de los supuestos del modelo. Los intervalos del modelo seleccionado son exploratorios porque no incorporan incertidumbre por selección de variables.</p>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="rlm.html#cb232-1" tabindex="-1"></a>cov_full <span class="ot">&lt;-</span> sandwich<span class="sc">::</span><span class="fu">vcovHC</span>(modelo_full, <span class="at">type =</span> <span class="st">&quot;HC1&quot;</span>)</span>
+<span id="cb232-2"><a href="rlm.html#cb232-2" tabindex="-1"></a><span class="fu">tabla_coef</span>(modelo_full, <span class="st">&quot;Coeficientes del modelo completo e IC robustos del 95%&quot;</span>, cov_full) <span class="sc">%&gt;%</span></span>
+<span id="cb232-3"><a href="rlm.html#cb232-3" tabindex="-1"></a>  <span class="fu">scroll_box</span>(<span class="at">height =</span> <span class="st">&quot;450px&quot;</span>)</span></code></pre></div>
 <div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:450px; ">
 <table class="table table-striped table-hover table-condensed" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:coef-completo">Tabla 4.4: </span>Coeficientes estimados del modelo completo e intervalos de confianza del 95%
+<span id="tab:coef-completo">Tabla 4.4: </span>Coeficientes del modelo completo e IC robustos del 95%
 </caption>
 <thead>
 <tr>
@@ -645,7 +663,7 @@ Término
 Estimación
 </th>
 <th style="text-align:center;font-weight: bold;position: sticky; top:0; background-color: #FFFFFF;">
-Error estándar
+Error estándar HC1
 </th>
 <th style="text-align:center;font-weight: bold;position: sticky; top:0; background-color: #FFFFFF;">
 <span class="math inline">\(t\)</span>
@@ -667,22 +685,22 @@ IC 97.5%
 (Intercept)
 </td>
 <td style="text-align:center;">
-1,164.9606
+1,174.0124
 </td>
 <td style="text-align:center;">
-7.2081
+7.2445
 </td>
 <td style="text-align:center;">
-161.6182
+162.0550
 </td>
 <td style="text-align:center;">
 &lt; 0.001
 </td>
 <td style="text-align:center;">
-1,150.8330
+1,159.8134
 </td>
 <td style="text-align:center;">
-1,179.0883
+1,188.2115
 </td>
 </tr>
 <tr>
@@ -696,16 +714,16 @@ Age
 0.06562
 </td>
 <td style="text-align:center;">
--1.9377
+-1.9374
 </td>
 <td style="text-align:center;">
 0.0527
 </td>
 <td style="text-align:center;">
--0.2557
+-0.2558
 </td>
 <td style="text-align:center;">
-0.001463
+0.001481
 </td>
 </tr>
 <tr>
@@ -719,13 +737,13 @@ GenderMale
 1.7633
 </td>
 <td style="text-align:center;">
--0.7484
+-0.7483
 </td>
 <td style="text-align:center;">
-0.4542
+0.4543
 </td>
 <td style="text-align:center;">
--4.7756
+-4.7757
 </td>
 <td style="text-align:center;">
 2.1365
@@ -736,22 +754,22 @@ GenderMale
 Annual_Income
 </td>
 <td style="text-align:center;">
--0.0004816
+-0.0004818
 </td>
 <td style="text-align:center;">
-0.0000284
+0.00003286
 </td>
 <td style="text-align:center;">
--16.9601
+-14.6622
 </td>
 <td style="text-align:center;">
 &lt; 0.001
 </td>
 <td style="text-align:center;">
--0.0005373
+-0.0005462
 </td>
 <td style="text-align:center;">
--0.0004259
+-0.0004174
 </td>
 </tr>
 <tr>
@@ -762,19 +780,19 @@ Marital_StatusMarried
 -0.401
 </td>
 <td style="text-align:center;">
-2.1785
+2.1770
 </td>
 <td style="text-align:center;">
--0.1841
+-0.1842
 </td>
 <td style="text-align:center;">
-0.8540
+0.8539
 </td>
 <td style="text-align:center;">
--4.6708
+-4.6679
 </td>
 <td style="text-align:center;">
-3.8688
+3.8659
 </td>
 </tr>
 <tr>
@@ -782,22 +800,22 @@ Marital_StatusMarried
 Marital_StatusSingle
 </td>
 <td style="text-align:center;">
-5.1348
+5.1349
 </td>
 <td style="text-align:center;">
-2.1526
+2.1542
 </td>
 <td style="text-align:center;">
-2.3854
+2.3837
 </td>
 <td style="text-align:center;">
 0.0171
 </td>
 <td style="text-align:center;">
-0.9159
+0.9127
 </td>
 <td style="text-align:center;">
-9.3537
+9.3570
 </td>
 </tr>
 <tr>
@@ -808,42 +826,42 @@ Number_of_Dependents
 -0.4962
 </td>
 <td style="text-align:center;">
-0.6526
+0.6514
 </td>
 <td style="text-align:center;">
--0.7603
+-0.7616
 </td>
 <td style="text-align:center;">
-0.4470
+0.4463
 </td>
 <td style="text-align:center;">
--1.7752
+-1.7730
 </td>
 <td style="text-align:center;">
-0.7828
+0.7807
 </td>
 </tr>
 <tr>
 <td style="text-align:center;">
-Education_LevelBachelor’s
+Education_LevelHigh School
 </td>
 <td style="text-align:center;">
--3.5724
+3.5725
 </td>
 <td style="text-align:center;">
-2.5099
+2.5115
 </td>
 <td style="text-align:center;">
--1.4234
+1.4224
 </td>
 <td style="text-align:center;">
-0.1546
+0.1549
 </td>
 <td style="text-align:center;">
--8.4917
+-1.3500
 </td>
 <td style="text-align:center;">
-1.3468
+8.4949
 </td>
 </tr>
 <tr>
@@ -851,22 +869,22 @@ Education_LevelBachelor’s
 Education_LevelMaster’s
 </td>
 <td style="text-align:center;">
--3.4101
+0.1623
 </td>
 <td style="text-align:center;">
-2.5081
+2.4806
 </td>
 <td style="text-align:center;">
--1.3596
+0.06544
 </td>
 <td style="text-align:center;">
-0.1740
+0.9478
 </td>
 <td style="text-align:center;">
--8.3260
+-4.6996
 </td>
 <td style="text-align:center;">
-1.5058
+5.0243
 </td>
 </tr>
 <tr>
@@ -874,22 +892,22 @@ Education_LevelMaster’s
 Education_LevelPhD
 </td>
 <td style="text-align:center;">
--5.8052
+-2.2328
 </td>
 <td style="text-align:center;">
-2.5099
+2.4758
 </td>
 <td style="text-align:center;">
--2.3129
+-0.9018
 </td>
 <td style="text-align:center;">
-0.0207
+0.3671
 </td>
 <td style="text-align:center;">
--10.7245
+-7.0854
 </td>
 <td style="text-align:center;">
--0.8859
+2.6198
 </td>
 </tr>
 <tr>
@@ -900,19 +918,19 @@ OccupationNo especificado
 -13.3215
 </td>
 <td style="text-align:center;">
-2.4299
+2.4206
 </td>
 <td style="text-align:center;">
--5.4824
+-5.5034
 </td>
 <td style="text-align:center;">
 &lt; 0.001
 </td>
 <td style="text-align:center;">
--18.0840
+-18.0658
 </td>
 <td style="text-align:center;">
--8.5591
+-8.5773
 </td>
 </tr>
 <tr>
@@ -923,19 +941,19 @@ OccupationSelf-Employed
 -0.2157
 </td>
 <td style="text-align:center;">
-2.5699
+2.5766
 </td>
 <td style="text-align:center;">
--0.08393
+-0.0837
 </td>
 <td style="text-align:center;">
-0.9331
+0.9333
 </td>
 <td style="text-align:center;">
--5.2526
+-5.2657
 </td>
 <td style="text-align:center;">
-4.8212
+4.8344
 </td>
 </tr>
 <tr>
@@ -946,19 +964,19 @@ OccupationUnemployed
 -3.5806
 </td>
 <td style="text-align:center;">
-2.5826
+2.5834
 </td>
 <td style="text-align:center;">
--1.3865
+-1.3860
 </td>
 <td style="text-align:center;">
-0.1656
+0.1657
 </td>
 <td style="text-align:center;">
--8.6423
+-8.6439
 </td>
 <td style="text-align:center;">
-1.4811
+1.4827
 </td>
 </tr>
 <tr>
@@ -969,19 +987,19 @@ Health_Score
 1.0422
 </td>
 <td style="text-align:center;">
-0.07464
+0.07542
 </td>
 <td style="text-align:center;">
-13.9634
+13.8180
 </td>
 <td style="text-align:center;">
 &lt; 0.001
 </td>
 <td style="text-align:center;">
-0.896
+0.8944
 </td>
 <td style="text-align:center;">
-1.1885
+1.1900
 </td>
 </tr>
 <tr>
@@ -992,19 +1010,19 @@ LocationSuburban
 0.9276
 </td>
 <td style="text-align:center;">
-2.1565
+2.1563
 </td>
 <td style="text-align:center;">
-0.4301
+0.4302
 </td>
 <td style="text-align:center;">
 0.6671
 </td>
 <td style="text-align:center;">
--3.2991
+-3.2987
 </td>
 <td style="text-align:center;">
-5.1542
+5.1538
 </td>
 </tr>
 <tr>
@@ -1015,19 +1033,19 @@ LocationUrban
 2.4307
 </td>
 <td style="text-align:center;">
-2.1617
+2.1615
 </td>
 <td style="text-align:center;">
-1.1245
+1.1246
 </td>
 <td style="text-align:center;">
 0.2608
 </td>
 <td style="text-align:center;">
--1.8061
+-1.8057
 </td>
 <td style="text-align:center;">
-6.6675
+6.6671
 </td>
 </tr>
 <tr>
@@ -1038,19 +1056,19 @@ Policy_TypeComprehensive
 0.3791
 </td>
 <td style="text-align:center;">
-2.1618
+2.1623
 </td>
 <td style="text-align:center;">
-0.1754
+0.1753
 </td>
 <td style="text-align:center;">
 0.8608
 </td>
 <td style="text-align:center;">
--3.8580
+-3.8590
 </td>
 <td style="text-align:center;">
-4.6162
+4.6172
 </td>
 </tr>
 <tr>
@@ -1061,19 +1079,19 @@ Policy_TypePremium
 -1.1022
 </td>
 <td style="text-align:center;">
-2.1590
+2.1574
 </td>
 <td style="text-align:center;">
--0.5105
+-0.5109
 </td>
 <td style="text-align:center;">
-0.6097
+0.6094
 </td>
 <td style="text-align:center;">
--5.3338
+-5.3306
 </td>
 <td style="text-align:center;">
-3.1294
+3.1262
 </td>
 </tr>
 <tr>
@@ -1081,22 +1099,22 @@ Policy_TypePremium
 Previous_Claims
 </td>
 <td style="text-align:center;">
-42.8158
+42.8161
 </td>
 <td style="text-align:center;">
-1.0759
+1.1034
 </td>
 <td style="text-align:center;">
-39.7965
+38.8026
 </td>
 <td style="text-align:center;">
 &lt; 0.001
 </td>
 <td style="text-align:center;">
-40.7071
+40.6534
 </td>
 <td style="text-align:center;">
-44.9245
+44.9788
 </td>
 </tr>
 <tr>
@@ -1107,19 +1125,19 @@ Vehicle_Age
 0.03283
 </td>
 <td style="text-align:center;">
-0.1526
+0.1529
 </td>
 <td style="text-align:center;">
-0.2151
+0.2147
 </td>
 <td style="text-align:center;">
-0.8297
+0.8300
 </td>
 <td style="text-align:center;">
--0.2663
+-0.2669
 </td>
 <td style="text-align:center;">
-0.332
+0.3326
 </td>
 </tr>
 <tr>
@@ -1130,10 +1148,10 @@ Credit_Score
 -0.1757
 </td>
 <td style="text-align:center;">
-0.006359
+0.00636
 </td>
 <td style="text-align:center;">
--27.6313
+-27.6290
 </td>
 <td style="text-align:center;">
 &lt; 0.001
@@ -1142,7 +1160,7 @@ Credit_Score
 -0.1882
 </td>
 <td style="text-align:center;">
--0.1632
+-0.1633
 </td>
 </tr>
 <tr>
@@ -1153,42 +1171,19 @@ Insurance_Duration
 -0.1628
 </td>
 <td style="text-align:center;">
-0.3398
+0.34
 </td>
 <td style="text-align:center;">
--0.479
+-0.4788
 </td>
 <td style="text-align:center;">
-0.6319
+0.6321
 </td>
 <td style="text-align:center;">
--0.8288
+-0.8291
 </td>
 <td style="text-align:center;">
-0.5032
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-Customer_FeedbackAverage
-</td>
-<td style="text-align:center;">
-11.8881
-</td>
-<td style="text-align:center;">
-2.1283
-</td>
-<td style="text-align:center;">
-5.5856
-</td>
-<td style="text-align:center;">
-&lt; 0.001
-</td>
-<td style="text-align:center;">
-7.7166
-</td>
-<td style="text-align:center;">
-16.0596
+0.5036
 </td>
 </tr>
 <tr>
@@ -1196,22 +1191,45 @@ Customer_FeedbackAverage
 Customer_FeedbackGood
 </td>
 <td style="text-align:center;">
--3.2802
+-15.1685
 </td>
 <td style="text-align:center;">
-2.2395
+2.1390
 </td>
 <td style="text-align:center;">
--1.4647
+-7.0915
 </td>
 <td style="text-align:center;">
-0.1430
+&lt; 0.001
 </td>
 <td style="text-align:center;">
--7.6695
+-19.3608
 </td>
 <td style="text-align:center;">
-1.1090
+-10.9762
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Customer_FeedbackPoor
+</td>
+<td style="text-align:center;">
+-11.8883
+</td>
+<td style="text-align:center;">
+2.1302
+</td>
+<td style="text-align:center;">
+-5.5809
+</td>
+<td style="text-align:center;">
+&lt; 0.001
+</td>
+<td style="text-align:center;">
+-16.0634
+</td>
+<td style="text-align:center;">
+-7.7132
 </td>
 </tr>
 <tr>
@@ -1219,7 +1237,7 @@ Customer_FeedbackGood
 Smoking_StatusYes
 </td>
 <td style="text-align:center;">
--0.145
+-0.1451
 </td>
 <td style="text-align:center;">
 1.7633
@@ -1242,22 +1260,45 @@ Smoking_StatusYes
 Exercise_FrequencyMonthly
 </td>
 <td style="text-align:center;">
--0.5695
+-1.2946
 </td>
 <td style="text-align:center;">
-2.4959
+2.5085
 </td>
 <td style="text-align:center;">
--0.2282
+-0.5161
 </td>
 <td style="text-align:center;">
-0.8195
+0.6058
 </td>
 <td style="text-align:center;">
--5.4615
+-6.2111
 </td>
 <td style="text-align:center;">
-4.3224
+3.6219
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Exercise_FrequencyRarely
+</td>
+<td style="text-align:center;">
+-0.7251
+</td>
+<td style="text-align:center;">
+2.5038
+</td>
+<td style="text-align:center;">
+-0.2896
+</td>
+<td style="text-align:center;">
+0.7721
+</td>
+<td style="text-align:center;">
+-5.6324
+</td>
+<td style="text-align:center;">
+4.1823
 </td>
 </tr>
 <tr>
@@ -1265,45 +1306,22 @@ Exercise_FrequencyMonthly
 Exercise_FrequencyWeekly
 </td>
 <td style="text-align:center;">
--2.0680
+-2.7931
 </td>
 <td style="text-align:center;">
-2.4819
+2.4900
 </td>
 <td style="text-align:center;">
--0.8332
+-1.1218
 </td>
 <td style="text-align:center;">
-0.4047
+0.2620
 </td>
 <td style="text-align:center;">
--6.9326
+-7.6734
 </td>
 <td style="text-align:center;">
-2.7965
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-Exercise_FrequencyDaily
-</td>
-<td style="text-align:center;">
-0.7251
-</td>
-<td style="text-align:center;">
-2.5059
-</td>
-<td style="text-align:center;">
-0.2894
-</td>
-<td style="text-align:center;">
-0.7723
-</td>
-<td style="text-align:center;">
--4.1863
-</td>
-<td style="text-align:center;">
-5.6365
+2.0871
 </td>
 </tr>
 <tr>
@@ -1314,19 +1332,19 @@ Property_TypeCondo
 -2.8406
 </td>
 <td style="text-align:center;">
-2.1601
+2.1636
 </td>
 <td style="text-align:center;">
--1.3150
+-1.3129
 </td>
 <td style="text-align:center;">
-0.1885
+0.1892
 </td>
 <td style="text-align:center;">
--7.0744
+-7.0812
 </td>
 <td style="text-align:center;">
-1.3931
+1.3999
 </td>
 </tr>
 <tr>
@@ -1337,37 +1355,37 @@ Property_TypeHouse
 -2.5386
 </td>
 <td style="text-align:center;">
-2.1589
+2.1576
 </td>
 <td style="text-align:center;">
--1.1758
+-1.1766
 </td>
 <td style="text-align:center;">
-0.2397
+0.2394
 </td>
 <td style="text-align:center;">
--6.7700
+-6.7673
 </td>
 <td style="text-align:center;">
-1.6929
+1.6902
 </td>
 </tr>
 </tbody>
 </table>
 </div>
-<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb308-1"><a href="rlm.html#cb308-1" tabindex="-1"></a>coef_full <span class="ot">&lt;-</span> broom<span class="sc">::</span><span class="fu">tidy</span>(modelo_full)[<span class="sc">-</span><span class="dv">1</span>, ]</span>
-<span id="cb308-2"><a href="rlm.html#cb308-2" tabindex="-1"></a>sig_full  <span class="ot">&lt;-</span> coef_full<span class="sc">$</span>term[coef_full<span class="sc">$</span>p.value <span class="sc">&lt;</span> <span class="fl">0.05</span>]</span></code></pre></div>
-<p>Con una confianza del 95%, de los 29 coeficientes asociados a las variables predictoras, 8 resultan estadísticamente significativos (Annual Income, Marital Status = Single, Education Level = PhD, Occupation = No especificado, Health Score, Previous Claims, Credit Score, Customer Feedback = Average), ya que su p valor es menor a <span class="math inline">\(0.05\)</span> y su intervalo de confianza no contiene al 0. Los demás coeficientes no son significativos, lo que sugiere que esas variables podrían eliminarse del modelo.</p>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="rlm.html#cb233-1" tabindex="-1"></a>coef_full <span class="ot">&lt;-</span> <span class="fu">coef_robustos</span>(modelo_full, cov_full)[<span class="sc">-</span><span class="dv">1</span>, ]</span>
+<span id="cb233-2"><a href="rlm.html#cb233-2" tabindex="-1"></a>sig_full  <span class="ot">&lt;-</span> coef_full<span class="sc">$</span>term[coef_full<span class="sc">$</span>p.value <span class="sc">&lt;</span> <span class="fl">0.05</span>]</span></code></pre></div>
+<p>Con una confianza del 95%, de los 29 coeficientes asociados a las variables predictoras, 8 resultan estadísticamente significativos (Annual Income, Marital Status = Single, Occupation = No especificado, Health Score, Previous Claims, Credit Score, Customer Feedback = Good, Customer Feedback = Poor), ya que su p valor es menor a <span class="math inline">\(0.05\)</span> y su intervalo de confianza no contiene al 0. Los demás coeficientes no son significativos, lo que sugiere que esas variables podrían eliminarse del modelo.</p>
 </div>
 <div id="análisis-de-multicolinealidad" class="section level3 hasAnchor" number="4.3.3">
 <h3><span class="header-section-number">4.3.3</span> Análisis de multicolinealidad<a href="rlm.html#an%C3%A1lisis-de-multicolinealidad" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Antes de seleccionar variables, se verifica que no exista multicolinealidad, es decir, que ninguna variable predictora pueda expresarse como combinación lineal de las demás. Como el modelo incluye variables categóricas con varias dummies, se usa el factor de inflación de varianza generalizado (GVIF). El valor <span class="math inline">\(GVIF^{1/(2\,gl)}\)</span> es comparable entre variables con distinto número de dummies, y el criterio <span class="math inline">\(VIF &gt; 5\)</span> equivale a <span class="math inline">\(GVIF^{1/(2\,gl)} &gt; \sqrt{5} \approx 2.24\)</span>.</p>
-<div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb309-1"><a href="rlm.html#cb309-1" tabindex="-1"></a>vif_full <span class="ot">&lt;-</span> car<span class="sc">::</span><span class="fu">vif</span>(modelo_full)</span>
-<span id="cb309-2"><a href="rlm.html#cb309-2" tabindex="-1"></a>tabla_vif <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(vif_full) <span class="sc">%&gt;%</span></span>
-<span id="cb309-3"><a href="rlm.html#cb309-3" tabindex="-1"></a>  tibble<span class="sc">::</span><span class="fu">rownames_to_column</span>(<span class="st">&quot;Variable&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb309-4"><a href="rlm.html#cb309-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Variable =</span> <span class="fu">gsub</span>(<span class="st">&quot;_&quot;</span>, <span class="st">&quot; &quot;</span>, Variable))</span>
-<span id="cb309-5"><a href="rlm.html#cb309-5" tabindex="-1"></a><span class="fu">names</span>(tabla_vif) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Variable&quot;</span>, <span class="st">&quot;GVIF&quot;</span>, <span class="st">&quot;gl&quot;</span>, <span class="st">&quot;$GVIF^{1/(2</span><span class="sc">\\</span><span class="st">,gl)}$&quot;</span>)</span>
-<span id="cb309-6"><a href="rlm.html#cb309-6" tabindex="-1"></a>tabla_vif <span class="sc">%&gt;%</span> <span class="fu">tabla_rlm</span>(<span class="st">&quot;Factor de inflación de varianza generalizado del modelo completo&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="rlm.html#cb234-1" tabindex="-1"></a>vif_full <span class="ot">&lt;-</span> car<span class="sc">::</span><span class="fu">vif</span>(modelo_full)</span>
+<span id="cb234-2"><a href="rlm.html#cb234-2" tabindex="-1"></a>tabla_vif <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(vif_full) <span class="sc">%&gt;%</span></span>
+<span id="cb234-3"><a href="rlm.html#cb234-3" tabindex="-1"></a>  tibble<span class="sc">::</span><span class="fu">rownames_to_column</span>(<span class="st">&quot;Variable&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb234-4"><a href="rlm.html#cb234-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Variable =</span> <span class="fu">gsub</span>(<span class="st">&quot;_&quot;</span>, <span class="st">&quot; &quot;</span>, Variable))</span>
+<span id="cb234-5"><a href="rlm.html#cb234-5" tabindex="-1"></a><span class="fu">names</span>(tabla_vif) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Variable&quot;</span>, <span class="st">&quot;GVIF&quot;</span>, <span class="st">&quot;gl&quot;</span>, <span class="st">&quot;$GVIF^{1/(2</span><span class="sc">\\</span><span class="st">,gl)}$&quot;</span>)</span>
+<span id="cb234-6"><a href="rlm.html#cb234-6" tabindex="-1"></a>tabla_vif <span class="sc">%&gt;%</span> <span class="fu">tabla_rlm</span>(<span class="st">&quot;Factor de inflación de varianza generalizado del modelo completo&quot;</span>)</span></code></pre></div>
 <table class="table table-striped table-hover table-condensed" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:vif-completo">Tabla 4.5: </span>Factor de inflación de varianza generalizado del modelo completo
@@ -1562,7 +1580,7 @@ Vehicle Age
 Credit Score
 </td>
 <td style="text-align:center;">
-1.0355
+1.0356
 </td>
 <td style="text-align:center;">
 1
@@ -1643,47 +1661,47 @@ Property Type
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="rlm.html#cb310-1" tabindex="-1"></a>gvif_max <span class="ot">&lt;-</span> <span class="fu">max</span>(vif_full[, <span class="dv">3</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="rlm.html#cb235-1" tabindex="-1"></a>gvif_max <span class="ot">&lt;-</span> <span class="fu">max</span>(vif_full[, <span class="dv">3</span>])</span></code></pre></div>
 <p>Además, se calcula el número de condición (ICN) de la matriz de diseño. Como las variables tienen escalas muy distintas (por ejemplo, Annual Income llega a 150,000 y las dummies solo valen 0 o 1), el ICN se calcula sobre las columnas estandarizadas, ya que de lo contrario reflejaría la diferencia de escalas y no la dependencia entre variables.</p>
-<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="rlm.html#cb311-1" tabindex="-1"></a>X_std <span class="ot">&lt;-</span> <span class="fu">scale</span>(<span class="fu">model.matrix</span>(modelo_full)[, <span class="sc">-</span><span class="dv">1</span>])</span>
-<span id="cb311-2"><a href="rlm.html#cb311-2" tabindex="-1"></a>icn <span class="ot">&lt;-</span> <span class="fu">kappa</span>(X_std, <span class="at">exact =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb311-3"><a href="rlm.html#cb311-3" tabindex="-1"></a><span class="fu">rm</span>(X_std); <span class="fu">invisible</span>(<span class="fu">gc</span>())</span></code></pre></div>
-<p>El mayor valor de <span class="math inline">\(GVIF^{1/(2\,gl)}\)</span> es <span class="math inline">\(1.0182\)</span>, muy por debajo de <span class="math inline">\(2.24\)</span>, y el número de condición es <span class="math inline">\(ICN = 2.19\)</span>, menor a 30. Por lo tanto, se concluye que no existe multicolinealidad entre las variables predictoras, lo cual es coherente con la matriz de correlación del EDA, donde ningún par de variables numéricas superaba <span class="math inline">\(|\rho_s| = 0.133\)</span>.</p>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="rlm.html#cb236-1" tabindex="-1"></a>X_std <span class="ot">&lt;-</span> <span class="fu">scale</span>(<span class="fu">model.matrix</span>(modelo_full)[, <span class="sc">-</span><span class="dv">1</span>])</span>
+<span id="cb236-2"><a href="rlm.html#cb236-2" tabindex="-1"></a>icn <span class="ot">&lt;-</span> <span class="fu">kappa</span>(X_std, <span class="at">exact =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb236-3"><a href="rlm.html#cb236-3" tabindex="-1"></a><span class="fu">rm</span>(X_std); <span class="fu">invisible</span>(<span class="fu">gc</span>())</span></code></pre></div>
+<p>El mayor valor de <span class="math inline">\(GVIF^{1/(2\,gl)}\)</span> es <span class="math inline">\(1.0182\)</span>, muy por debajo de <span class="math inline">\(2.24\)</span>, y el número de condición es <span class="math inline">\(ICN = 2.18\)</span>, menor a 30. Por lo tanto, se concluye que no existe multicolinealidad entre las variables predictoras, lo cual es coherente con la matriz de correlación del EDA, donde ningún par de variables numéricas superaba <span class="math inline">\(|\rho_s| = 0.133\)</span>.</p>
 </div>
 </div>
 <div id="selección-de-variables" class="section level2 hasAnchor" number="4.4">
 <h2><span class="header-section-number">4.4</span> Selección de variables<a href="rlm.html#selecci%C3%B3n-de-variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>El método de todas las regresiones posibles requeriría ajustar <span class="math inline">\(2^{18} - 1 = 262{,}143\)</span> modelos sobre 960,000 observaciones, lo cual no es viable computacionalmente. Por ello se usa la selección secuencial con los métodos forward, backward y stepwise.</p>
 <p>Como criterio se usa principalmente el BIC, <span class="math inline">\(BIC = n\ln(SSE/n) + p\ln n\)</span>, ya que penaliza más la inclusión de variables cuando el tamaño de muestra es grande: con <span class="math inline">\(n\)</span> cercano a un millón, el AIC tiende a conservar variables que, aunque mejoran un poco el ajuste, no aportan en la práctica. Para comparar, se incluye también el método stepwise con el AIC. En <code>stepAIC()</code>, el BIC se obtiene con el argumento <code>k = log(n)</code>.</p>
-<p>Este paso puede tardar varios minutos por el tamaño de los datos.</p>
-<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="rlm.html#cb312-1" tabindex="-1"></a>modelo_nulo <span class="ot">&lt;-</span> <span class="fu">lm</span>(Premium_Amount <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> train)</span>
-<span id="cb312-2"><a href="rlm.html#cb312-2" tabindex="-1"></a>k_bic <span class="ot">&lt;-</span> <span class="fu">log</span>(<span class="fu">nrow</span>(train))</span>
-<span id="cb312-3"><a href="rlm.html#cb312-3" tabindex="-1"></a>alcance <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">lower =</span> modelo_nulo, <span class="at">upper =</span> modelo_full)</span>
-<span id="cb312-4"><a href="rlm.html#cb312-4" tabindex="-1"></a></span>
-<span id="cb312-5"><a href="rlm.html#cb312-5" tabindex="-1"></a><span class="co"># Método forward (BIC)</span></span>
-<span id="cb312-6"><a href="rlm.html#cb312-6" tabindex="-1"></a>sel_forward <span class="ot">&lt;-</span> MASS<span class="sc">::</span><span class="fu">stepAIC</span>(modelo_nulo, <span class="at">scope =</span> alcance, <span class="at">direction =</span> <span class="st">&quot;forward&quot;</span>,</span>
-<span id="cb312-7"><a href="rlm.html#cb312-7" tabindex="-1"></a>                             <span class="at">k =</span> k_bic, <span class="at">trace =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb312-8"><a href="rlm.html#cb312-8" tabindex="-1"></a></span>
-<span id="cb312-9"><a href="rlm.html#cb312-9" tabindex="-1"></a><span class="co"># Método backward (BIC)</span></span>
-<span id="cb312-10"><a href="rlm.html#cb312-10" tabindex="-1"></a>sel_backward <span class="ot">&lt;-</span> MASS<span class="sc">::</span><span class="fu">stepAIC</span>(modelo_full, <span class="at">direction =</span> <span class="st">&quot;backward&quot;</span>,</span>
-<span id="cb312-11"><a href="rlm.html#cb312-11" tabindex="-1"></a>                              <span class="at">k =</span> k_bic, <span class="at">trace =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb312-12"><a href="rlm.html#cb312-12" tabindex="-1"></a></span>
-<span id="cb312-13"><a href="rlm.html#cb312-13" tabindex="-1"></a><span class="co"># Método stepwise (BIC)</span></span>
-<span id="cb312-14"><a href="rlm.html#cb312-14" tabindex="-1"></a>sel_both <span class="ot">&lt;-</span> MASS<span class="sc">::</span><span class="fu">stepAIC</span>(modelo_nulo, <span class="at">scope =</span> alcance, <span class="at">direction =</span> <span class="st">&quot;both&quot;</span>,</span>
-<span id="cb312-15"><a href="rlm.html#cb312-15" tabindex="-1"></a>                          <span class="at">k =</span> k_bic, <span class="at">trace =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb312-16"><a href="rlm.html#cb312-16" tabindex="-1"></a></span>
-<span id="cb312-17"><a href="rlm.html#cb312-17" tabindex="-1"></a><span class="co"># Método stepwise (AIC), para comparar</span></span>
-<span id="cb312-18"><a href="rlm.html#cb312-18" tabindex="-1"></a>sel_aic <span class="ot">&lt;-</span> MASS<span class="sc">::</span><span class="fu">stepAIC</span>(modelo_nulo, <span class="at">scope =</span> alcance, <span class="at">direction =</span> <span class="st">&quot;both&quot;</span>,</span>
-<span id="cb312-19"><a href="rlm.html#cb312-19" tabindex="-1"></a>                         <span class="at">k =</span> <span class="dv">2</span>, <span class="at">trace =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb313-1"><a href="rlm.html#cb313-1" tabindex="-1"></a>sel <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">&quot;Forward (BIC)&quot;</span> <span class="ot">=</span> sel_forward, <span class="st">&quot;Backward (BIC)&quot;</span> <span class="ot">=</span> sel_backward,</span>
-<span id="cb313-2"><a href="rlm.html#cb313-2" tabindex="-1"></a>            <span class="st">&quot;Stepwise (BIC)&quot;</span> <span class="ot">=</span> sel_both, <span class="st">&quot;Stepwise (AIC)&quot;</span> <span class="ot">=</span> sel_aic)</span>
-<span id="cb313-3"><a href="rlm.html#cb313-3" tabindex="-1"></a></span>
-<span id="cb313-4"><a href="rlm.html#cb313-4" tabindex="-1"></a><span class="fu">tibble</span>(<span class="st">`</span><span class="at">Método</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">names</span>(sel),</span>
-<span id="cb313-5"><a href="rlm.html#cb313-5" tabindex="-1"></a>       <span class="st">`</span><span class="at">Número de variables</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sapply</span>(sel, <span class="cf">function</span>(m) <span class="fu">length</span>(<span class="fu">vars_de</span>(m))),</span>
-<span id="cb313-6"><a href="rlm.html#cb313-6" tabindex="-1"></a>       <span class="at">Variables =</span> <span class="fu">sapply</span>(sel, <span class="cf">function</span>(m) <span class="fu">paste</span>(<span class="fu">gsub</span>(<span class="st">&quot;_&quot;</span>, <span class="st">&quot; &quot;</span>, <span class="fu">sort</span>(<span class="fu">vars_de</span>(m))), <span class="at">collapse =</span> <span class="st">&quot;, &quot;</span>)),</span>
-<span id="cb313-7"><a href="rlm.html#cb313-7" tabindex="-1"></a>       <span class="at">AIC =</span> <span class="fu">sapply</span>(sel, AIC),</span>
-<span id="cb313-8"><a href="rlm.html#cb313-8" tabindex="-1"></a>       <span class="at">BIC =</span> <span class="fu">sapply</span>(sel, BIC)) <span class="sc">%&gt;%</span></span>
-<span id="cb313-9"><a href="rlm.html#cb313-9" tabindex="-1"></a>  <span class="fu">tabla_rlm</span>(<span class="st">&quot;Modelos obtenidos con la selección secuencial&quot;</span>, <span class="at">align =</span> <span class="st">&quot;lclcc&quot;</span>)</span></code></pre></div>
+<p>Estos ajustes sobre todo el entrenamiento describen la selección de variables. La evaluación del procedimiento de selección se realizó por separado y de nuevo en cada pliegue.</p>
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="rlm.html#cb237-1" tabindex="-1"></a>modelo_nulo <span class="ot">&lt;-</span> <span class="fu">lm</span>(Premium_Amount <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> train)</span>
+<span id="cb237-2"><a href="rlm.html#cb237-2" tabindex="-1"></a>k_bic <span class="ot">&lt;-</span> <span class="fu">log</span>(<span class="fu">nrow</span>(train))</span>
+<span id="cb237-3"><a href="rlm.html#cb237-3" tabindex="-1"></a>alcance <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">lower =</span> modelo_nulo, <span class="at">upper =</span> modelo_full)</span>
+<span id="cb237-4"><a href="rlm.html#cb237-4" tabindex="-1"></a></span>
+<span id="cb237-5"><a href="rlm.html#cb237-5" tabindex="-1"></a><span class="co"># Método forward (BIC)</span></span>
+<span id="cb237-6"><a href="rlm.html#cb237-6" tabindex="-1"></a>sel_forward <span class="ot">&lt;-</span> MASS<span class="sc">::</span><span class="fu">stepAIC</span>(modelo_nulo, <span class="at">scope =</span> alcance, <span class="at">direction =</span> <span class="st">&quot;forward&quot;</span>,</span>
+<span id="cb237-7"><a href="rlm.html#cb237-7" tabindex="-1"></a>                             <span class="at">k =</span> k_bic, <span class="at">trace =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb237-8"><a href="rlm.html#cb237-8" tabindex="-1"></a></span>
+<span id="cb237-9"><a href="rlm.html#cb237-9" tabindex="-1"></a><span class="co"># Método backward (BIC)</span></span>
+<span id="cb237-10"><a href="rlm.html#cb237-10" tabindex="-1"></a>sel_backward <span class="ot">&lt;-</span> MASS<span class="sc">::</span><span class="fu">stepAIC</span>(modelo_full, <span class="at">direction =</span> <span class="st">&quot;backward&quot;</span>,</span>
+<span id="cb237-11"><a href="rlm.html#cb237-11" tabindex="-1"></a>                              <span class="at">k =</span> k_bic, <span class="at">trace =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb237-12"><a href="rlm.html#cb237-12" tabindex="-1"></a></span>
+<span id="cb237-13"><a href="rlm.html#cb237-13" tabindex="-1"></a><span class="co"># Método stepwise (BIC)</span></span>
+<span id="cb237-14"><a href="rlm.html#cb237-14" tabindex="-1"></a>sel_both <span class="ot">&lt;-</span> MASS<span class="sc">::</span><span class="fu">stepAIC</span>(modelo_nulo, <span class="at">scope =</span> alcance, <span class="at">direction =</span> <span class="st">&quot;both&quot;</span>,</span>
+<span id="cb237-15"><a href="rlm.html#cb237-15" tabindex="-1"></a>                          <span class="at">k =</span> k_bic, <span class="at">trace =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb237-16"><a href="rlm.html#cb237-16" tabindex="-1"></a></span>
+<span id="cb237-17"><a href="rlm.html#cb237-17" tabindex="-1"></a><span class="co"># Método stepwise (AIC), para comparar</span></span>
+<span id="cb237-18"><a href="rlm.html#cb237-18" tabindex="-1"></a>sel_aic <span class="ot">&lt;-</span> MASS<span class="sc">::</span><span class="fu">stepAIC</span>(modelo_nulo, <span class="at">scope =</span> alcance, <span class="at">direction =</span> <span class="st">&quot;both&quot;</span>,</span>
+<span id="cb237-19"><a href="rlm.html#cb237-19" tabindex="-1"></a>                         <span class="at">k =</span> <span class="dv">2</span>, <span class="at">trace =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="rlm.html#cb238-1" tabindex="-1"></a>sel <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">&quot;Forward (BIC)&quot;</span> <span class="ot">=</span> sel_forward, <span class="st">&quot;Backward (BIC)&quot;</span> <span class="ot">=</span> sel_backward,</span>
+<span id="cb238-2"><a href="rlm.html#cb238-2" tabindex="-1"></a>            <span class="st">&quot;Stepwise (BIC)&quot;</span> <span class="ot">=</span> sel_both, <span class="st">&quot;Stepwise (AIC)&quot;</span> <span class="ot">=</span> sel_aic)</span>
+<span id="cb238-3"><a href="rlm.html#cb238-3" tabindex="-1"></a></span>
+<span id="cb238-4"><a href="rlm.html#cb238-4" tabindex="-1"></a><span class="fu">tibble</span>(<span class="st">`</span><span class="at">Método</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">names</span>(sel),</span>
+<span id="cb238-5"><a href="rlm.html#cb238-5" tabindex="-1"></a>       <span class="st">`</span><span class="at">Número de variables</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sapply</span>(sel, <span class="cf">function</span>(m) <span class="fu">length</span>(<span class="fu">vars_de</span>(m))),</span>
+<span id="cb238-6"><a href="rlm.html#cb238-6" tabindex="-1"></a>       <span class="at">Variables =</span> <span class="fu">sapply</span>(sel, <span class="cf">function</span>(m) <span class="fu">paste</span>(<span class="fu">gsub</span>(<span class="st">&quot;_&quot;</span>, <span class="st">&quot; &quot;</span>, <span class="fu">sort</span>(<span class="fu">vars_de</span>(m))), <span class="at">collapse =</span> <span class="st">&quot;, &quot;</span>)),</span>
+<span id="cb238-7"><a href="rlm.html#cb238-7" tabindex="-1"></a>       <span class="at">AIC =</span> <span class="fu">sapply</span>(sel, AIC),</span>
+<span id="cb238-8"><a href="rlm.html#cb238-8" tabindex="-1"></a>       <span class="at">BIC =</span> <span class="fu">sapply</span>(sel, BIC)) <span class="sc">%&gt;%</span></span>
+<span id="cb238-9"><a href="rlm.html#cb238-9" tabindex="-1"></a>  <span class="fu">tabla_rlm</span>(<span class="st">&quot;Modelos obtenidos con la selección secuencial&quot;</span>, <span class="at">align =</span> <span class="st">&quot;lclcc&quot;</span>)</span></code></pre></div>
 <table class="table table-striped table-hover table-condensed" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:tabla-seleccion">Tabla 4.6: </span>Modelos obtenidos con la selección secuencial
@@ -1719,10 +1737,10 @@ Forward (BIC)
 Annual Income, Credit Score, Customer Feedback, Health Score, Occupation, Previous Claims
 </td>
 <td style="text-align:center;">
-15,706,197.6047
+15,706,197.4497
 </td>
 <td style="text-align:center;">
-15,706,327.1262
+15,706,326.9713
 </td>
 </tr>
 <tr>
@@ -1736,10 +1754,10 @@ Backward (BIC)
 Annual Income, Credit Score, Customer Feedback, Health Score, Occupation, Previous Claims
 </td>
 <td style="text-align:center;">
-15,706,197.6047
+15,706,197.4497
 </td>
 <td style="text-align:center;">
-15,706,327.1262
+15,706,326.9713
 </td>
 </tr>
 <tr>
@@ -1753,10 +1771,10 @@ Stepwise (BIC)
 Annual Income, Credit Score, Customer Feedback, Health Score, Occupation, Previous Claims
 </td>
 <td style="text-align:center;">
-15,706,197.6047
+15,706,197.4497
 </td>
 <td style="text-align:center;">
-15,706,327.1262
+15,706,326.9713
 </td>
 </tr>
 <tr>
@@ -1770,23 +1788,23 @@ Stepwise (AIC)
 Age, Annual Income, Credit Score, Customer Feedback, Health Score, Marital Status, Occupation, Previous Claims
 </td>
 <td style="text-align:center;">
-15,706,191.5340
+15,706,191.3789
 </td>
 <td style="text-align:center;">
-15,706,356.3796
+15,706,356.2245
 </td>
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="rlm.html#cb314-1" tabindex="-1"></a>mismas_bic <span class="ot">&lt;-</span> <span class="fu">identical</span>(<span class="fu">sort</span>(<span class="fu">vars_de</span>(sel_forward)), <span class="fu">sort</span>(<span class="fu">vars_de</span>(sel_backward))) <span class="sc">&amp;&amp;</span></span>
-<span id="cb314-2"><a href="rlm.html#cb314-2" tabindex="-1"></a>  <span class="fu">identical</span>(<span class="fu">sort</span>(<span class="fu">vars_de</span>(sel_forward)), <span class="fu">sort</span>(<span class="fu">vars_de</span>(sel_both)))</span>
-<span id="cb314-3"><a href="rlm.html#cb314-3" tabindex="-1"></a></span>
-<span id="cb314-4"><a href="rlm.html#cb314-4" tabindex="-1"></a>modelo_bic <span class="ot">&lt;-</span> sel_both</span>
-<span id="cb314-5"><a href="rlm.html#cb314-5" tabindex="-1"></a>vars_bic   <span class="ot">&lt;-</span> <span class="fu">vars_de</span>(modelo_bic)</span>
-<span id="cb314-6"><a href="rlm.html#cb314-6" tabindex="-1"></a>vars_elim  <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(<span class="fu">vars_de</span>(modelo_full), vars_bic)</span>
-<span id="cb314-7"><a href="rlm.html#cb314-7" tabindex="-1"></a>vars_aic   <span class="ot">&lt;-</span> <span class="fu">vars_de</span>(sel_aic)</span>
-<span id="cb314-8"><a href="rlm.html#cb314-8" tabindex="-1"></a></span>
-<span id="cb314-9"><a href="rlm.html#cb314-9" tabindex="-1"></a><span class="fu">rm</span>(sel_forward, sel_backward, sel); <span class="fu">invisible</span>(<span class="fu">gc</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="rlm.html#cb239-1" tabindex="-1"></a>mismas_bic <span class="ot">&lt;-</span> <span class="fu">identical</span>(<span class="fu">sort</span>(<span class="fu">vars_de</span>(sel_forward)), <span class="fu">sort</span>(<span class="fu">vars_de</span>(sel_backward))) <span class="sc">&amp;&amp;</span></span>
+<span id="cb239-2"><a href="rlm.html#cb239-2" tabindex="-1"></a>  <span class="fu">identical</span>(<span class="fu">sort</span>(<span class="fu">vars_de</span>(sel_forward)), <span class="fu">sort</span>(<span class="fu">vars_de</span>(sel_both)))</span>
+<span id="cb239-3"><a href="rlm.html#cb239-3" tabindex="-1"></a></span>
+<span id="cb239-4"><a href="rlm.html#cb239-4" tabindex="-1"></a>modelo_bic <span class="ot">&lt;-</span> sel_both</span>
+<span id="cb239-5"><a href="rlm.html#cb239-5" tabindex="-1"></a>vars_bic   <span class="ot">&lt;-</span> <span class="fu">vars_de</span>(modelo_bic)</span>
+<span id="cb239-6"><a href="rlm.html#cb239-6" tabindex="-1"></a>vars_elim  <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(<span class="fu">vars_de</span>(modelo_full), vars_bic)</span>
+<span id="cb239-7"><a href="rlm.html#cb239-7" tabindex="-1"></a>vars_aic   <span class="ot">&lt;-</span> <span class="fu">vars_de</span>(sel_aic)</span>
+<span id="cb239-8"><a href="rlm.html#cb239-8" tabindex="-1"></a></span>
+<span id="cb239-9"><a href="rlm.html#cb239-9" tabindex="-1"></a><span class="fu">rm</span>(sel_forward, sel_backward, sel); <span class="fu">invisible</span>(<span class="fu">gc</span>())</span></code></pre></div>
 <p>Los tres métodos con el criterio BIC (forward, backward y stepwise) coinciden en el mismo modelo, que incluye 6 variables: Previous Claims, Credit Score, Annual Income, Health Score, Customer Feedback, Occupation. Las 12 variables eliminadas son: Age, Gender, Marital Status, Number of Dependents, Education Level, Location, Policy Type, Vehicle Age, Insurance Duration, Smoking Status, Exercise Frequency, Property Type. Por su parte, el método stepwise con el AIC conserva 8 variables, más que con el BIC, como era de esperarse por su menor penalización.</p>
 <p>Para verificar si las variables eliminadas aportan al modelo, se compara el modelo seleccionado (reducido) con el completo mediante la prueba F parcial:</p>
 <p><span class="math display">\[
@@ -1797,8 +1815,8 @@ H_1 &amp;: \text{al menos uno de esos coeficientes es distinto de 0}
 \qquad
 F = \frac{(SSE_{\text{reduc}} - SSE_{\text{full}})/(p_{\text{full}} - p_{\text{reduc}})}{SSE_{\text{full}}/(n - p_{\text{full}})}
 \]</span></p>
-<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb315-1"><a href="rlm.html#cb315-1" tabindex="-1"></a>f_parcial <span class="ot">&lt;-</span> <span class="fu">anova</span>(modelo_bic, modelo_full)</span>
-<span id="cb315-2"><a href="rlm.html#cb315-2" tabindex="-1"></a>f_parcial</span></code></pre></div>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="rlm.html#cb240-1" tabindex="-1"></a>f_parcial <span class="ot">&lt;-</span> <span class="fu">anova</span>(modelo_bic, modelo_full)</span>
+<span id="cb240-2"><a href="rlm.html#cb240-2" tabindex="-1"></a>f_parcial</span></code></pre></div>
 <table class="table table-striped table-hover table-condensed" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -1833,7 +1851,7 @@ Pr(&gt;F)
 959,990
 </td>
 <td style="text-align:center;">
-716,333,075,672.3585
+716,332,960,066.2976
 </td>
 <td style="text-align:center;">
 </td>
@@ -1852,13 +1870,13 @@ Pr(&gt;F)
 959,970
 </td>
 <td style="text-align:center;">
-716,315,030,992.8740
+716,314,915,247.9230
 </td>
 <td style="text-align:center;">
 20
 </td>
 <td style="text-align:center;">
-18,044,679.4845
+18,044,818.3746
 </td>
 <td style="text-align:center;">
 1.2091
@@ -1869,10 +1887,10 @@ Pr(&gt;F)
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="rlm.html#cb316-1" tabindex="-1"></a>p_parcial <span class="ot">&lt;-</span> f_parcial<span class="sc">$</span><span class="st">`</span><span class="at">Pr(&gt;F)</span><span class="st">`</span>[<span class="dv">2</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="rlm.html#cb241-1" tabindex="-1"></a>p_parcial <span class="ot">&lt;-</span> f_parcial<span class="sc">$</span><span class="st">`</span><span class="at">Pr(&gt;F)</span><span class="st">`</span>[<span class="dv">2</span>]</span></code></pre></div>
 <p>Con una confianza del 95%, la prueba F parcial indica que las variables eliminadas no aportan de forma estadísticamente significativa al modelo (<span class="math inline">\(F = 1.2091\)</span>, p valor <span class="math inline">\(= 0.2345\)</span>), por lo que no se rechaza <span class="math inline">\(H_0\)</span>. Esto respalda el uso del modelo reducido, que es más simple y explica prácticamente lo mismo que el modelo completo.</p>
 <p>Los coeficientes del modelo seleccionado son:</p>
-<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb317-1"><a href="rlm.html#cb317-1" tabindex="-1"></a><span class="fu">tabla_coef</span>(modelo_bic, <span class="st">&quot;Coeficientes estimados del modelo seleccionado por BIC e intervalos de confianza del 95%&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="rlm.html#cb242-1" tabindex="-1"></a><span class="fu">tabla_coef</span>(modelo_bic, <span class="st">&quot;Coeficientes estimados del modelo seleccionado por BIC e intervalos de confianza del 95%&quot;</span>)</span></code></pre></div>
 <table class="table table-striped table-hover table-condensed" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:coef-bic">Tabla 4.7: </span>Coeficientes estimados del modelo seleccionado por BIC e intervalos de confianza del 95%
@@ -1886,7 +1904,7 @@ Término
 Estimación
 </th>
 <th style="text-align:center;font-weight: bold;">
-Error estándar
+Error estándar HC1
 </th>
 <th style="text-align:center;font-weight: bold;">
 <span class="math inline">\(t\)</span>
@@ -1908,22 +1926,22 @@ IC 97.5%
 (Intercept)
 </td>
 <td style="text-align:center;">
-1,154.5193
+1,166.4423
 </td>
 <td style="text-align:center;">
-5.0360
+5.0832
 </td>
 <td style="text-align:center;">
-229.2544
+229.4716
 </td>
 <td style="text-align:center;">
 &lt; 0.001
 </td>
 <td style="text-align:center;">
-1,144.6489
+1,156.4794
 </td>
 <td style="text-align:center;">
-1,164.3896
+1,176.4051
 </td>
 </tr>
 <tr>
@@ -1931,22 +1949,22 @@ IC 97.5%
 Previous_Claims
 </td>
 <td style="text-align:center;">
-42.8212
+42.8214
 </td>
 <td style="text-align:center;">
-1.0758
+1.1034
 </td>
 <td style="text-align:center;">
-39.8022
+38.8086
 </td>
 <td style="text-align:center;">
 &lt; 0.001
 </td>
 <td style="text-align:center;">
-40.7125
+40.6588
 </td>
 <td style="text-align:center;">
-44.9298
+44.9841
 </td>
 </tr>
 <tr>
@@ -1957,10 +1975,10 @@ Credit_Score
 -0.1758
 </td>
 <td style="text-align:center;">
-0.006359
+0.00636
 </td>
 <td style="text-align:center;">
--27.6416
+-27.6390
 </td>
 <td style="text-align:center;">
 &lt; 0.001
@@ -1977,22 +1995,22 @@ Credit_Score
 Annual_Income
 </td>
 <td style="text-align:center;">
--0.0004812
+-0.0004813
 </td>
 <td style="text-align:center;">
-0.0000284
+0.00003286
 </td>
 <td style="text-align:center;">
--16.9460
+-14.6498
 </td>
 <td style="text-align:center;">
 &lt; 0.001
 </td>
 <td style="text-align:center;">
--0.0005368
+-0.0005457
 </td>
 <td style="text-align:center;">
--0.0004255
+-0.0004169
 </td>
 </tr>
 <tr>
@@ -2000,45 +2018,22 @@ Annual_Income
 Health_Score
 </td>
 <td style="text-align:center;">
-1.0413
+1.0412
 </td>
 <td style="text-align:center;">
-0.07464
+0.07542
 </td>
 <td style="text-align:center;">
-13.9515
-</td>
-<td style="text-align:center;">
-&lt; 0.001
-</td>
-<td style="text-align:center;">
-0.895
-</td>
-<td style="text-align:center;">
-1.1876
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-Customer_FeedbackAverage
-</td>
-<td style="text-align:center;">
-11.9119
-</td>
-<td style="text-align:center;">
-2.1283
-</td>
-<td style="text-align:center;">
-5.5969
+13.8058
 </td>
 <td style="text-align:center;">
 &lt; 0.001
 </td>
 <td style="text-align:center;">
-7.7404
+0.8934
 </td>
 <td style="text-align:center;">
-16.0833
+1.1891
 </td>
 </tr>
 <tr>
@@ -2046,22 +2041,45 @@ Customer_FeedbackAverage
 Customer_FeedbackGood
 </td>
 <td style="text-align:center;">
--3.2903
+-15.2023
 </td>
 <td style="text-align:center;">
-2.2394
+2.1389
 </td>
 <td style="text-align:center;">
--1.4693
+-7.1076
 </td>
 <td style="text-align:center;">
-0.1418
+&lt; 0.001
 </td>
 <td style="text-align:center;">
--7.6794
+-19.3944
 </td>
 <td style="text-align:center;">
-1.0989
+-11.0102
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Customer_FeedbackPoor
+</td>
+<td style="text-align:center;">
+-11.9121
+</td>
+<td style="text-align:center;">
+2.1302
+</td>
+<td style="text-align:center;">
+-5.5921
+</td>
+<td style="text-align:center;">
+&lt; 0.001
+</td>
+<td style="text-align:center;">
+-16.0871
+</td>
+<td style="text-align:center;">
+-7.7370
 </td>
 </tr>
 <tr>
@@ -2072,19 +2090,19 @@ OccupationNo especificado
 -13.3319
 </td>
 <td style="text-align:center;">
-2.4298
+2.4205
 </td>
 <td style="text-align:center;">
--5.4868
+-5.5079
 </td>
 <td style="text-align:center;">
 &lt; 0.001
 </td>
 <td style="text-align:center;">
--18.0943
+-18.0761
 </td>
 <td style="text-align:center;">
--8.5695
+-8.5878
 </td>
 </tr>
 <tr>
@@ -2092,22 +2110,22 @@ OccupationNo especificado
 OccupationSelf-Employed
 </td>
 <td style="text-align:center;">
--0.1907
+-0.1906
 </td>
 <td style="text-align:center;">
-2.5698
+2.5765
 </td>
 <td style="text-align:center;">
--0.0742
+-0.07399
 </td>
 <td style="text-align:center;">
-0.9408
+0.9410
 </td>
 <td style="text-align:center;">
--5.2274
+-5.2405
 </td>
 <td style="text-align:center;">
-4.8461
+4.8592
 </td>
 </tr>
 <tr>
@@ -2118,34 +2136,34 @@ OccupationUnemployed
 -3.5698
 </td>
 <td style="text-align:center;">
-2.5825
+2.5833
 </td>
 <td style="text-align:center;">
--1.3823
+-1.3819
 </td>
 <td style="text-align:center;">
-0.1669
+0.1670
 </td>
 <td style="text-align:center;">
--8.6314
+-8.6329
 </td>
 <td style="text-align:center;">
-1.4918
+1.4933
 </td>
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="rlm.html#cb318-1" tabindex="-1"></a>r2_bic   <span class="ot">&lt;-</span> <span class="fu">summary</span>(modelo_bic)<span class="sc">$</span>r.squared</span>
-<span id="cb318-2"><a href="rlm.html#cb318-2" tabindex="-1"></a>r2aj_bic <span class="ot">&lt;-</span> <span class="fu">summary</span>(modelo_bic)<span class="sc">$</span>adj.r.squared</span></code></pre></div>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="rlm.html#cb243-1" tabindex="-1"></a>r2_bic   <span class="ot">&lt;-</span> <span class="fu">summary</span>(modelo_bic)<span class="sc">$</span>r.squared</span>
+<span id="cb243-2"><a href="rlm.html#cb243-2" tabindex="-1"></a>r2aj_bic <span class="ot">&lt;-</span> <span class="fu">summary</span>(modelo_bic)<span class="sc">$</span>adj.r.squared</span></code></pre></div>
 <p>El modelo seleccionado tiene <span class="math inline">\(R^2 = 0.0028\)</span> y <span class="math inline">\(R^2_{aj} = 0.0028\)</span>, prácticamente iguales a los del modelo completo (<span class="math inline">\(R^2_{aj} = 0.0028\)</span>), pero con 20 parámetros menos.</p>
 </div>
 <div id="análisis-de-residuales" class="section level2 hasAnchor" number="4.5">
 <h2><span class="header-section-number">4.5</span> Análisis de residuales<a href="rlm.html#an%C3%A1lisis-de-residuales" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>A continuación se validan los supuestos del modelo seleccionado: independencia, normalidad, media cero y varianza constante de los errores. Además, se identifican observaciones atípicas e influyentes. Para los gráficos se usa una muestra aleatoria de 20,000 residuales, ya que con cerca de un millón de puntos los gráficos se saturan; las pruebas sí se calculan con todos los residuales.</p>
-<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb319-1"><a href="rlm.html#cb319-1" tabindex="-1"></a>res_bic <span class="ot">&lt;-</span> <span class="fu">residuals</span>(modelo_bic)</span>
-<span id="cb319-2"><a href="rlm.html#cb319-2" tabindex="-1"></a>aj_bic  <span class="ot">&lt;-</span> <span class="fu">fitted</span>(modelo_bic)</span>
-<span id="cb319-3"><a href="rlm.html#cb319-3" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb319-4"><a href="rlm.html#cb319-4" tabindex="-1"></a>idx_graf <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">length</span>(res_bic), <span class="dv">20000</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="rlm.html#cb244-1" tabindex="-1"></a>res_bic <span class="ot">&lt;-</span> <span class="fu">residuals</span>(modelo_bic)</span>
+<span id="cb244-2"><a href="rlm.html#cb244-2" tabindex="-1"></a>aj_bic  <span class="ot">&lt;-</span> <span class="fu">fitted</span>(modelo_bic)</span>
+<span id="cb244-3"><a href="rlm.html#cb244-3" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb244-4"><a href="rlm.html#cb244-4" tabindex="-1"></a>idx_graf <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">length</span>(res_bic), <span class="dv">20000</span>)</span></code></pre></div>
 <div id="independencia-de-los-errores" class="section level3 hasAnchor" number="4.5.1">
 <h3><span class="header-section-number">4.5.1</span> Independencia de los errores<a href="rlm.html#independencia-de-los-errores" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><span class="math display">\[
@@ -2154,8 +2172,8 @@ H_0 &amp;: \text{los errores son independientes (no hay autocorrelación)} \\
 H_1 &amp;: \text{los errores están autocorrelacionados}
 \end{aligned}
 \]</span></p>
-<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="rlm.html#cb320-1" tabindex="-1"></a>dw <span class="ot">&lt;-</span> lmtest<span class="sc">::</span><span class="fu">dwtest</span>(modelo_bic, <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>)</span>
-<span id="cb320-2"><a href="rlm.html#cb320-2" tabindex="-1"></a>dw</span></code></pre></div>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="rlm.html#cb245-1" tabindex="-1"></a>dw <span class="ot">&lt;-</span> lmtest<span class="sc">::</span><span class="fu">dwtest</span>(modelo_bic, <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>)</span>
+<span id="cb245-2"><a href="rlm.html#cb245-2" tabindex="-1"></a>dw</span></code></pre></div>
 <table class="table table-striped table-hover table-condensed" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -2201,8 +2219,8 @@ H_1 &amp;: \text{los errores no siguen una distribución normal}
 \end{aligned}
 \]</span></p>
 <p>La prueba de Shapiro-Wilk solo admite hasta 5,000 observaciones, por lo que se usa la prueba de Lilliefors, igual que en el capítulo anterior.</p>
-<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="rlm.html#cb321-1" tabindex="-1"></a>lil_res <span class="ot">&lt;-</span> <span class="fu">lillie.test</span>(res_bic)</span>
-<span id="cb321-2"><a href="rlm.html#cb321-2" tabindex="-1"></a>lil_res</span></code></pre></div>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="rlm.html#cb246-1" tabindex="-1"></a>lil_res <span class="ot">&lt;-</span> <span class="fu">lillie.test</span>(res_bic)</span>
+<span id="cb246-2"><a href="rlm.html#cb246-2" tabindex="-1"></a>lil_res</span></code></pre></div>
 <table class="table table-striped table-hover table-condensed" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -2237,9 +2255,9 @@ res_bic
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="rlm.html#cb322-1" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">qqPlot</span>(res_bic[idx_graf], <span class="at">las =</span> <span class="dv">1</span>, <span class="at">id =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb322-2"><a href="rlm.html#cb322-2" tabindex="-1"></a>            <span class="at">xlab =</span> <span class="st">&quot;Cuantiles teóricos&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Residuales&quot;</span>,</span>
-<span id="cb322-3"><a href="rlm.html#cb322-3" tabindex="-1"></a>            <span class="at">main =</span> <span class="st">&quot;Gráfico Q-Q de los residuales (muestra de 20,000)&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="rlm.html#cb247-1" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">qqPlot</span>(res_bic[idx_graf], <span class="at">las =</span> <span class="dv">1</span>, <span class="at">id =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb247-2"><a href="rlm.html#cb247-2" tabindex="-1"></a>            <span class="at">xlab =</span> <span class="st">&quot;Cuantiles teóricos&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Residuales&quot;</span>,</span>
+<span id="cb247-3"><a href="rlm.html#cb247-3" tabindex="-1"></a>            <span class="at">main =</span> <span class="st">&quot;Gráfico Q-Q de los residuales (muestra de 20,000)&quot;</span>)</span></code></pre></div>
 <p><img src="analisis-seguros_files/figure-html/qq-res-1.png" alt="" width="672" /></p>
 <p>Con una confianza del 95%, la prueba de Lilliefors indica que los residuales no siguen una distribución normal (<span class="math inline">\(D = 0.11494\)</span>, p valor <span class="math inline">\(&lt; 0.001\)</span>). En el gráfico Q-Q se observa que los puntos se alejan de la línea de referencia en la cola derecha, reflejo del sesgo hacia la derecha de Premium Amount que ya se había identificado en el EDA.</p>
 </div>
@@ -2251,8 +2269,8 @@ H_0 &amp;: E(\varepsilon) = 0 \\
 H_1 &amp;: E(\varepsilon) \neq 0
 \end{aligned}
 \]</span></p>
-<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb323-1"><a href="rlm.html#cb323-1" tabindex="-1"></a>t_res <span class="ot">&lt;-</span> <span class="fu">t.test</span>(res_bic, <span class="at">mu =</span> <span class="dv">0</span>)</span>
-<span id="cb323-2"><a href="rlm.html#cb323-2" tabindex="-1"></a>t_res</span></code></pre></div>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="rlm.html#cb248-1" tabindex="-1"></a>t_res <span class="ot">&lt;-</span> <span class="fu">t.test</span>(res_bic, <span class="at">mu =</span> <span class="dv">0</span>)</span>
+<span id="cb248-2"><a href="rlm.html#cb248-2" tabindex="-1"></a>t_res</span></code></pre></div>
 <table class="table table-striped table-hover table-condensed" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -2285,10 +2303,10 @@ One Sample t-test
 res_bic
 </td>
 <td style="text-align:center;">
--0.00000000000002566
+0.000000000000008186
 </td>
 <td style="text-align:center;">
--0.0000000000000291
+0.000000000000009285
 </td>
 <td style="text-align:center;">
 959,999
@@ -2309,8 +2327,8 @@ H_0 &amp;: \text{la varianza de los errores es constante (homocedasticidad)} \\
 H_1 &amp;: \text{la varianza de los errores no es constante (heterocedasticidad)}
 \end{aligned}
 \]</span></p>
-<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="rlm.html#cb324-1" tabindex="-1"></a>bp_bic <span class="ot">&lt;-</span> lmtest<span class="sc">::</span><span class="fu">bptest</span>(modelo_bic)</span>
-<span id="cb324-2"><a href="rlm.html#cb324-2" tabindex="-1"></a>bp_bic</span></code></pre></div>
+<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="rlm.html#cb249-1" tabindex="-1"></a>bp_bic <span class="ot">&lt;-</span> lmtest<span class="sc">::</span><span class="fu">bptest</span>(modelo_bic)</span>
+<span id="cb249-2"><a href="rlm.html#cb249-2" tabindex="-1"></a>bp_bic</span></code></pre></div>
 <table class="table table-striped table-hover table-condensed" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -2340,7 +2358,7 @@ studentized Breusch-Pagan test
 modelo_bic
 </td>
 <td style="text-align:center;">
-8,113.8091
+8,114.5633
 </td>
 <td style="text-align:center;">
 9
@@ -2351,29 +2369,29 @@ modelo_bic
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb325-1"><a href="rlm.html#cb325-1" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">ajustado =</span> aj_bic[idx_graf], <span class="at">residuo =</span> res_bic[idx_graf]) <span class="sc">%&gt;%</span></span>
-<span id="cb325-2"><a href="rlm.html#cb325-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> ajustado, <span class="at">y =</span> residuo)) <span class="sc">+</span></span>
-<span id="cb325-3"><a href="rlm.html#cb325-3" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">&quot;#5B7C99&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.15</span>, <span class="at">size =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
-<span id="cb325-4"><a href="rlm.html#cb325-4" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span></span>
-<span id="cb325-5"><a href="rlm.html#cb325-5" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">&quot;#B22222&quot;</span>) <span class="sc">+</span></span>
-<span id="cb325-6"><a href="rlm.html#cb325-6" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Residuales vs valores ajustados (muestra de 20,000)&quot;</span>,</span>
-<span id="cb325-7"><a href="rlm.html#cb325-7" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Valores ajustados&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Residuales&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="rlm.html#cb250-1" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">ajustado =</span> aj_bic[idx_graf], <span class="at">residuo =</span> res_bic[idx_graf]) <span class="sc">%&gt;%</span></span>
+<span id="cb250-2"><a href="rlm.html#cb250-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> ajustado, <span class="at">y =</span> residuo)) <span class="sc">+</span></span>
+<span id="cb250-3"><a href="rlm.html#cb250-3" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">&quot;#5B7C99&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.15</span>, <span class="at">size =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb250-4"><a href="rlm.html#cb250-4" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span></span>
+<span id="cb250-5"><a href="rlm.html#cb250-5" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">&quot;#B22222&quot;</span>) <span class="sc">+</span></span>
+<span id="cb250-6"><a href="rlm.html#cb250-6" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Residuales vs valores ajustados (muestra de 20,000)&quot;</span>,</span>
+<span id="cb250-7"><a href="rlm.html#cb250-7" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Valores ajustados&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Residuales&quot;</span>)</span></code></pre></div>
 <p><img src="analisis-seguros_files/figure-html/res-vs-ajustados-1.png" alt="" width="672" /></p>
-<p>Con una confianza del 95%, la prueba de Breusch-Pagan indica que la varianza de los errores no es constante (<span class="math inline">\(BP = 8113.81\)</span>, gl <span class="math inline">\(= 9\)</span>, p valor <span class="math inline">\(&lt; 0.001\)</span>), por lo que no se cumple el supuesto de homocedasticidad. En el gráfico de residuales vs valores ajustados se observa que los valores ajustados ocupan un rango muy estrecho comparado con el de los residuales, lo que refleja que el modelo predice casi el mismo valor para todos los clientes. Además, los residuales son asimétricos, con una cola larga de valores positivos.</p>
+<p>Con una confianza del 95%, la prueba de Breusch-Pagan indica que la varianza de los errores no es constante (<span class="math inline">\(BP = 8114.56\)</span>, gl <span class="math inline">\(= 9\)</span>, p valor <span class="math inline">\(&lt; 0.001\)</span>), por lo que no se cumple el supuesto de homocedasticidad. En el gráfico de residuales vs valores ajustados se observa que los valores ajustados ocupan un rango muy estrecho comparado con el de los residuales, lo que refleja que el modelo predice casi el mismo valor para todos los clientes. Además, los residuales son asimétricos, con una cola larga de valores positivos.</p>
 </div>
 <div id="identificación-de-outliers" class="section level3 hasAnchor" number="4.5.5">
 <h3><span class="header-section-number">4.5.5</span> Identificación de outliers<a href="rlm.html#identificaci%C3%B3n-de-outliers" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Una observación se considera atípica si su residual estudentizado <span class="math inline">\(r_i\)</span> está fuera del intervalo <span class="math inline">\((-3, 3)\)</span>. Adicionalmente, se aplica la prueba de Bonferroni sobre el mayor residual estudentizado.</p>
-<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="rlm.html#cb326-1" tabindex="-1"></a>r_est <span class="ot">&lt;-</span> <span class="fu">rstudent</span>(modelo_bic)</span>
-<span id="cb326-2"><a href="rlm.html#cb326-2" tabindex="-1"></a>n_out <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">abs</span>(r_est) <span class="sc">&gt;</span> <span class="dv">3</span>)</span>
-<span id="cb326-3"><a href="rlm.html#cb326-3" tabindex="-1"></a>esperados <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">pnorm</span>(<span class="sc">-</span><span class="dv">3</span>) <span class="sc">*</span> <span class="fu">length</span>(r_est)</span>
-<span id="cb326-4"><a href="rlm.html#cb326-4" tabindex="-1"></a></span>
-<span id="cb326-5"><a href="rlm.html#cb326-5" tabindex="-1"></a>ot <span class="ot">&lt;-</span> car<span class="sc">::</span><span class="fu">outlierTest</span>(modelo_bic, <span class="at">n.max =</span> <span class="dv">5</span>)</span>
-<span id="cb326-6"><a href="rlm.html#cb326-6" tabindex="-1"></a><span class="fu">tibble</span>(<span class="st">`</span><span class="at">Observación</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">names</span>(ot<span class="sc">$</span>rstudent),</span>
-<span id="cb326-7"><a href="rlm.html#cb326-7" tabindex="-1"></a>       <span class="st">`</span><span class="at">Residual estudentizado</span><span class="st">`</span> <span class="ot">=</span> ot<span class="sc">$</span>rstudent,</span>
-<span id="cb326-8"><a href="rlm.html#cb326-8" tabindex="-1"></a>       <span class="st">`</span><span class="at">p valor</span><span class="st">`</span> <span class="ot">=</span> ot<span class="sc">$</span>p,</span>
-<span id="cb326-9"><a href="rlm.html#cb326-9" tabindex="-1"></a>       <span class="st">`</span><span class="at">p Bonferroni</span><span class="st">`</span> <span class="ot">=</span> ot<span class="sc">$</span>bonf.p) <span class="sc">%&gt;%</span></span>
-<span id="cb326-10"><a href="rlm.html#cb326-10" tabindex="-1"></a>  <span class="fu">tabla_rlm</span>(<span class="st">&quot;Prueba de Bonferroni para outliers&quot;</span>, <span class="at">p_cols =</span> <span class="fu">c</span>(<span class="st">&quot;p valor&quot;</span>, <span class="st">&quot;p Bonferroni&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="rlm.html#cb251-1" tabindex="-1"></a>r_est <span class="ot">&lt;-</span> <span class="fu">rstudent</span>(modelo_bic)</span>
+<span id="cb251-2"><a href="rlm.html#cb251-2" tabindex="-1"></a>n_out <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">abs</span>(r_est) <span class="sc">&gt;</span> <span class="dv">3</span>)</span>
+<span id="cb251-3"><a href="rlm.html#cb251-3" tabindex="-1"></a>esperados <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">pnorm</span>(<span class="sc">-</span><span class="dv">3</span>) <span class="sc">*</span> <span class="fu">length</span>(r_est)</span>
+<span id="cb251-4"><a href="rlm.html#cb251-4" tabindex="-1"></a></span>
+<span id="cb251-5"><a href="rlm.html#cb251-5" tabindex="-1"></a>ot <span class="ot">&lt;-</span> car<span class="sc">::</span><span class="fu">outlierTest</span>(modelo_bic, <span class="at">n.max =</span> <span class="dv">5</span>)</span>
+<span id="cb251-6"><a href="rlm.html#cb251-6" tabindex="-1"></a><span class="fu">tibble</span>(<span class="st">`</span><span class="at">Observación</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">names</span>(ot<span class="sc">$</span>rstudent),</span>
+<span id="cb251-7"><a href="rlm.html#cb251-7" tabindex="-1"></a>       <span class="st">`</span><span class="at">Residual estudentizado</span><span class="st">`</span> <span class="ot">=</span> ot<span class="sc">$</span>rstudent,</span>
+<span id="cb251-8"><a href="rlm.html#cb251-8" tabindex="-1"></a>       <span class="st">`</span><span class="at">p valor</span><span class="st">`</span> <span class="ot">=</span> ot<span class="sc">$</span>p,</span>
+<span id="cb251-9"><a href="rlm.html#cb251-9" tabindex="-1"></a>       <span class="st">`</span><span class="at">p Bonferroni</span><span class="st">`</span> <span class="ot">=</span> ot<span class="sc">$</span>bonf.p) <span class="sc">%&gt;%</span></span>
+<span id="cb251-10"><a href="rlm.html#cb251-10" tabindex="-1"></a>  <span class="fu">tabla_rlm</span>(<span class="st">&quot;Prueba de Bonferroni para outliers&quot;</span>, <span class="at">p_cols =</span> <span class="fu">c</span>(<span class="st">&quot;p valor&quot;</span>, <span class="st">&quot;p Bonferroni&quot;</span>))</span></code></pre></div>
 <table class="table table-striped table-hover table-condensed" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:outliers">Tabla 4.8: </span>Prueba de Bonferroni para outliers
@@ -2406,29 +2424,29 @@ p Bonferroni
 &lt; 0.001
 </td>
 <td style="text-align:center;">
-3.3780
+3.3777
 </td>
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="rlm.html#cb327-1" tabindex="-1"></a><span class="fu">rm</span>(r_est); <span class="fu">invisible</span>(<span class="fu">gc</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="rlm.html#cb252-1" tabindex="-1"></a><span class="fu">rm</span>(r_est); <span class="fu">invisible</span>(<span class="fu">gc</span>())</span></code></pre></div>
 <p>Se encontraron 12,183 observaciones con <span class="math inline">\(|r_i| &gt; 3\)</span>, el 1.27% del total. Bajo normalidad se esperarían alrededor de 2,592 (el 0.27%) solo por azar, por lo que hay más atípicos de lo esperado, lo cual es coherente con la cola derecha larga de Premium Amount. La prueba de Bonferroni no identifica ninguna observación como outlier.</p>
 </div>
 <div id="identificación-de-observaciones-influyentes" class="section level3 hasAnchor" number="4.5.6">
 <h3><span class="header-section-number">4.5.6</span> Identificación de observaciones influyentes<a href="rlm.html#identificaci%C3%B3n-de-observaciones-influyentes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>La influencia de cada observación se mide con la distancia de Cook, <span class="math inline">\(D_i = \dfrac{r_i^2}{p}\dfrac{h_{ii}}{1 - h_{ii}}\)</span>, y se considera influyente si <span class="math inline">\(D_i &gt; \dfrac{4}{n - p - 2}\)</span>.</p>
-<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="rlm.html#cb328-1" tabindex="-1"></a>cook <span class="ot">&lt;-</span> <span class="fu">cooks.distance</span>(modelo_bic)</span>
-<span id="cb328-2"><a href="rlm.html#cb328-2" tabindex="-1"></a>p_bic <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">coef</span>(modelo_bic))</span>
-<span id="cb328-3"><a href="rlm.html#cb328-3" tabindex="-1"></a>umbral <span class="ot">&lt;-</span> <span class="dv">4</span> <span class="sc">/</span> (<span class="fu">length</span>(cook) <span class="sc">-</span> p_bic <span class="sc">-</span> <span class="dv">2</span>)</span>
-<span id="cb328-4"><a href="rlm.html#cb328-4" tabindex="-1"></a>n_infl <span class="ot">&lt;-</span> <span class="fu">sum</span>(cook <span class="sc">&gt;</span> umbral)</span>
-<span id="cb328-5"><a href="rlm.html#cb328-5" tabindex="-1"></a></span>
-<span id="cb328-6"><a href="rlm.html#cb328-6" tabindex="-1"></a><span class="fu">plot</span>(cook, <span class="at">type =</span> <span class="st">&quot;h&quot;</span>, <span class="at">las =</span> <span class="dv">1</span>, <span class="at">xlab =</span> <span class="st">&quot;Índice&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Distancia de Cook&quot;</span>,</span>
-<span id="cb328-7"><a href="rlm.html#cb328-7" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Distancia de Cook (línea = umbral)&quot;</span>)</span>
-<span id="cb328-8"><a href="rlm.html#cb328-8" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> umbral, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;#B22222&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="rlm.html#cb253-1" tabindex="-1"></a>cook <span class="ot">&lt;-</span> <span class="fu">cooks.distance</span>(modelo_bic)</span>
+<span id="cb253-2"><a href="rlm.html#cb253-2" tabindex="-1"></a>p_bic <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">coef</span>(modelo_bic))</span>
+<span id="cb253-3"><a href="rlm.html#cb253-3" tabindex="-1"></a>umbral <span class="ot">&lt;-</span> <span class="dv">4</span> <span class="sc">/</span> (<span class="fu">length</span>(cook) <span class="sc">-</span> p_bic <span class="sc">-</span> <span class="dv">2</span>)</span>
+<span id="cb253-4"><a href="rlm.html#cb253-4" tabindex="-1"></a>n_infl <span class="ot">&lt;-</span> <span class="fu">sum</span>(cook <span class="sc">&gt;</span> umbral)</span>
+<span id="cb253-5"><a href="rlm.html#cb253-5" tabindex="-1"></a></span>
+<span id="cb253-6"><a href="rlm.html#cb253-6" tabindex="-1"></a><span class="fu">plot</span>(cook, <span class="at">type =</span> <span class="st">&quot;h&quot;</span>, <span class="at">las =</span> <span class="dv">1</span>, <span class="at">xlab =</span> <span class="st">&quot;Índice&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Distancia de Cook&quot;</span>,</span>
+<span id="cb253-7"><a href="rlm.html#cb253-7" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Distancia de Cook (línea = umbral)&quot;</span>)</span>
+<span id="cb253-8"><a href="rlm.html#cb253-8" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> umbral, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;#B22222&quot;</span>)</span></code></pre></div>
 <p><img src="analisis-seguros_files/figure-html/cook-1.png" alt="" width="672" /></p>
-<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="rlm.html#cb329-1" tabindex="-1"></a>ord <span class="ot">&lt;-</span> <span class="fu">order</span>(cook, <span class="at">decreasing =</span> <span class="cn">TRUE</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span>
-<span id="cb329-2"><a href="rlm.html#cb329-2" tabindex="-1"></a><span class="fu">tibble</span>(<span class="st">`</span><span class="at">Observación</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">names</span>(cook)[ord], <span class="st">`</span><span class="at">Distancia de Cook</span><span class="st">`</span> <span class="ot">=</span> cook[ord]) <span class="sc">%&gt;%</span></span>
-<span id="cb329-3"><a href="rlm.html#cb329-3" tabindex="-1"></a>  <span class="fu">tabla_rlm</span>(<span class="st">&quot;Observaciones con mayor distancia de Cook&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="rlm.html#cb254-1" tabindex="-1"></a>ord <span class="ot">&lt;-</span> <span class="fu">order</span>(cook, <span class="at">decreasing =</span> <span class="cn">TRUE</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span>
+<span id="cb254-2"><a href="rlm.html#cb254-2" tabindex="-1"></a><span class="fu">tibble</span>(<span class="st">`</span><span class="at">Observación</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">names</span>(cook)[ord], <span class="st">`</span><span class="at">Distancia de Cook</span><span class="st">`</span> <span class="ot">=</span> cook[ord]) <span class="sc">%&gt;%</span></span>
+<span id="cb254-3"><a href="rlm.html#cb254-3" tabindex="-1"></a>  <span class="fu">tabla_rlm</span>(<span class="st">&quot;Observaciones con mayor distancia de Cook&quot;</span>)</span></code></pre></div>
 <table class="table table-striped table-hover table-condensed" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:cook-tabla">Tabla 4.9: </span>Observaciones con mayor distancia de Cook
@@ -2526,9 +2544,9 @@ Distancia de Cook
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="rlm.html#cb330-1" tabindex="-1"></a>cook_max <span class="ot">&lt;-</span> <span class="fu">max</span>(cook)</span>
-<span id="cb330-2"><a href="rlm.html#cb330-2" tabindex="-1"></a><span class="fu">rm</span>(cook); <span class="fu">invisible</span>(<span class="fu">gc</span>())</span></code></pre></div>
-<p>Con un tamaño de muestra tan grande, el umbral <span class="math inline">\(4/(n-p-2) = 4.17e-06\)</span> es muy pequeño, por lo que 52,564 observaciones lo superan. Sin embargo, la mayor distancia de Cook es <span class="math inline">\(9.08e-05\)</span>, muy lejos de 1, por lo que ninguna observación individual controla el modelo: retirar cualquiera de ellas no cambiaría los coeficientes estimados de forma apreciable.</p>
+<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="rlm.html#cb255-1" tabindex="-1"></a>cook_max <span class="ot">&lt;-</span> <span class="fu">max</span>(cook)</span>
+<span id="cb255-2"><a href="rlm.html#cb255-2" tabindex="-1"></a><span class="fu">rm</span>(cook); <span class="fu">invisible</span>(<span class="fu">gc</span>())</span></code></pre></div>
+<p>Con un tamaño de muestra tan grande, el umbral <span class="math inline">\(4/(n-p-2) = 4.17e-06\)</span> es muy pequeño, por lo que 52,563 observaciones lo superan. Sin embargo, la mayor distancia de Cook es <span class="math inline">\(9.08e-05\)</span>, muy lejos de 1, por lo que ninguna observación individual controla el modelo: retirar cualquiera de ellas no cambiaría los coeficientes estimados de forma apreciable.</p>
 </div>
 </div>
 <div id="transformación-de-box-cox" class="section level2 hasAnchor" number="4.6">
@@ -2542,26 +2560,26 @@ y^{(\lambda)} =
 \end{cases}
 \]</span></p>
 <p>donde <span class="math inline">\(\lambda\)</span> se elige maximizando la verosimilitud del modelo. Para estimar <span class="math inline">\(\lambda\)</span> se usa una muestra aleatoria de 100,000 observaciones del conjunto de entrenamiento, ya que el procedimiento ajusta el modelo una vez por cada valor de <span class="math inline">\(\lambda\)</span>.</p>
-<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="rlm.html#cb331-1" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">min</span>(train<span class="sc">$</span>Premium_Amount) <span class="sc">&gt;</span> <span class="dv">0</span>)</span>
-<span id="cb331-2"><a href="rlm.html#cb331-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb331-3"><a href="rlm.html#cb331-3" tabindex="-1"></a>idx_bc <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">nrow</span>(train), <span class="dv">100000</span>)</span>
-<span id="cb331-4"><a href="rlm.html#cb331-4" tabindex="-1"></a>bc <span class="ot">&lt;-</span> MASS<span class="sc">::</span><span class="fu">boxcox</span>(<span class="fu">formula</span>(modelo_bic), <span class="at">data =</span> train[idx_bc, ],</span>
-<span id="cb331-5"><a href="rlm.html#cb331-5" tabindex="-1"></a>                   <span class="at">lambda =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="fl">0.5</span>, <span class="fl">1.5</span>, <span class="fl">0.05</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="rlm.html#cb256-1" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">min</span>(train<span class="sc">$</span>Premium_Amount) <span class="sc">&gt;</span> <span class="dv">0</span>)</span>
+<span id="cb256-2"><a href="rlm.html#cb256-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb256-3"><a href="rlm.html#cb256-3" tabindex="-1"></a>idx_bc <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">nrow</span>(train), <span class="dv">100000</span>)</span>
+<span id="cb256-4"><a href="rlm.html#cb256-4" tabindex="-1"></a>bc <span class="ot">&lt;-</span> MASS<span class="sc">::</span><span class="fu">boxcox</span>(<span class="fu">formula</span>(modelo_bic), <span class="at">data =</span> train[idx_bc, ],</span>
+<span id="cb256-5"><a href="rlm.html#cb256-5" tabindex="-1"></a>                   <span class="at">lambda =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="fl">0.5</span>, <span class="fl">1.5</span>, <span class="fl">0.05</span>))</span></code></pre></div>
 <p><img src="analisis-seguros_files/figure-html/boxcox-1.png" alt="" width="672" /></p>
-<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="rlm.html#cb332-1" tabindex="-1"></a>lambda_hat <span class="ot">&lt;-</span> bc<span class="sc">$</span>x[<span class="fu">which.max</span>(bc<span class="sc">$</span>y)]</span>
-<span id="cb332-2"><a href="rlm.html#cb332-2" tabindex="-1"></a>ic_lambda  <span class="ot">&lt;-</span> <span class="fu">range</span>(bc<span class="sc">$</span>x[bc<span class="sc">$</span>y <span class="sc">&gt;</span> <span class="fu">max</span>(bc<span class="sc">$</span>y) <span class="sc">-</span> <span class="fu">qchisq</span>(<span class="fl">0.95</span>, <span class="dv">1</span>) <span class="sc">/</span> <span class="dv">2</span>])</span>
-<span id="cb332-3"><a href="rlm.html#cb332-3" tabindex="-1"></a>lambda     <span class="ot">&lt;-</span> <span class="fu">round</span>(lambda_hat, <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="rlm.html#cb257-1" tabindex="-1"></a>lambda_hat <span class="ot">&lt;-</span> bc<span class="sc">$</span>x[<span class="fu">which.max</span>(bc<span class="sc">$</span>y)]</span>
+<span id="cb257-2"><a href="rlm.html#cb257-2" tabindex="-1"></a>ic_lambda  <span class="ot">&lt;-</span> <span class="fu">range</span>(bc<span class="sc">$</span>x[bc<span class="sc">$</span>y <span class="sc">&gt;</span> <span class="fu">max</span>(bc<span class="sc">$</span>y) <span class="sc">-</span> <span class="fu">qchisq</span>(<span class="fl">0.95</span>, <span class="dv">1</span>) <span class="sc">/</span> <span class="dv">2</span>])</span>
+<span id="cb257-3"><a href="rlm.html#cb257-3" tabindex="-1"></a>lambda     <span class="ot">&lt;-</span> <span class="fu">round</span>(lambda_hat, <span class="dv">2</span>)</span></code></pre></div>
 <p>El valor de <span class="math inline">\(\lambda\)</span> que maximiza la verosimilitud es <span class="math inline">\(\hat\lambda = 0.39\)</span>, con un intervalo de confianza del 95% de <span class="math inline">\((0.39, 0.39)\)</span>. Como el intervalo no contiene al 1, se justifica transformar la respuesta. Se ajusta el modelo con las mismas variables del modelo seleccionado y la respuesta transformada con <span class="math inline">\(\lambda = 0.39\)</span>.</p>
-<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="rlm.html#cb333-1" tabindex="-1"></a>bc_trans <span class="ot">&lt;-</span> <span class="cf">function</span>(y, l) <span class="cf">if</span> (<span class="fu">abs</span>(l) <span class="sc">&lt;</span> <span class="fl">1e-8</span>) <span class="fu">log</span>(y) <span class="cf">else</span> (y<span class="sc">^</span>l <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">/</span> l</span>
-<span id="cb333-2"><a href="rlm.html#cb333-2" tabindex="-1"></a>bc_inv   <span class="ot">&lt;-</span> <span class="cf">function</span>(z, l) <span class="cf">if</span> (<span class="fu">abs</span>(l) <span class="sc">&lt;</span> <span class="fl">1e-8</span>) <span class="fu">exp</span>(z) <span class="cf">else</span> <span class="fu">pmax</span>(l <span class="sc">*</span> z <span class="sc">+</span> <span class="dv">1</span>, <span class="dv">0</span>)<span class="sc">^</span>(<span class="dv">1</span> <span class="sc">/</span> l)</span>
-<span id="cb333-3"><a href="rlm.html#cb333-3" tabindex="-1"></a></span>
-<span id="cb333-4"><a href="rlm.html#cb333-4" tabindex="-1"></a>train<span class="sc">$</span>Premium_BC <span class="ot">&lt;-</span> <span class="fu">bc_trans</span>(train<span class="sc">$</span>Premium_Amount, lambda)</span>
-<span id="cb333-5"><a href="rlm.html#cb333-5" tabindex="-1"></a>modelo_bc <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">update</span>(<span class="fu">formula</span>(modelo_bic), Premium_BC <span class="sc">~</span> .), <span class="at">data =</span> train)</span>
-<span id="cb333-6"><a href="rlm.html#cb333-6" tabindex="-1"></a>train<span class="sc">$</span>Premium_BC <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb333-7"><a href="rlm.html#cb333-7" tabindex="-1"></a></span>
-<span id="cb333-8"><a href="rlm.html#cb333-8" tabindex="-1"></a>res_bc <span class="ot">&lt;-</span> <span class="fu">residuals</span>(modelo_bc)</span>
-<span id="cb333-9"><a href="rlm.html#cb333-9" tabindex="-1"></a>lil_bc <span class="ot">&lt;-</span> <span class="fu">lillie.test</span>(res_bc)</span>
-<span id="cb333-10"><a href="rlm.html#cb333-10" tabindex="-1"></a>lil_bc</span></code></pre></div>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="rlm.html#cb258-1" tabindex="-1"></a>bc_trans <span class="ot">&lt;-</span> <span class="cf">function</span>(y, l) <span class="cf">if</span> (<span class="fu">abs</span>(l) <span class="sc">&lt;</span> <span class="fl">1e-8</span>) <span class="fu">log</span>(y) <span class="cf">else</span> (y<span class="sc">^</span>l <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">/</span> l</span>
+<span id="cb258-2"><a href="rlm.html#cb258-2" tabindex="-1"></a>bc_inv   <span class="ot">&lt;-</span> <span class="cf">function</span>(z, l) <span class="cf">if</span> (<span class="fu">abs</span>(l) <span class="sc">&lt;</span> <span class="fl">1e-8</span>) <span class="fu">exp</span>(z) <span class="cf">else</span> <span class="fu">pmax</span>(l <span class="sc">*</span> z <span class="sc">+</span> <span class="dv">1</span>, <span class="dv">0</span>)<span class="sc">^</span>(<span class="dv">1</span> <span class="sc">/</span> l)</span>
+<span id="cb258-3"><a href="rlm.html#cb258-3" tabindex="-1"></a></span>
+<span id="cb258-4"><a href="rlm.html#cb258-4" tabindex="-1"></a>train<span class="sc">$</span>Premium_BC <span class="ot">&lt;-</span> <span class="fu">bc_trans</span>(train<span class="sc">$</span>Premium_Amount, lambda)</span>
+<span id="cb258-5"><a href="rlm.html#cb258-5" tabindex="-1"></a>modelo_bc <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">update</span>(<span class="fu">formula</span>(modelo_bic), Premium_BC <span class="sc">~</span> .), <span class="at">data =</span> train)</span>
+<span id="cb258-6"><a href="rlm.html#cb258-6" tabindex="-1"></a>train<span class="sc">$</span>Premium_BC <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb258-7"><a href="rlm.html#cb258-7" tabindex="-1"></a></span>
+<span id="cb258-8"><a href="rlm.html#cb258-8" tabindex="-1"></a>res_bc <span class="ot">&lt;-</span> <span class="fu">residuals</span>(modelo_bc)</span>
+<span id="cb258-9"><a href="rlm.html#cb258-9" tabindex="-1"></a>lil_bc <span class="ot">&lt;-</span> <span class="fu">lillie.test</span>(res_bc)</span>
+<span id="cb258-10"><a href="rlm.html#cb258-10" tabindex="-1"></a>lil_bc</span></code></pre></div>
 <table class="table table-striped table-hover table-condensed" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -2596,8 +2614,8 @@ res_bc
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="rlm.html#cb334-1" tabindex="-1"></a>bp_bc <span class="ot">&lt;-</span> lmtest<span class="sc">::</span><span class="fu">bptest</span>(modelo_bc)</span>
-<span id="cb334-2"><a href="rlm.html#cb334-2" tabindex="-1"></a>bp_bc</span></code></pre></div>
+<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="rlm.html#cb259-1" tabindex="-1"></a>bp_bc <span class="ot">&lt;-</span> lmtest<span class="sc">::</span><span class="fu">bptest</span>(modelo_bc)</span>
+<span id="cb259-2"><a href="rlm.html#cb259-2" tabindex="-1"></a>bp_bc</span></code></pre></div>
 <table class="table table-striped table-hover table-condensed" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -2627,7 +2645,7 @@ studentized Breusch-Pagan test
 modelo_bc
 </td>
 <td style="text-align:center;">
-18,660.7258
+18,663.1471
 </td>
 <td style="text-align:center;">
 9
@@ -2638,44 +2656,44 @@ modelo_bc
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="rlm.html#cb335-1" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">qqPlot</span>(res_bc[idx_graf], <span class="at">las =</span> <span class="dv">1</span>, <span class="at">id =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb335-2"><a href="rlm.html#cb335-2" tabindex="-1"></a>            <span class="at">xlab =</span> <span class="st">&quot;Cuantiles teóricos&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Residuales&quot;</span>,</span>
-<span id="cb335-3"><a href="rlm.html#cb335-3" tabindex="-1"></a>            <span class="at">main =</span> <span class="st">&quot;Gráfico Q-Q de los residuales del modelo Box-Cox (muestra de 20,000)&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="rlm.html#cb260-1" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">qqPlot</span>(res_bc[idx_graf], <span class="at">las =</span> <span class="dv">1</span>, <span class="at">id =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb260-2"><a href="rlm.html#cb260-2" tabindex="-1"></a>            <span class="at">xlab =</span> <span class="st">&quot;Cuantiles teóricos&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Residuales&quot;</span>,</span>
+<span id="cb260-3"><a href="rlm.html#cb260-3" tabindex="-1"></a>            <span class="at">main =</span> <span class="st">&quot;Gráfico Q-Q de los residuales del modelo Box-Cox (muestra de 20,000)&quot;</span>)</span></code></pre></div>
 <p><img src="analisis-seguros_files/figure-html/qq-bc-1.png" alt="" width="672" /></p>
-<p>Con la transformación, el estadístico de Lilliefors pasa de <span class="math inline">\(D = 0.11494\)</span> a <span class="math inline">\(D = 0.04070\)</span>, es decir, los residuales se acercan más a la normalidad, aunque con una confianza del 95% siguen sin cumplir el supuesto (p valor <span class="math inline">\(&lt; 0.001\)</span>). Por su parte, la prueba de Breusch-Pagan da <span class="math inline">\(BP = 18660.73\)</span> (p valor <span class="math inline">\(&lt; 0.001\)</span>), por lo que tampoco se cumple el supuesto de homocedasticidad.</p>
+<p>Con la transformación, el estadístico de Lilliefors pasa de <span class="math inline">\(D = 0.11494\)</span> a <span class="math inline">\(D = 0.04070\)</span>, es decir, los residuales se acercan más a la normalidad, aunque con una confianza del 95% siguen sin cumplir el supuesto (p valor <span class="math inline">\(&lt; 0.001\)</span>). Por su parte, la prueba de Breusch-Pagan da <span class="math inline">\(BP = 18663.15\)</span> (p valor <span class="math inline">\(&lt; 0.001\)</span>), por lo que tampoco se cumple el supuesto de homocedasticidad.</p>
 </div>
 <div id="comparación-de-modelos" class="section level2 hasAnchor" number="4.7">
 <h2><span class="header-section-number">4.7</span> Comparación de modelos<a href="rlm.html#comparaci%C3%B3n-de-modelos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Se comparan los modelos obtenidos en el conjunto de prueba, que no se usó en el ajuste. Como referencia se incluye el modelo nulo, que predice para todos los clientes el promedio de Premium Amount del conjunto de entrenamiento. Las predicciones del modelo Box-Cox se devuelven a la escala original con la transformación inversa, <span class="math inline">\(y = (\lambda\, y^{(\lambda)} + 1)^{1/\lambda}\)</span>, para que sus errores sean comparables con los de los demás modelos.</p>
 <p>Las métricas usadas son la raíz del error cuadrático medio, <span class="math inline">\(RMSE = \sqrt{\frac{1}{m}\sum (y_i - \hat y_i)^2}\)</span>, el error absoluto medio, <span class="math inline">\(MAE = \frac{1}{m}\sum |y_i - \hat y_i|\)</span>, y el <span class="math inline">\(R^2\)</span> en el conjunto de prueba.</p>
-<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb336-1"><a href="rlm.html#cb336-1" tabindex="-1"></a>y_te <span class="ot">&lt;-</span> test<span class="sc">$</span>Premium_Amount</span>
-<span id="cb336-2"><a href="rlm.html#cb336-2" tabindex="-1"></a>media_tr <span class="ot">&lt;-</span> <span class="fu">mean</span>(train<span class="sc">$</span>Premium_Amount)</span>
-<span id="cb336-3"><a href="rlm.html#cb336-3" tabindex="-1"></a></span>
-<span id="cb336-4"><a href="rlm.html#cb336-4" tabindex="-1"></a>pred <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb336-5"><a href="rlm.html#cb336-5" tabindex="-1"></a>  <span class="st">&quot;Nulo&quot;</span>               <span class="ot">=</span> <span class="fu">rep</span>(media_tr, <span class="fu">nrow</span>(test)),</span>
-<span id="cb336-6"><a href="rlm.html#cb336-6" tabindex="-1"></a>  <span class="st">&quot;Simple (Annual Income)&quot;</span> <span class="ot">=</span> <span class="fu">predict</span>(modelo_rls, test),</span>
-<span id="cb336-7"><a href="rlm.html#cb336-7" tabindex="-1"></a>  <span class="st">&quot;Completo&quot;</span>           <span class="ot">=</span> <span class="fu">predict</span>(modelo_full, test),</span>
-<span id="cb336-8"><a href="rlm.html#cb336-8" tabindex="-1"></a>  <span class="st">&quot;Seleccionado (BIC)&quot;</span> <span class="ot">=</span> <span class="fu">predict</span>(modelo_bic, test),</span>
-<span id="cb336-9"><a href="rlm.html#cb336-9" tabindex="-1"></a>  <span class="st">&quot;Seleccionado (AIC)&quot;</span> <span class="ot">=</span> <span class="fu">predict</span>(sel_aic, test),</span>
-<span id="cb336-10"><a href="rlm.html#cb336-10" tabindex="-1"></a>  <span class="st">&quot;Box-Cox (BIC)&quot;</span>      <span class="ot">=</span> <span class="fu">bc_inv</span>(<span class="fu">predict</span>(modelo_bc, test), lambda)</span>
-<span id="cb336-11"><a href="rlm.html#cb336-11" tabindex="-1"></a>)</span>
-<span id="cb336-12"><a href="rlm.html#cb336-12" tabindex="-1"></a>mods <span class="ot">&lt;-</span> <span class="fu">list</span>(modelo_nulo, modelo_rls, modelo_full, modelo_bic, sel_aic, modelo_bc)</span>
-<span id="cb336-13"><a href="rlm.html#cb336-13" tabindex="-1"></a></span>
-<span id="cb336-14"><a href="rlm.html#cb336-14" tabindex="-1"></a>comp <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb336-15"><a href="rlm.html#cb336-15" tabindex="-1"></a>  <span class="at">Modelo =</span> <span class="fu">names</span>(pred),</span>
-<span id="cb336-16"><a href="rlm.html#cb336-16" tabindex="-1"></a>  <span class="at">p =</span> <span class="fu">sapply</span>(mods, <span class="cf">function</span>(m) <span class="fu">length</span>(<span class="fu">coef</span>(m))),</span>
-<span id="cb336-17"><a href="rlm.html#cb336-17" tabindex="-1"></a>  <span class="at">r2aj =</span> <span class="fu">sapply</span>(mods, <span class="cf">function</span>(m) <span class="fu">summary</span>(m)<span class="sc">$</span>adj.r.squared),</span>
-<span id="cb336-18"><a href="rlm.html#cb336-18" tabindex="-1"></a>  <span class="at">AIC =</span> <span class="fu">c</span>(<span class="fu">sapply</span>(mods[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>], AIC), <span class="cn">NA</span>),</span>
-<span id="cb336-19"><a href="rlm.html#cb336-19" tabindex="-1"></a>  <span class="at">BIC =</span> <span class="fu">c</span>(<span class="fu">sapply</span>(mods[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>], BIC), <span class="cn">NA</span>),</span>
-<span id="cb336-20"><a href="rlm.html#cb336-20" tabindex="-1"></a>  <span class="at">RMSE =</span> <span class="fu">sapply</span>(pred, <span class="cf">function</span>(pr) <span class="fu">sqrt</span>(<span class="fu">mean</span>((y_te <span class="sc">-</span> pr)<span class="sc">^</span><span class="dv">2</span>))),</span>
-<span id="cb336-21"><a href="rlm.html#cb336-21" tabindex="-1"></a>  <span class="at">MAE  =</span> <span class="fu">sapply</span>(pred, <span class="cf">function</span>(pr) <span class="fu">mean</span>(<span class="fu">abs</span>(y_te <span class="sc">-</span> pr))),</span>
-<span id="cb336-22"><a href="rlm.html#cb336-22" tabindex="-1"></a>  <span class="at">r2p  =</span> <span class="fu">sapply</span>(pred, <span class="cf">function</span>(pr) <span class="dv">1</span> <span class="sc">-</span> <span class="fu">sum</span>((y_te <span class="sc">-</span> pr)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> <span class="fu">sum</span>((y_te <span class="sc">-</span> media_tr)<span class="sc">^</span><span class="dv">2</span>))</span>
-<span id="cb336-23"><a href="rlm.html#cb336-23" tabindex="-1"></a>)</span>
-<span id="cb336-24"><a href="rlm.html#cb336-24" tabindex="-1"></a></span>
-<span id="cb336-25"><a href="rlm.html#cb336-25" tabindex="-1"></a>comp <span class="sc">%&gt;%</span></span>
-<span id="cb336-26"><a href="rlm.html#cb336-26" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">`</span><span class="at">$p$</span><span class="st">`</span> <span class="ot">=</span> p, <span class="st">`</span><span class="at">$R^2_{aj}$ (entrenamiento)</span><span class="st">`</span> <span class="ot">=</span> r2aj,</span>
-<span id="cb336-27"><a href="rlm.html#cb336-27" tabindex="-1"></a>         <span class="st">`</span><span class="at">RMSE (prueba)</span><span class="st">`</span> <span class="ot">=</span> RMSE, <span class="st">`</span><span class="at">MAE (prueba)</span><span class="st">`</span> <span class="ot">=</span> MAE, <span class="st">`</span><span class="at">$R^2$ (prueba)</span><span class="st">`</span> <span class="ot">=</span> r2p) <span class="sc">%&gt;%</span></span>
-<span id="cb336-28"><a href="rlm.html#cb336-28" tabindex="-1"></a>  <span class="fu">tabla_rlm</span>(<span class="st">&quot;Comparación de los modelos ajustados&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="rlm.html#cb261-1" tabindex="-1"></a>y_te <span class="ot">&lt;-</span> test<span class="sc">$</span>Premium_Amount</span>
+<span id="cb261-2"><a href="rlm.html#cb261-2" tabindex="-1"></a>media_tr <span class="ot">&lt;-</span> <span class="fu">mean</span>(train<span class="sc">$</span>Premium_Amount)</span>
+<span id="cb261-3"><a href="rlm.html#cb261-3" tabindex="-1"></a></span>
+<span id="cb261-4"><a href="rlm.html#cb261-4" tabindex="-1"></a>pred <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb261-5"><a href="rlm.html#cb261-5" tabindex="-1"></a>  <span class="st">&quot;Nulo&quot;</span>               <span class="ot">=</span> <span class="fu">rep</span>(media_tr, <span class="fu">nrow</span>(test)),</span>
+<span id="cb261-6"><a href="rlm.html#cb261-6" tabindex="-1"></a>  <span class="st">&quot;Simple (Annual Income)&quot;</span> <span class="ot">=</span> <span class="fu">predict</span>(modelo_rls, test),</span>
+<span id="cb261-7"><a href="rlm.html#cb261-7" tabindex="-1"></a>  <span class="st">&quot;Completo&quot;</span>           <span class="ot">=</span> <span class="fu">predict</span>(modelo_full, test),</span>
+<span id="cb261-8"><a href="rlm.html#cb261-8" tabindex="-1"></a>  <span class="st">&quot;Seleccionado (BIC)&quot;</span> <span class="ot">=</span> <span class="fu">predict</span>(modelo_bic, test),</span>
+<span id="cb261-9"><a href="rlm.html#cb261-9" tabindex="-1"></a>  <span class="st">&quot;Seleccionado (AIC)&quot;</span> <span class="ot">=</span> <span class="fu">predict</span>(sel_aic, test),</span>
+<span id="cb261-10"><a href="rlm.html#cb261-10" tabindex="-1"></a>  <span class="st">&quot;Box-Cox (BIC)&quot;</span>      <span class="ot">=</span> <span class="fu">bc_inv</span>(<span class="fu">predict</span>(modelo_bc, test), lambda)</span>
+<span id="cb261-11"><a href="rlm.html#cb261-11" tabindex="-1"></a>)</span>
+<span id="cb261-12"><a href="rlm.html#cb261-12" tabindex="-1"></a>mods <span class="ot">&lt;-</span> <span class="fu">list</span>(modelo_nulo, modelo_rls, modelo_full, modelo_bic, sel_aic, modelo_bc)</span>
+<span id="cb261-13"><a href="rlm.html#cb261-13" tabindex="-1"></a></span>
+<span id="cb261-14"><a href="rlm.html#cb261-14" tabindex="-1"></a>comp <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb261-15"><a href="rlm.html#cb261-15" tabindex="-1"></a>  <span class="at">Modelo =</span> <span class="fu">names</span>(pred),</span>
+<span id="cb261-16"><a href="rlm.html#cb261-16" tabindex="-1"></a>  <span class="at">p =</span> <span class="fu">sapply</span>(mods, <span class="cf">function</span>(m) <span class="fu">length</span>(<span class="fu">coef</span>(m))),</span>
+<span id="cb261-17"><a href="rlm.html#cb261-17" tabindex="-1"></a>  <span class="at">r2aj =</span> <span class="fu">sapply</span>(mods, <span class="cf">function</span>(m) <span class="fu">summary</span>(m)<span class="sc">$</span>adj.r.squared),</span>
+<span id="cb261-18"><a href="rlm.html#cb261-18" tabindex="-1"></a>  <span class="at">AIC =</span> <span class="fu">c</span>(<span class="fu">sapply</span>(mods[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>], AIC), <span class="cn">NA</span>),</span>
+<span id="cb261-19"><a href="rlm.html#cb261-19" tabindex="-1"></a>  <span class="at">BIC =</span> <span class="fu">c</span>(<span class="fu">sapply</span>(mods[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>], BIC), <span class="cn">NA</span>),</span>
+<span id="cb261-20"><a href="rlm.html#cb261-20" tabindex="-1"></a>  <span class="at">RMSE =</span> <span class="fu">sapply</span>(pred, <span class="cf">function</span>(pr) <span class="fu">sqrt</span>(<span class="fu">mean</span>((y_te <span class="sc">-</span> pr)<span class="sc">^</span><span class="dv">2</span>))),</span>
+<span id="cb261-21"><a href="rlm.html#cb261-21" tabindex="-1"></a>  <span class="at">MAE  =</span> <span class="fu">sapply</span>(pred, <span class="cf">function</span>(pr) <span class="fu">mean</span>(<span class="fu">abs</span>(y_te <span class="sc">-</span> pr))),</span>
+<span id="cb261-22"><a href="rlm.html#cb261-22" tabindex="-1"></a>  <span class="at">r2p  =</span> <span class="fu">sapply</span>(pred, <span class="cf">function</span>(pr) <span class="dv">1</span> <span class="sc">-</span> <span class="fu">sum</span>((y_te <span class="sc">-</span> pr)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> <span class="fu">sum</span>((y_te <span class="sc">-</span> media_tr)<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb261-23"><a href="rlm.html#cb261-23" tabindex="-1"></a>)</span>
+<span id="cb261-24"><a href="rlm.html#cb261-24" tabindex="-1"></a></span>
+<span id="cb261-25"><a href="rlm.html#cb261-25" tabindex="-1"></a>comp <span class="sc">%&gt;%</span></span>
+<span id="cb261-26"><a href="rlm.html#cb261-26" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">`</span><span class="at">$p$</span><span class="st">`</span> <span class="ot">=</span> p, <span class="st">`</span><span class="at">$R^2_{aj}$ (entrenamiento)</span><span class="st">`</span> <span class="ot">=</span> r2aj,</span>
+<span id="cb261-27"><a href="rlm.html#cb261-27" tabindex="-1"></a>         <span class="st">`</span><span class="at">RMSE (prueba)</span><span class="st">`</span> <span class="ot">=</span> RMSE, <span class="st">`</span><span class="at">MAE (prueba)</span><span class="st">`</span> <span class="ot">=</span> MAE, <span class="st">`</span><span class="at">$R^2$ (prueba)</span><span class="st">`</span> <span class="ot">=</span> r2p) <span class="sc">%&gt;%</span></span>
+<span id="cb261-28"><a href="rlm.html#cb261-28" tabindex="-1"></a>  <span class="fu">tabla_rlm</span>(<span class="st">&quot;Comparación de los modelos ajustados&quot;</span>)</span></code></pre></div>
 <table class="table table-striped table-hover table-condensed" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:comparacion">Tabla 4.10: </span>Comparación de los modelos ajustados
@@ -2743,22 +2761,22 @@ Simple (Annual Income)
 2
 </td>
 <td style="text-align:center;">
-0.0001087
+0.0001088
 </td>
 <td style="text-align:center;">
-15,708,738.3147
+15,708,738.2178
 </td>
 <td style="text-align:center;">
-15,708,773.6388
+15,708,773.5419
 </td>
 <td style="text-align:center;">
 864.9042
 </td>
 <td style="text-align:center;">
-668.5596
+668.5595
 </td>
 <td style="text-align:center;">
-0.00005862
+0.00005869
 </td>
 </tr>
 <tr>
@@ -2772,13 +2790,13 @@ Completo
 0.002764
 </td>
 <td style="text-align:center;">
-15,706,213.4216
+15,706,213.2665
 </td>
 <td style="text-align:center;">
-15,706,578.4370
+15,706,578.2819
 </td>
 <td style="text-align:center;">
-863.6793
+863.6792
 </td>
 <td style="text-align:center;">
 667.2948
@@ -2798,16 +2816,16 @@ Seleccionado (BIC)
 0.00276
 </td>
 <td style="text-align:center;">
-15,706,197.6047
+15,706,197.4497
 </td>
 <td style="text-align:center;">
-15,706,327.1262
+15,706,326.9713
 </td>
 <td style="text-align:center;">
-863.6884
+863.6883
 </td>
 <td style="text-align:center;">
-667.3041
+667.3040
 </td>
 <td style="text-align:center;">
 0.002868
@@ -2824,10 +2842,10 @@ Seleccionado (AIC)
 0.002769
 </td>
 <td style="text-align:center;">
-15,706,191.5340
+15,706,191.3789
 </td>
 <td style="text-align:center;">
-15,706,356.3796
+15,706,356.2245
 </td>
 <td style="text-align:center;">
 863.6707
@@ -2847,7 +2865,7 @@ Box-Cox (BIC)
 10
 </td>
 <td style="text-align:center;">
-0.008175
+0.008176
 </td>
 <td style="text-align:center;">
 </td>
@@ -2857,7 +2875,7 @@ Box-Cox (BIC)
 889.9082
 </td>
 <td style="text-align:center;">
-638.5328
+638.5324
 </td>
 <td style="text-align:center;">
 -0.05859
@@ -2865,35 +2883,204 @@ Box-Cox (BIC)
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="rlm.html#cb337-1" tabindex="-1"></a>rmse <span class="ot">&lt;-</span> <span class="fu">setNames</span>(comp<span class="sc">$</span>RMSE, comp<span class="sc">$</span>Modelo)</span>
-<span id="cb337-2"><a href="rlm.html#cb337-2" tabindex="-1"></a>mae  <span class="ot">&lt;-</span> <span class="fu">setNames</span>(comp<span class="sc">$</span>MAE, comp<span class="sc">$</span>Modelo)</span>
-<span id="cb337-3"><a href="rlm.html#cb337-3" tabindex="-1"></a>r2p  <span class="ot">&lt;-</span> <span class="fu">setNames</span>(comp<span class="sc">$</span>r2p, comp<span class="sc">$</span>Modelo)</span>
-<span id="cb337-4"><a href="rlm.html#cb337-4" tabindex="-1"></a>mejora_rmse <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> rmse[<span class="st">&quot;Seleccionado (BIC)&quot;</span>] <span class="sc">/</span> rmse[<span class="st">&quot;Nulo&quot;</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="rlm.html#cb262-1" tabindex="-1"></a>rmse <span class="ot">&lt;-</span> <span class="fu">setNames</span>(comp<span class="sc">$</span>RMSE, comp<span class="sc">$</span>Modelo)</span>
+<span id="cb262-2"><a href="rlm.html#cb262-2" tabindex="-1"></a>mae  <span class="ot">&lt;-</span> <span class="fu">setNames</span>(comp<span class="sc">$</span>MAE, comp<span class="sc">$</span>Modelo)</span>
+<span id="cb262-3"><a href="rlm.html#cb262-3" tabindex="-1"></a>r2p  <span class="ot">&lt;-</span> <span class="fu">setNames</span>(comp<span class="sc">$</span>r2p, comp<span class="sc">$</span>Modelo)</span>
+<span id="cb262-4"><a href="rlm.html#cb262-4" tabindex="-1"></a>mejora_rmse <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> rmse[<span class="st">&quot;Seleccionado (BIC)&quot;</span>] <span class="sc">/</span> rmse[<span class="st">&quot;Nulo&quot;</span>])</span></code></pre></div>
 <p>El <span class="math inline">\(R^2_{aj}\)</span> del modelo Box-Cox está en la escala transformada, por lo que no es directamente comparable con el de los demás; por la misma razón no se reportan su AIC ni su BIC.</p>
-<p>El modelo con menor error de predicción en el conjunto de prueba es el modelo Seleccionado (AIC) (<span class="math inline">\(RMSE = 863.67\)</span>). Frente al modelo nulo (<span class="math inline">\(RMSE = 864.93\)</span>), el modelo seleccionado por BIC (<span class="math inline">\(RMSE = 863.69\)</span>) reduce el error apenas en un 0.14%, y su <span class="math inline">\(R^2\)</span> en el conjunto de prueba es de <span class="math inline">\(0.0029\)</span>. Esto confirma que, aunque varias variables resultan estadísticamente significativas, el modelo predice prácticamente igual que usar el promedio de la prima para todos los clientes.</p>
-<p>El modelo Box-Cox no mejora el error de predicción en la escala original (RMSE de 889.91 frente a 863.69), ya que al devolver las predicciones a la escala original se estima la mediana y no la media de la prima. Como además dificulta la interpretación de los coeficientes, se elige como modelo final el seleccionado por BIC en la escala original. Este modelo tiene un error similar al del modelo completo y al seleccionado por AIC, pero con menos variables.</p>
+<div id="validación-cruzada-y-prueba-final" class="section level3 hasAnchor" number="4.7.1">
+<h3><span class="header-section-number">4.7.1</span> Validación cruzada y prueba final<a href="rlm.html#validaci%C3%B3n-cruzada-y-prueba-final" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="rlm.html#cb263-1" tabindex="-1"></a><span class="fu">tabla_rlm</span>(cv, <span class="st">&quot;Validación cruzada de cinco pliegues en entrenamiento&quot;</span>)</span></code></pre></div>
+<table class="table table-striped table-hover table-condensed" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:resultados-cv">Tabla 4.11: </span>Validación cruzada de cinco pliegues en entrenamiento
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;font-weight: bold;">
+Modelo
+</th>
+<th style="text-align:center;font-weight: bold;">
+RMSE
+</th>
+<th style="text-align:center;font-weight: bold;">
+MAE
+</th>
+<th style="text-align:center;font-weight: bold;">
+R2
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Nulo
+</td>
+<td style="text-align:center;">
+865.0174
+</td>
+<td style="text-align:center;">
+669.0210
+</td>
+<td style="text-align:center;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Simple (Annual Income)
+</td>
+<td style="text-align:center;">
+864.9712
+</td>
+<td style="text-align:center;">
+668.9449
+</td>
+<td style="text-align:center;">
+0.0001069
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Completo
+</td>
+<td style="text-align:center;">
+863.8354
+</td>
+<td style="text-align:center;">
+667.7103
+</td>
+<td style="text-align:center;">
+0.002731
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Seleccionado (BIC)
+</td>
+<td style="text-align:center;">
+863.8436
+</td>
+<td style="text-align:center;">
+667.7260
+</td>
+<td style="text-align:center;">
+0.002712
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Seleccionado (AIC)
+</td>
+<td style="text-align:center;">
+863.8301
+</td>
+<td style="text-align:center;">
+667.7085
+</td>
+<td style="text-align:center;">
+0.002743
+</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="rlm.html#cb264-1" tabindex="-1"></a>ganador_cv <span class="ot">&lt;-</span> cv<span class="sc">$</span>Modelo[<span class="fu">which.min</span>(cv<span class="sc">$</span>RMSE)]</span>
+<span id="cb264-2"><a href="rlm.html#cb264-2" tabindex="-1"></a>mejora_cv <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> <span class="fu">min</span>(cv<span class="sc">$</span>RMSE) <span class="sc">/</span> cv<span class="sc">$</span>RMSE[cv<span class="sc">$</span>Modelo <span class="sc">==</span> <span class="st">&quot;Nulo&quot;</span>])</span></code></pre></div>
+<p>Según la validación cruzada, <strong>Seleccionado (AIC)</strong> obtuvo el menor RMSE. La reducción frente al promedio fue de <strong>0.14 %</strong>. Este criterio se definió antes de examinar los resultados de prueba. Box–Cox se presenta como diagnóstico adicional; no participó en la selección por validación cruzada.</p>
+<div id="resultados-ejecutivos">
+<p>El modelo BIC obtuvo en prueba un <strong>RMSE de 863.69</strong>, frente a <strong>864.93</strong> del promedio. La mejora fue de <strong>0.14 %</strong> y el R² predictivo, medido frente al promedio de entrenamiento, fue <strong>0.0029</strong>.</p>
+<table class="table table-striped table-hover table-condensed" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:tabla-ejecutiva">Tabla 4.12: </span>Resultados en el conjunto de prueba
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;font-weight: bold;">
+Modelo
+</th>
+<th style="text-align:center;font-weight: bold;">
+RMSE
+</th>
+<th style="text-align:center;font-weight: bold;">
+MAE
+</th>
+<th style="text-align:center;font-weight: bold;">
+R² de prueba
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Nulo
+</td>
+<td style="text-align:center;">
+864.9296
+</td>
+<td style="text-align:center;">
+668.6135
+</td>
+<td style="text-align:center;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Seleccionado (BIC)
+</td>
+<td style="text-align:center;">
+863.6883
+</td>
+<td style="text-align:center;">
+667.3040
+</td>
+<td style="text-align:center;">
+0.002868
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Seleccionado (AIC)
+</td>
+<td style="text-align:center;">
+863.6707
+</td>
+<td style="text-align:center;">
+667.2918
+</td>
+<td style="text-align:center;">
+0.002909
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Se conserva BIC para la interpretación porque usa 6 predictores frente a 8 de AIC. Las métricas de prueba cuantifican la diferencia real restante; no se usaron para cambiar el procedimiento elegido. Se informa Box–Cox como diagnóstico exploratorio y las predicciones invertidas se comparan en las unidades originales.</p>
+<p><img src="analisis-seguros_files/figure-html/comparacion-rmse-1.png" alt="RMSE en prueba: promedio, BIC y AIC" width="672" /></p>
+</div>
 </div>
 <div id="modelo-final" class="section level2 hasAnchor" number="4.8">
 <h2><span class="header-section-number">4.8</span> Modelo final<a href="rlm.html#modelo-final" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>El modelo final ajustado es:</p>
 <p><span class="math display">\[
 \begin{aligned}
-\widehat{\text{Premium Amount}} &amp;= 1154.52 + 42.82\,\text{Previous Claims} - 0.1758\,\text{Credit Score} - 0.0004812\,\text{Annual Income} \\
-&amp;\quad + 1.041\,\text{Health Score} + 11.91\,\text{Customer Feedback = Average} -  3.29\,\text{Customer Feedback = Good} \\
-&amp;\quad - 13.33\,\text{Occupation = No especificado} - 0.1907\,\text{Occupation = Self-Employed} -  3.57\,\text{Occupation = Unemployed}
+\widehat{\text{Premium Amount}} &amp;= 1166.44 + 42.82\,\text{Previous Claims} - 0.1758\,\text{Credit Score} - 0.0004813\,\text{Annual Income} \\
+&amp;\quad + 1.041\,\text{Health Score} -  15.2\,\text{Customer Feedback = Good} - 11.91\,\text{Customer Feedback = Poor} \\
+&amp;\quad - 13.33\,\text{Occupation = No especificado} - 0.1906\,\text{Occupation = Self-Employed} -  3.57\,\text{Occupation = Unemployed}
 \end{aligned}
 \]</span></p>
 <p>La interpretación de cada coeficiente es la siguiente:</p>
-<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="rlm.html#cb338-1" tabindex="-1"></a>coef_fin <span class="ot">&lt;-</span> broom<span class="sc">::</span><span class="fu">tidy</span>(modelo_final)[<span class="sc">-</span><span class="dv">1</span>, ]</span>
-<span id="cb338-2"><a href="rlm.html#cb338-2" tabindex="-1"></a><span class="fu">tibble</span>(<span class="st">`</span><span class="at">Término</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sapply</span>(coef_fin<span class="sc">$</span>term, etiqueta, <span class="at">datos =</span> train),</span>
-<span id="cb338-3"><a href="rlm.html#cb338-3" tabindex="-1"></a>       <span class="st">`</span><span class="at">Estimación</span><span class="st">`</span> <span class="ot">=</span> coef_fin<span class="sc">$</span>estimate,</span>
-<span id="cb338-4"><a href="rlm.html#cb338-4" tabindex="-1"></a>       <span class="st">`</span><span class="at">p valor</span><span class="st">`</span> <span class="ot">=</span> coef_fin<span class="sc">$</span>p.value,</span>
-<span id="cb338-5"><a href="rlm.html#cb338-5" tabindex="-1"></a>       <span class="st">`</span><span class="at">Interpretación</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">interpretar</span>(modelo_final, train)) <span class="sc">%&gt;%</span></span>
-<span id="cb338-6"><a href="rlm.html#cb338-6" tabindex="-1"></a>  <span class="fu">tabla_rlm</span>(<span class="st">&quot;Interpretación de los coeficientes del modelo final&quot;</span>,</span>
-<span id="cb338-7"><a href="rlm.html#cb338-7" tabindex="-1"></a>            <span class="at">p_cols =</span> <span class="st">&quot;p valor&quot;</span>, <span class="at">align =</span> <span class="st">&quot;lccl&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="rlm.html#cb265-1" tabindex="-1"></a>coef_fin <span class="ot">&lt;-</span> <span class="fu">coef_robustos</span>(modelo_final)[<span class="sc">-</span><span class="dv">1</span>, ]</span>
+<span id="cb265-2"><a href="rlm.html#cb265-2" tabindex="-1"></a><span class="fu">tibble</span>(<span class="st">`</span><span class="at">Término</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sapply</span>(coef_fin<span class="sc">$</span>term, etiqueta, <span class="at">datos =</span> train),</span>
+<span id="cb265-3"><a href="rlm.html#cb265-3" tabindex="-1"></a>       <span class="st">`</span><span class="at">Estimación</span><span class="st">`</span> <span class="ot">=</span> coef_fin<span class="sc">$</span>estimate,</span>
+<span id="cb265-4"><a href="rlm.html#cb265-4" tabindex="-1"></a>       <span class="st">`</span><span class="at">IC 2.5%</span><span class="st">`</span> <span class="ot">=</span> coef_fin<span class="sc">$</span>conf.low, <span class="st">`</span><span class="at">IC 97.5%</span><span class="st">`</span> <span class="ot">=</span> coef_fin<span class="sc">$</span>conf.high,</span>
+<span id="cb265-5"><a href="rlm.html#cb265-5" tabindex="-1"></a>       <span class="st">`</span><span class="at">p valor</span><span class="st">`</span> <span class="ot">=</span> coef_fin<span class="sc">$</span>p.value,</span>
+<span id="cb265-6"><a href="rlm.html#cb265-6" tabindex="-1"></a>       <span class="st">`</span><span class="at">Interpretación</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">interpretar</span>(modelo_final, train)) <span class="sc">%&gt;%</span></span>
+<span id="cb265-7"><a href="rlm.html#cb265-7" tabindex="-1"></a>  <span class="fu">tabla_rlm</span>(<span class="st">&quot;Interpretación de los coeficientes del modelo final&quot;</span>,</span>
+<span id="cb265-8"><a href="rlm.html#cb265-8" tabindex="-1"></a>            <span class="at">p_cols =</span> <span class="st">&quot;p valor&quot;</span>, <span class="at">align =</span> <span class="st">&quot;lccccl&quot;</span>)</span></code></pre></div>
 <table class="table table-striped table-hover table-condensed" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:interpretacion">Tabla 4.11: </span>Interpretación de los coeficientes del modelo final
+<span id="tab:interpretacion">Tabla 4.13: </span>Interpretación de los coeficientes del modelo final
 </caption>
 <thead>
 <tr>
@@ -2902,6 +3089,12 @@ Término
 </th>
 <th style="text-align:center;font-weight: bold;">
 Estimación
+</th>
+<th style="text-align:center;font-weight: bold;">
+IC 2.5%
+</th>
+<th style="text-align:center;font-weight: bold;">
+IC 97.5%
 </th>
 <th style="text-align:center;font-weight: bold;">
 p valor
@@ -2917,7 +3110,13 @@ Interpretación
 Previous Claims
 </td>
 <td style="text-align:center;">
-42.8212
+42.8214
+</td>
+<td style="text-align:center;">
+40.6588
+</td>
+<td style="text-align:center;">
+44.9841
 </td>
 <td style="text-align:center;">
 &lt; 0.001
@@ -2934,6 +3133,12 @@ Credit Score
 -0.1758
 </td>
 <td style="text-align:center;">
+-0.1882
+</td>
+<td style="text-align:center;">
+-0.1633
+</td>
+<td style="text-align:center;">
 &lt; 0.001
 </td>
 <td style="text-align:left;">
@@ -2945,13 +3150,19 @@ Por cada unidad adicional de Credit Score, la prima promedio disminuye en 0.1758
 Annual Income
 </td>
 <td style="text-align:center;">
--0.0004812
+-0.0004813
+</td>
+<td style="text-align:center;">
+-0.0005457
+</td>
+<td style="text-align:center;">
+-0.0004169
 </td>
 <td style="text-align:center;">
 &lt; 0.001
 </td>
 <td style="text-align:left;">
-Por cada unidad adicional de Annual Income, la prima promedio disminuye en 0.0004812, manteniendo constantes las demás variables.
+Por cada unidad adicional de Annual Income, la prima promedio disminuye en 0.0004813, manteniendo constantes las demás variables.
 </td>
 </tr>
 <tr>
@@ -2959,7 +3170,13 @@ Por cada unidad adicional de Annual Income, la prima promedio disminuye en 0.000
 Health Score
 </td>
 <td style="text-align:center;">
-1.0413
+1.0412
+</td>
+<td style="text-align:center;">
+0.8934
+</td>
+<td style="text-align:center;">
+1.1891
 </td>
 <td style="text-align:center;">
 &lt; 0.001
@@ -2970,30 +3187,42 @@ Por cada unidad adicional de Health Score, la prima promedio aumenta en 1.041, m
 </tr>
 <tr>
 <td style="text-align:left;">
-Customer Feedback = Average
+Customer Feedback = Good
 </td>
 <td style="text-align:center;">
-11.9119
+-15.2023
+</td>
+<td style="text-align:center;">
+-19.3944
+</td>
+<td style="text-align:center;">
+-11.0102
 </td>
 <td style="text-align:center;">
 &lt; 0.001
 </td>
 <td style="text-align:left;">
-Los clientes con Customer Feedback = Average pagan en promedio 11.91 más que los de la categoría base (Poor), manteniendo constantes las demás variables.
+Los clientes con Customer Feedback = Good pagan en promedio 15.2 menos que los de la categoría base (Average), manteniendo constantes las demás variables.
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Customer Feedback = Good
+Customer Feedback = Poor
 </td>
 <td style="text-align:center;">
--3.2903
+-11.9121
 </td>
 <td style="text-align:center;">
-0.1418
+-16.0871
+</td>
+<td style="text-align:center;">
+-7.7370
+</td>
+<td style="text-align:center;">
+&lt; 0.001
 </td>
 <td style="text-align:left;">
-Los clientes con Customer Feedback = Good pagan en promedio 3.29 menos que los de la categoría base (Poor), manteniendo constantes las demás variables.
+Los clientes con Customer Feedback = Poor pagan en promedio 11.91 menos que los de la categoría base (Average), manteniendo constantes las demás variables.
 </td>
 </tr>
 <tr>
@@ -3002,6 +3231,12 @@ Occupation = No especificado
 </td>
 <td style="text-align:center;">
 -13.3319
+</td>
+<td style="text-align:center;">
+-18.0761
+</td>
+<td style="text-align:center;">
+-8.5878
 </td>
 <td style="text-align:center;">
 &lt; 0.001
@@ -3015,13 +3250,19 @@ Los clientes con Occupation = No especificado pagan en promedio 13.33 menos que 
 Occupation = Self-Employed
 </td>
 <td style="text-align:center;">
--0.1907
+-0.1906
 </td>
 <td style="text-align:center;">
-0.9408
+-5.2405
+</td>
+<td style="text-align:center;">
+4.8592
+</td>
+<td style="text-align:center;">
+0.9410
 </td>
 <td style="text-align:left;">
-Los clientes con Occupation = Self-Employed pagan en promedio 0.1907 menos que los de la categoría base (Employed), manteniendo constantes las demás variables.
+Los clientes con Occupation = Self-Employed pagan en promedio 0.1906 menos que los de la categoría base (Employed), manteniendo constantes las demás variables.
 </td>
 </tr>
 <tr>
@@ -3032,7 +3273,13 @@ Occupation = Unemployed
 -3.5698
 </td>
 <td style="text-align:center;">
-0.1669
+-8.6329
+</td>
+<td style="text-align:center;">
+1.4933
+</td>
+<td style="text-align:center;">
+0.1670
 </td>
 <td style="text-align:left;">
 Los clientes con Occupation = Unemployed pagan en promedio 3.57 menos que los de la categoría base (Employed), manteniendo constantes las demás variables.
@@ -3040,25 +3287,25 @@ Los clientes con Occupation = Unemployed pagan en promedio 3.57 menos que los de
 </tr>
 </tbody>
 </table>
-<p>El intercepto, <span class="math inline">\(\hat\beta_0 = 1154.52\)</span>, representa la prima promedio estimada para un cliente que pertenece a todas las categorías base y cuyas variables numéricas del modelo valen cero; es un valor teórico de referencia, ya que esas condiciones no se presentan en los datos. Aunque los coeficientes anteriores son estadísticamente significativos, sus efectos son muy pequeños en relación con la variabilidad de la prima (desviación estándar de 865.02), lo que explica el bajo <span class="math inline">\(R^2_{aj} = 0.0028\)</span>.</p>
+<p>El intercepto, <span class="math inline">\(\hat\beta_0 = 1166.44\)</span>, representa la prima promedio estimada para un cliente que pertenece a todas las categorías base y cuyas variables numéricas del modelo valen cero; es un valor teórico de referencia, ya que esas condiciones no se presentan en los datos. Aunque los coeficientes anteriores son estadísticamente significativos, sus efectos son muy pequeños en relación con la variabilidad de la prima (desviación estándar de 865.02), lo que explica el bajo <span class="math inline">\(R^2_{aj} = 0.0028\)</span>.</p>
 </div>
 <div id="inferencia-para-la-respuesta" class="section level2 hasAnchor" number="4.9">
 <h2><span class="header-section-number">4.9</span> Inferencia para la respuesta<a href="rlm.html#inferencia-para-la-respuesta" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Como ejemplo, se estima la prima de un cliente con un perfil típico: el valor mediano en cada variable numérica y la categoría más frecuente en cada variable categórica.</p>
-<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="rlm.html#cb339-1" tabindex="-1"></a>moda <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">names</span>(<span class="fu">which.max</span>(<span class="fu">table</span>(x)))</span>
-<span id="cb339-2"><a href="rlm.html#cb339-2" tabindex="-1"></a></span>
-<span id="cb339-3"><a href="rlm.html#cb339-3" tabindex="-1"></a>dato_nuevo <span class="ot">&lt;-</span> train <span class="sc">%&gt;%</span></span>
-<span id="cb339-4"><a href="rlm.html#cb339-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>Premium_Amount) <span class="sc">%&gt;%</span></span>
-<span id="cb339-5"><a href="rlm.html#cb339-5" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), median),</span>
-<span id="cb339-6"><a href="rlm.html#cb339-6" tabindex="-1"></a>            <span class="fu">across</span>(<span class="fu">where</span>(is.factor), <span class="sc">~</span> <span class="fu">factor</span>(<span class="fu">moda</span>(.x), <span class="at">levels =</span> <span class="fu">levels</span>(.x))))</span>
-<span id="cb339-7"><a href="rlm.html#cb339-7" tabindex="-1"></a></span>
-<span id="cb339-8"><a href="rlm.html#cb339-8" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">Variable =</span> <span class="fu">gsub</span>(<span class="st">&quot;_&quot;</span>, <span class="st">&quot; &quot;</span>, <span class="fu">names</span>(dato_nuevo)),</span>
-<span id="cb339-9"><a href="rlm.html#cb339-9" tabindex="-1"></a>       <span class="at">Valor =</span> <span class="fu">sapply</span>(dato_nuevo, <span class="cf">function</span>(x) <span class="fu">as.character</span>(x))) <span class="sc">%&gt;%</span></span>
-<span id="cb339-10"><a href="rlm.html#cb339-10" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">gsub</span>(<span class="st">&quot; &quot;</span>, <span class="st">&quot;_&quot;</span>, Variable) <span class="sc">%in%</span> vars_bic) <span class="sc">%&gt;%</span></span>
-<span id="cb339-11"><a href="rlm.html#cb339-11" tabindex="-1"></a>  <span class="fu">tabla_rlm</span>(<span class="st">&quot;Perfil del cliente típico (variables del modelo final)&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="rlm.html#cb266-1" tabindex="-1"></a>moda <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">names</span>(<span class="fu">which.max</span>(<span class="fu">table</span>(x)))</span>
+<span id="cb266-2"><a href="rlm.html#cb266-2" tabindex="-1"></a></span>
+<span id="cb266-3"><a href="rlm.html#cb266-3" tabindex="-1"></a>dato_nuevo <span class="ot">&lt;-</span> train <span class="sc">%&gt;%</span></span>
+<span id="cb266-4"><a href="rlm.html#cb266-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>Premium_Amount) <span class="sc">%&gt;%</span></span>
+<span id="cb266-5"><a href="rlm.html#cb266-5" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), median),</span>
+<span id="cb266-6"><a href="rlm.html#cb266-6" tabindex="-1"></a>            <span class="fu">across</span>(<span class="fu">where</span>(is.factor), <span class="sc">~</span> <span class="fu">factor</span>(<span class="fu">moda</span>(.x), <span class="at">levels =</span> <span class="fu">levels</span>(.x))))</span>
+<span id="cb266-7"><a href="rlm.html#cb266-7" tabindex="-1"></a></span>
+<span id="cb266-8"><a href="rlm.html#cb266-8" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">Variable =</span> <span class="fu">gsub</span>(<span class="st">&quot;_&quot;</span>, <span class="st">&quot; &quot;</span>, <span class="fu">names</span>(dato_nuevo)),</span>
+<span id="cb266-9"><a href="rlm.html#cb266-9" tabindex="-1"></a>       <span class="at">Valor =</span> <span class="fu">sapply</span>(dato_nuevo, <span class="cf">function</span>(x) <span class="fu">as.character</span>(x))) <span class="sc">%&gt;%</span></span>
+<span id="cb266-10"><a href="rlm.html#cb266-10" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">gsub</span>(<span class="st">&quot; &quot;</span>, <span class="st">&quot;_&quot;</span>, Variable) <span class="sc">%in%</span> vars_bic) <span class="sc">%&gt;%</span></span>
+<span id="cb266-11"><a href="rlm.html#cb266-11" tabindex="-1"></a>  <span class="fu">tabla_rlm</span>(<span class="st">&quot;Perfil del cliente típico (variables del modelo final)&quot;</span>)</span></code></pre></div>
 <table class="table table-striped table-hover table-condensed" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:dato-nuevo">Tabla 4.12: </span>Perfil del cliente típico (variables del modelo final)
+<span id="tab:dato-nuevo">Tabla 4.14: </span>Perfil del cliente típico (variables del modelo final)
 </caption>
 <thead>
 <tr>
@@ -3076,7 +3323,7 @@ Valor
 Annual Income
 </td>
 <td style="text-align:center;">
-23911
+23931
 </td>
 </tr>
 <tr>
@@ -3084,7 +3331,7 @@ Annual Income
 Health Score
 </td>
 <td style="text-align:center;">
-24.5786481641278
+24.5763163628836
 </td>
 </tr>
 <tr>
@@ -3122,17 +3369,17 @@ Average
 </tbody>
 </table>
 <p>El intervalo de confianza del 95% para la prima promedio, <span class="math inline">\(E[Y \mid \mathbf{x}_0]\)</span>, es <span class="math inline">\(\hat y_0 \pm t_{\alpha/2,\, n-p}\sqrt{\hat\sigma^2\, \mathbf{x}_0&#39;(\mathbf{X}&#39;\mathbf{X})^{-1}\mathbf{x}_0}\)</span>, y el intervalo de predicción del 95% para la prima de un cliente nuevo, <span class="math inline">\(Y_0\)</span>, es <span class="math inline">\(\hat y_0 \pm t_{\alpha/2,\, n-p}\sqrt{\hat\sigma^2\,\left(1 + \mathbf{x}_0&#39;(\mathbf{X}&#39;\mathbf{X})^{-1}\mathbf{x}_0\right)}\)</span>.</p>
-<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="rlm.html#cb340-1" tabindex="-1"></a>ic_media <span class="ot">&lt;-</span> <span class="fu">predict</span>(modelo_final, <span class="at">newdata =</span> dato_nuevo, <span class="at">interval =</span> <span class="st">&quot;confidence&quot;</span>)</span>
-<span id="cb340-2"><a href="rlm.html#cb340-2" tabindex="-1"></a>ic_pred  <span class="ot">&lt;-</span> <span class="fu">predict</span>(modelo_final, <span class="at">newdata =</span> dato_nuevo, <span class="at">interval =</span> <span class="st">&quot;prediction&quot;</span>)</span>
-<span id="cb340-3"><a href="rlm.html#cb340-3" tabindex="-1"></a></span>
-<span id="cb340-4"><a href="rlm.html#cb340-4" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">Intervalo =</span> <span class="fu">c</span>(<span class="st">&quot;Confianza para la media&quot;</span>, <span class="st">&quot;Predicción para un cliente nuevo&quot;</span>),</span>
-<span id="cb340-5"><a href="rlm.html#cb340-5" tabindex="-1"></a>       <span class="st">`</span><span class="at">Estimación</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(ic_media[<span class="dv">1</span>, <span class="st">&quot;fit&quot;</span>], ic_pred[<span class="dv">1</span>, <span class="st">&quot;fit&quot;</span>]),</span>
-<span id="cb340-6"><a href="rlm.html#cb340-6" tabindex="-1"></a>       <span class="st">`</span><span class="at">Límite inferior</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(ic_media[<span class="dv">1</span>, <span class="st">&quot;lwr&quot;</span>], ic_pred[<span class="dv">1</span>, <span class="st">&quot;lwr&quot;</span>]),</span>
-<span id="cb340-7"><a href="rlm.html#cb340-7" tabindex="-1"></a>       <span class="st">`</span><span class="at">Límite superior</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(ic_media[<span class="dv">1</span>, <span class="st">&quot;upr&quot;</span>], ic_pred[<span class="dv">1</span>, <span class="st">&quot;upr&quot;</span>])) <span class="sc">%&gt;%</span></span>
-<span id="cb340-8"><a href="rlm.html#cb340-8" tabindex="-1"></a>  <span class="fu">tabla_rlm</span>(<span class="st">&quot;Intervalos del 95% para la prima del cliente típico&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="rlm.html#cb267-1" tabindex="-1"></a>ic_media <span class="ot">&lt;-</span> <span class="fu">predict</span>(modelo_final, <span class="at">newdata =</span> dato_nuevo, <span class="at">interval =</span> <span class="st">&quot;confidence&quot;</span>)</span>
+<span id="cb267-2"><a href="rlm.html#cb267-2" tabindex="-1"></a>ic_pred  <span class="ot">&lt;-</span> <span class="fu">predict</span>(modelo_final, <span class="at">newdata =</span> dato_nuevo, <span class="at">interval =</span> <span class="st">&quot;prediction&quot;</span>)</span>
+<span id="cb267-3"><a href="rlm.html#cb267-3" tabindex="-1"></a></span>
+<span id="cb267-4"><a href="rlm.html#cb267-4" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">Intervalo =</span> <span class="fu">c</span>(<span class="st">&quot;Confianza para la media&quot;</span>, <span class="st">&quot;Predicción para un cliente nuevo&quot;</span>),</span>
+<span id="cb267-5"><a href="rlm.html#cb267-5" tabindex="-1"></a>       <span class="st">`</span><span class="at">Estimación</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(ic_media[<span class="dv">1</span>, <span class="st">&quot;fit&quot;</span>], ic_pred[<span class="dv">1</span>, <span class="st">&quot;fit&quot;</span>]),</span>
+<span id="cb267-6"><a href="rlm.html#cb267-6" tabindex="-1"></a>       <span class="st">`</span><span class="at">Límite inferior</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(ic_media[<span class="dv">1</span>, <span class="st">&quot;lwr&quot;</span>], ic_pred[<span class="dv">1</span>, <span class="st">&quot;lwr&quot;</span>]),</span>
+<span id="cb267-7"><a href="rlm.html#cb267-7" tabindex="-1"></a>       <span class="st">`</span><span class="at">Límite superior</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(ic_media[<span class="dv">1</span>, <span class="st">&quot;upr&quot;</span>], ic_pred[<span class="dv">1</span>, <span class="st">&quot;upr&quot;</span>])) <span class="sc">%&gt;%</span></span>
+<span id="cb267-8"><a href="rlm.html#cb267-8" tabindex="-1"></a>  <span class="fu">tabla_rlm</span>(<span class="st">&quot;Intervalos del 95% para la prima del cliente típico&quot;</span>)</span></code></pre></div>
 <table class="table table-striped table-hover table-condensed" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:intervalos-respuesta">Tabla 4.13: </span>Intervalos del 95% para la prima del cliente típico
+<span id="tab:intervalos-respuesta">Tabla 4.15: </span>Intervalos del 95% para la prima del cliente típico
 </caption>
 <thead>
 <tr>
@@ -3156,13 +3403,13 @@ Límite superior
 Confianza para la media
 </td>
 <td style="text-align:center;">
-1,105.4245
+1,105.4144
 </td>
 <td style="text-align:center;">
-1,101.5274
+1,101.5174
 </td>
 <td style="text-align:center;">
-1,109.3216
+1,109.3114
 </td>
 </tr>
 <tr>
@@ -3170,23 +3417,23 @@ Confianza para la media
 Predicción para un cliente nuevo
 </td>
 <td style="text-align:center;">
-1,105.4245
+1,105.4144
 </td>
 <td style="text-align:center;">
--587.6417
+-587.6516
 </td>
 <td style="text-align:center;">
-2,798.4907
+2,798.4805
 </td>
 </tr>
 </tbody>
 </table>
-<p>Para un cliente con este perfil, se espera que la prima promedio sea de 1105.42. A nivel poblacional, con una confianza del 95%, dicho promedio se encuentra en el intervalo <span class="math inline">\((1101.53, 1109.32)\)</span>, que es muy estrecho gracias al gran tamaño de la muestra. En cambio, el intervalo de predicción para un cliente nuevo es <span class="math inline">\((-587.64, 2798.49)\)</span>, con una amplitud de 3386.13, lo que muestra que el modelo no permite predecir con precisión la prima de un cliente individual. Además, su límite inferior es negativo, algo imposible para una prima, lo cual se debe a que este intervalo supone errores normales y simétricos, supuesto que no se cumple. Como no se cumplen los supuestos de normalidad y homocedasticidad, este intervalo de predicción debe tomarse solo como aproximado.</p>
+<p>Para un cliente con este perfil, se espera que la prima promedio sea de 1105.41. Como ejercicio bajo el modelo clásico, el intervalo para dicho promedio se encuentra en el intervalo <span class="math inline">\((1101.52, 1109.31)\)</span>, que es muy estrecho gracias al gran tamaño de la muestra. En cambio, el intervalo de predicción para un cliente nuevo es <span class="math inline">\((-587.65, 2798.48)\)</span>, con una amplitud de 3386.13, lo que muestra que el modelo no permite predecir con precisión la prima de un cliente individual. Además, su límite inferior es negativo, algo imposible para una prima, lo cual se debe a que este intervalo supone errores normales y simétricos, supuesto que no se cumple. Como no se cumplen los supuestos de normalidad y homocedasticidad, este intervalo de predicción debe tomarse solo como aproximado.</p>
 </div>
 <div id="conclusiones-del-capítulo-1" class="section level2 hasAnchor" number="4.10">
 <h2><span class="header-section-number">4.10</span> Conclusiones del capítulo<a href="rlm.html#conclusiones-del-cap%C3%ADtulo-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>El modelo de regresión lineal múltiple confirma lo encontrado en los capítulos anteriores. Aunque la prueba F global y varias pruebas individuales resultan significativas, el modelo final, con 6 variables seleccionadas por BIC, explica apenas el 0.28% de la variabilidad de Premium Amount (<span class="math inline">\(R^2_{aj} = 0.0028\)</span>) y reduce el error de predicción solo en un 0.14% frente a predecir el promedio para todos los clientes. No se encontró multicolinealidad entre las variables predictoras, pero los residuales no cumplen los supuestos de normalidad ni de homocedasticidad, y la transformación de Box-Cox, aunque acerca los residuales a la normalidad, no mejora la capacidad predictiva del modelo.</p>
-<p>En conjunto, las características disponibles de los clientes no permiten explicar el monto de la prima mediante una relación lineal, ni de forma individual ni de forma conjunta. Esto sugiere que la prima depende de factores no incluidos en el dataset, o que su relación con las variables disponibles no es lineal, por lo que como trabajo futuro se podrían explorar modelos no lineales, como árboles de decisión o métodos de ensamble.</p>
+<p>En este conjunto de datos, los modelos lineales evaluados apenas mejoran el pronóstico basado en el promedio. El análisis mide asociación y rendimiento interno; una cartera real o futura requeriría validación externa, y una evaluación temporal serviría para estudiar estabilidad entre periodos.</p>
 
 </div>
 </div>

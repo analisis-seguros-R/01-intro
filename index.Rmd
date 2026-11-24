@@ -1,5 +1,5 @@
 ---
-title: "Factores Asociados al Monto de la Prima de Seguro: Análisis Exploratorio, Pruebas de Hipótesis y Regresión Lineal Múltiple sobre 1,200,000 Pólizas"
+title: "Factores asociados a la prima de seguro"
 author: "Fernando Cabrera Marriaga y Keisy Polo Peralta"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
@@ -11,6 +11,61 @@ description: "Análisis exploratorio de datos, pruebas de hipótesis paramétric
 ---
 
 # Introducción
+
+## Resumen ejecutivo
+
+**Pregunta.** ¿Cuánto mejora la estimación de la prima cuando incorporamos las características de los clientes y de sus pólizas?
+
+El análisis abarca **1,2 millones de registros** y 21 variables del conjunto de seguros de Kaggle. Los modelos lineales evaluados mejoran muy poco frente a predecir la prima promedio. La conclusión se limita a estos datos y a los modelos evaluados.
+
+<div id="resumen-portada" class="resumen-portada" aria-live="polite">
+<p><a href="rlm.html#resultados-ejecutivos">Ver las métricas del promedio, BIC y AIC</a></p>
+</div>
+<script>
+(function () {
+  const resumen = document.getElementById("resumen-portada");
+  if (!resumen) return;
+  fetch("rlm.html")
+    .then(function (response) {
+      if (!response.ok) throw new Error("Resultados no disponibles");
+      return response.text();
+    })
+    .then(function (html) {
+      const resultados = new DOMParser()
+        .parseFromString(html, "text/html")
+        .getElementById("resultados-ejecutivos");
+      if (resultados) resumen.replaceChildren(...resultados.childNodes);
+    })
+    .catch(function () {});
+})();
+</script>
+
+<div class="graficos-portada">
+<figure>
+<a href="intro.html#distribuci%C3%B3n"><img src="analisis-seguros_files/figure-html/histograma-respuesta-1.png" alt="Histograma de la prima de seguro"></a>
+<figcaption>Distribución de la prima</figcaption>
+</figure>
+<figure>
+<a href="rlm.html#comparaci%C3%B3n-de-modelos"><img src="analisis-seguros_files/figure-html/comparacion-rmse-1.png" alt="Comparación del RMSE del promedio, BIC y AIC"></a>
+<figcaption>Error en prueba</figcaption>
+</figure>
+<figure>
+<a href="rlm.html#varianza-constante-de-los-errores"><img src="analisis-seguros_files/figure-html/res-vs-ajustados-1.png" alt="Gráfico de residuales frente a valores ajustados"></a>
+<figcaption>Diagnóstico de residuales</figcaption>
+</figure>
+</div>
+
+## Datos y alcance
+
+| Aspecto | Descripción |
+|:--|:--|
+| Fuente | [Kaggle Playground Series S4E12](https://www.kaggle.com/competitions/playground-series-s4e12/data), archivo `train.csv`. |
+| Unidad de análisis | Registro de póliza. La variable objetivo es `Premium Amount`. |
+| Variables excluidas del modelo | `id` y `Policy Start Date`. |
+| Datos faltantes | Mediana para numéricas, moda para categóricas y categoría «No especificado» para `Occupation`. En predicción, las referencias se calculan solo con los datos de ajuste de cada partición. |
+| Alcance | Evaluación interna en una partición aleatoria. El diseño permite estudiar asociaciones, con generalización temporal y a otras carteras pendiente de validación. |
+
+## Contexto y objetivos
 
 El presente trabajo tiene como objetivo realizar un análisis estadístico completo
 sobre un conjunto de datos relacionado con pólizas de seguros, el cual contiene
@@ -97,4 +152,4 @@ El análisis se desarrolló en el lenguaje R mediante un enfoque cuantitativo, d
 
 Como el supuesto de normalidad no se cumplió en ningún caso, las hipótesis de las pruebas no paramétricas se plantean en términos de medianas o de igualdad de distribuciones, según corresponda.
 
-**Etapa 4. Regresión lineal múltiple.** Los datos se dividieron aleatoriamente en un conjunto de entrenamiento (80 %) y uno de prueba (20 %). Con el conjunto de entrenamiento se ajustó primero una regresión lineal simple con Annual Income, la variable con mayor correlación con la prima, y luego el modelo completo y se evaluaron su significancia global (prueba F), la significancia individual de los coeficientes (pruebas t e intervalos de confianza) y la multicolinealidad (GVIF y número de condición). Las variables se seleccionaron mediante los métodos forward, backward y stepwise con el criterio BIC, y se validaron los supuestos de independencia, normalidad, media cero y homocedasticidad de los errores, además de identificar observaciones atípicas e influyentes. Se evaluó también la transformación de Box-Cox de la variable respuesta. Finalmente, los modelos se compararon en el conjunto de prueba mediante el RMSE, el MAE y el $R^2$.
+**Etapa 4. Regresión lineal múltiple.** Antes de imputar, los registros se dividieron aleatoriamente en entrenamiento (80 %) y prueba (20 %). Se compararon cinco procedimientos con validación cruzada de cinco pliegues en entrenamiento, repitiendo la imputación y la selección dentro de cada pliegue. El rendimiento final se midió en prueba mediante RMSE, MAE y un $R^2$ predictivo frente al promedio de entrenamiento. Para describir el modelo se informan tamaños de efecto, intervalos de confianza robustos HC1 y diagnósticos de residuos. Box–Cox se examina como diagnóstico adicional.
