@@ -17,15 +17,9 @@ El documento completo se genera como un libro con **bookdown**.
 
 ## Versión para presentación
 
-La versión HTML lista para publicar queda en `docs/` después de compilar el
-libro. El flujo de GitHub Actions `.github/workflows/deploy-pages.yml` publica
-esa carpeta automáticamente en GitHub Pages al enviar cambios a `main`.
-
-Antes de la primera publicación, en GitHub abre **Settings → Pages** y elige
-**GitHub Actions** como fuente de despliegue. Tras el primer `push`, el enlace
-se mostrará en la ejecución del flujo y tendrá esta forma:
-
-`https://analisis-seguros-R.github.io/01-intro/`
+El informe está disponible en [GitHub Pages](https://analisis-seguros-r.github.io/01-intro/).
+GitHub Pages publica directamente la carpeta `docs/` de la rama `main`.
+La configuración correspondiente está en **Settings → Pages → Deploy from a branch → main → /docs**.
 
 ## Cómo obtener el dataset
 
@@ -87,10 +81,10 @@ Por su tamaño (~170 MB), el archivo `train.csv` **no está incluido en este rep
    ```
 
 6. Copia el contenido generado de `_book/` a `docs/`, confirma los cambios y
-   ejecuta `git push origin main`. El flujo de Pages publicará el sitio estático.
+   ejecuta `git push origin main`. GitHub Pages publicará el sitio estático desde `main:/docs`.
 
 ## Librerías principales utilizadas
 
 `bookdown`, `tidyverse`, `data.table`, `ggplot2`, `GGally`, `car`, `rstatix`, `coin`, `nortest`, `moments`, `patchwork`, `knitr`, `kableExtra`.
 
-El HTML generado incluye el resumen de prueba y los diagnósticos. El flujo de Pages publica el HTML estático; la compilación con el CSV se hace localmente. La semilla externa es 123 y la de los pliegues es 124.
+El HTML generado incluye el resumen de prueba y los diagnósticos. GitHub Pages publica el HTML estático; la compilación con el CSV se hace localmente. La semilla externa es 123 y la de los pliegues es 124.
