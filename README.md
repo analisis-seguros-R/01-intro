@@ -2,6 +2,9 @@
 
 **Autores:** Fernando Cabrera y Keisy Polo
 
+- [Leer el informe completo en GitHub Pages](https://analisis-seguros-r.github.io/01-intro/)
+- [Ver la presentación final del trabajo](https://analisis-seguros-r.github.io/01-intro/#presentacion-en-video)
+
 ## Descripción
 
 Este proyecto realiza un análisis estadístico completo sobre un conjunto de datos de pólizas de seguros, compuesto por 1,200,000 registros y 21 variables (demográficas, socioeconómicas, de salud y de comportamiento). El objetivo es comprender el comportamiento de estas variables y su posible relación con el monto de la prima de seguro (**Premium Amount**), la variable de interés principal del estudio.
