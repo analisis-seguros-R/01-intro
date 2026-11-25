@@ -32,3 +32,14 @@ pre code {
 }
 .graficos-portada img { display: block; width: 100%; }
 .graficos-portada figcaption { padding: 0.4rem; font-size: 0.9em; }
+
+.video-presentacion { max-width: 760px; margin: 1.25rem 0; }
+.video-presentacion iframe {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  border-radius: 8px;
+  background: #17232a;
+}
+.video-presentacion p { margin-top: 0.75rem; }

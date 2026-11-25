@@ -152,6 +152,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#objetivo-general"><i class="fa fa-check"></i><b>1.4</b> Objetivo general</a></li>
 <li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#objetivos-espec%C3%ADficos"><i class="fa fa-check"></i><b>1.5</b> Objetivos específicos</a></li>
 <li class="chapter" data-level="1.6" data-path="index.html"><a href="index.html#metodolog%C3%ADa"><i class="fa fa-check"></i><b>1.6</b> Metodología</a></li>
+<li class="chapter" data-level="1.7" data-path="index.html"><a href="index.html#presentacion-en-video"><i class="fa fa-check"></i><b>1.7</b> Presentación en video</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Análisis Exploratorio de Datos (EDA)</a>
 <ul>
@@ -237,6 +238,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">1.1</span> Resumen ejecutivo<a href="index.html#resumen-ejecutivo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><strong>Pregunta.</strong> ¿Cuánto mejora la estimación de la prima cuando incorporamos las características de los clientes y de sus pólizas?</p>
 <p>El análisis abarca <strong>1,2 millones de registros</strong> y 21 variables del conjunto de seguros de Kaggle. Los modelos lineales evaluados mejoran muy poco frente a predecir la prima promedio. La conclusión se limita a estos datos y a los modelos evaluados.</p>
+<p>También puedes consultar la <a href="#presentacion-en-video">presentación en video</a>.</p>
 <div id="resumen-portada" class="resumen-portada" aria-live="polite">
 <p>
 <a href="rlm.html#resultados-ejecutivos">Ver las métricas del promedio, BIC y AIC</a>
@@ -402,6 +404,14 @@ seleccionar el mejor modelo y validar sus supuestos.</p>
 <p>Como el supuesto de normalidad no se cumplió en ningún caso, las hipótesis de las pruebas no paramétricas se plantean en términos de medianas o de igualdad de distribuciones, según corresponda.</p>
 <p><strong>Etapa 4. Regresión lineal múltiple.</strong> Antes de imputar, los registros se dividieron aleatoriamente en entrenamiento (80 %) y prueba (20 %). Se compararon cinco procedimientos con validación cruzada de cinco pliegues en entrenamiento, repitiendo la imputación y la selección dentro de cada pliegue. El rendimiento final se midió en prueba mediante RMSE, MAE y un <span class="math inline">\(R^2\)</span> predictivo frente al promedio de entrenamiento. Para describir el modelo se informan tamaños de efecto, intervalos de confianza robustos HC1 y diagnósticos de residuos. Box–Cox se examina como diagnóstico adicional.</p>
 
+</div>
+<div id="presentacion-en-video" class="section level2 hasAnchor" number="1.7">
+<h2><span class="header-section-number">1.7</span> Presentación en video<a href="index.html#presentacion-en-video" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Fernando Cabrera Marriaga y Keisy Polo Peralta presentan el análisis de la prima de seguro. El video recorre la exploración de los datos, las pruebas de hipótesis y la regresión lineal múltiple, y explica por qué la mejora predictiva frente al promedio fue pequeña.</p>
+<div class="video-presentacion">
+<iframe src="https://www.youtube-nocookie.com/embed/NnIkO82QzLQ" title="¿Qué determina la prima de un seguro? Presentación del informe" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<p><a href="https://youtu.be/NnIkO82QzLQ">Ver la presentación en YouTube</a></p>
+</div>
 </div>
 </div>
             </section>

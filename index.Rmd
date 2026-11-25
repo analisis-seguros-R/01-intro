@@ -18,6 +18,8 @@ description: "Análisis exploratorio de datos, pruebas de hipótesis paramétric
 
 El análisis abarca **1,2 millones de registros** y 21 variables del conjunto de seguros de Kaggle. Los modelos lineales evaluados mejoran muy poco frente a predecir la prima promedio. La conclusión se limita a estos datos y a los modelos evaluados.
 
+También puedes consultar la [presentación en video](#presentacion-en-video).
+
 <div id="resumen-portada" class="resumen-portada" aria-live="polite">
 <p><a href="rlm.html#resultados-ejecutivos">Ver las métricas del promedio, BIC y AIC</a></p>
 </div>
@@ -153,3 +155,12 @@ El análisis se desarrolló en el lenguaje R mediante un enfoque cuantitativo, d
 Como el supuesto de normalidad no se cumplió en ningún caso, las hipótesis de las pruebas no paramétricas se plantean en términos de medianas o de igualdad de distribuciones, según corresponda.
 
 **Etapa 4. Regresión lineal múltiple.** Antes de imputar, los registros se dividieron aleatoriamente en entrenamiento (80 %) y prueba (20 %). Se compararon cinco procedimientos con validación cruzada de cinco pliegues en entrenamiento, repitiendo la imputación y la selección dentro de cada pliegue. El rendimiento final se midió en prueba mediante RMSE, MAE y un $R^2$ predictivo frente al promedio de entrenamiento. Para describir el modelo se informan tamaños de efecto, intervalos de confianza robustos HC1 y diagnósticos de residuos. Box–Cox se examina como diagnóstico adicional.
+
+## Presentación en video {#presentacion-en-video}
+
+Fernando Cabrera Marriaga y Keisy Polo Peralta presentan el análisis de la prima de seguro. El video recorre la exploración de los datos, las pruebas de hipótesis y la regresión lineal múltiple, y explica por qué la mejora predictiva frente al promedio fue pequeña.
+
+<div class="video-presentacion">
+<iframe src="https://www.youtube-nocookie.com/embed/NnIkO82QzLQ" title="¿Qué determina la prima de un seguro? Presentación del informe" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<p><a href="https://youtu.be/NnIkO82QzLQ">Ver la presentación en YouTube</a></p>
+</div>
